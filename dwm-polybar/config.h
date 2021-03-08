@@ -51,17 +51,27 @@ static const Rule rules[] = {
    /* class      instance    title       tags mask     switchtotag    isfloating   monitor */
    { "qutebrowser",NULL,      NULL,       1,            1,             0,           -1 },
    { "firefox",    NULL,      NULL,       1,            1,             0,           -1 },
+   { "Nightly",    NULL,      NULL,       1,            1,             0,           -1 },
    { "Brave-browser",NULL,    NULL,       1,            1,             0,           -1 },
    { "St",         NULL,      NULL,       1 << 1,       1,             0,           -1 },
+   { "Alacritty",  NULL,      NULL,       1 << 1,       1,             0,           -1 },
+   { "mpv",        NULL,      NULL,       1 << 4,       1,             1,           -1 },
    { "ncmpcpp",    NULL,      NULL,       1 << 3,       1,             0,           -1 },
    { "Transmission-gtk", NULL, NULL,      1 << 2,       1,             0,           -1 },
    { "SoulsekkQt", NULL,      NULL,       1 << 2,       1,             0,           -1 },
+   { "Caja",       NULL,      NULL,       1 << 4,       1,             0,           -1 },
+   { "Pcmanfm",    NULL,      NULL,       1 << 4,       1,             0,           -1 },
+   { "Nitrogen",   NULL,      NULL,       1 << 4,       1,             1,           -1 },
    { "Thunar",     NULL,      NULL,       1 << 4,       1,             0,           -1 },
    { "File-roller", NULL,     NULL,       1 << 4,       1,             1,           -1 },
    { "MuPDF",      NULL,      NULL,       1 << 4,       1,             1,           -1 },
    { "Subl3",      NULL,      NULL,       1 << 6,       1,             0,           -1 },
    { "Easytag",    NULL,      NULL,       1 << 8,       1,             0,           -1 },
    { "Xfce4-taskmanager", NULL, NULL,     1 << 9,       1,             0,           -1 },
+   { "Xfce4-appearance-settings", NULL, NULL, 1 << 9,   1,             1,           -1 },
+   { "Xfce4-mouse-settings", NULL, NULL,  1 << 9,       1,             1,           -1 },
+   { "Lxappearance",NULL,     NULL,       1 << 9,       1,             1,           -1 },
+   { "Blueman-manager", NULL, NULL,       1 << 9,       1,             1,           -1 },
    { "Slack",      NULL,      NULL,       1 << 7,       1,             0,           -1 },
 };
 
@@ -85,7 +95,7 @@ static const Layout layouts[] = {
 };
 
 /* key definitions */
-#define MODKEY Mod4Mask
+#define MODKEY Mod1Mask
 #define TAGKEYS(KEY,TAG) \
     { MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
     { MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
@@ -101,10 +111,12 @@ static const char *munext[]  = { "/usr/bin/mpc", "next", NULL };
 static const char *muprev[]  = { "/usr/bin/mpc", "prev", NULL };
 static const char *mupause[] = { "/usr/bin/mpc", "toggle", NULL };
 static const char *scrotcmd[] = {"teiler", NULL};
-static const char *browsercmd[] = { "firefox", NULL };
+/*static const char *browsercmd[] = { "firefox", NULL };*/
+static const char *browsercmd[] = { "firefox-nightly", NULL };
 static const char *bravecmd[] = { "brave", NULL };
 static const char *altbrowsercmd[] = { "qutebrowser", NULL };
 static const char *termcmd[] = { "st", NULL };
+/*static const char *termcmd[] = { "alacritty", NULL };*/
 static const char *dmenucmd[] = { "dmenu_run_history", NULL };
 static const char *qdmenucmd[] = { "dmenu_qutebrowser", NULL };
 /*static const char *roficmd[] = { "rofi", "-show", "drun", "-show-icons", NULL };*/
@@ -141,6 +153,7 @@ static Key keys[] = {
   { MODKEY,                       XK_e,                   spawn,               {.v = editcmd } },
   { MODKEY|ShiftMask,             XK_p,                   spawn,               SHCMD("rofi -modi \"clipboard:greenclip print\" -show clipboard -run-command '{cmd}'") },
   { MODKEY,                       XK_m,                   spawn,               SHCMD("st -c ncmpcpp -e ncmpcpp") },
+  /*{ MODKEY,                       XK_m,                   spawn,               SHCMD("alacritty --class ncmpcpp -e ncmpcpp") },*/
   { MODKEY,                       XK_Tab,                 focusstack,          {.i = +1 } },
   { MODKEY,                       XK_b,                   togglebar,           {0} },
   { MODKEY,                       XK_j,                   focusstack,          {.i = +1 } },

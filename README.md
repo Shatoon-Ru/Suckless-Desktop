@@ -1,7 +1,3 @@
-# Suckless-Desktop
+# Suckless
 
-My custom Suckless desktop with dwm, st, dmenu and others.
-
-Conky is to pipe info into the dwmbar in place of a statusbar.
-
-To be placed in /etc/
+My Suckless Desktop, a lot of testing and trying new things.

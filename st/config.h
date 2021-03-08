@@ -5,7 +5,7 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "MesloLGS NF:pixelsize=12:hinting=true:antialias=true";
+static char *font = "Iosevka:pixelsize=13:hinting=true:antialias=true";
 /*static char *font = "Scientifica:pixelsize=16:hinting=true:antialias=true";*/
 static char *font2[] = { "Hack Nerd Font:pixelsize=12:hinting=true:antialias=true" };
 static int borderpx = 25;
