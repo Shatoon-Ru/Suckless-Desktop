@@ -24,7 +24,7 @@ static const int nrg_force_vsplit        = 1;   /* nrowgrid layout, 1 means forc
 static const unsigned int systraypinning = 1;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
 static const unsigned int systrayspacing = 0;   /* systray spacing */
 static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
-static const int showsystray             = 1;   /* 0 means no systray */
+static const int showsystray             = 0;   /* 0 means no systray */
 static const char *fonts[]         		 = {"Inter:style=Regular:size=10", "Font Awesome 5 Pro:style=Solid:pixelsize=12:antialias=true", "Font Awesome 5 Brands:style=Solid:pixelsize=12:antialias=true", "Material Design Icons:Regular:pixelsize=22:antialias=true"};
 static const char dmenufont[]            = "SF Pro Text:size=5";
 static const char col_gray1[]            = "#141414";
@@ -79,7 +79,7 @@ static const Rule rules[] = {
 	{ "Subl3",		    NULL,                         NULL,        NULL,   1 << 6,    1,         0,           0,            0 },
 	{ "Code",		    NULL,                         NULL,        NULL,   1 << 6,    1,         0,           0,            0 },
 	{ "Steam",          NULL,                         NULL,        NULL,   1 << 7,    1,         0,           0,            0 },
-	{ "Slack",          NULL,                         NULL,        NULL,   1 << 7,    1,         0,           0,            0 },
+	{ "Slack",          NULL,                         NULL,        NULL,   1 << 7,    1,         0,           0,            1 },
 	{ "Easytag",	    NULL,                         NULL,        NULL,   1 << 8,    1,         1,           0,            0 },
 	{ "Xfce4-taskmanager",NULL,                       NULL,        NULL,   1 << 9,    1,         1,           0,            0 },
 	{ "Nitrogen",		NULL,                         NULL,        NULL,   1 << 9,    1,         1,           1,            1 },
@@ -156,9 +156,8 @@ static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "120x34
 #include <X11/XF86keysym.h>
 static Key keys[] = {
 	/* modifier                     key        function           argument */
-	{ MODKEY,                       XK_d,      spawn,             {.v = dmenucmd } },
-	/*{ MODKEY,						XK_space,  spawn,             {.v = dmenucmd } },*/
-	{ MODKEY, 						XK_space,  spawn, 			  {.v = roficmd } },
+	{ MODKEY,                       XK_space,  spawn,             {.v = dmenucmd } },
+	{ MODKEY, 						XK_d,  	   spawn, 			  {.v = roficmd } },
 	{ MODKEY,                       XK_t, 	   spawn,             {.v = termcmd } },
 	{ MODKEY,                       XK_grave,  togglescratch,  	  {.v = scratchpadcmd } },
 	{ MODKEY,			            XK_b,      togglebar,         {0} },
