@@ -52,6 +52,7 @@ static const Rule rules[] = {
    { "qutebrowser",NULL,      NULL,       1,            1,             0,           -1 },
    { "firefox",    NULL,      NULL,       1,            1,             0,           -1 },
    { "Nightly",    NULL,      NULL,       1,            1,             0,           -1 },
+   { "Vivaldi-stable", NULL,  NULL,       1,            1,             0,           -1 },
    { "Brave-browser",NULL,    NULL,       1,            1,             0,           -1 },
    { "St",         NULL,      NULL,       1 << 1,       1,             0,           -1 },
    { "Alacritty",  NULL,      NULL,       1 << 1,       1,             0,           -1 },
@@ -112,7 +113,7 @@ static const char *muprev[]  = { "/usr/bin/mpc", "prev", NULL };
 static const char *mupause[] = { "/usr/bin/mpc", "toggle", NULL };
 static const char *scrotcmd[] = {"teiler", NULL};
 /*static const char *browsercmd[] = { "firefox", NULL };*/
-static const char *browsercmd[] = { "firefox-nightly", NULL };
+static const char *browsercmd[] = { "vivaldi-stable", NULL };
 static const char *bravecmd[] = { "brave", NULL };
 static const char *altbrowsercmd[] = { "qutebrowser", NULL };
 static const char *termcmd[] = { "st", NULL };
@@ -140,8 +141,8 @@ static Key keys[] = {
   { 0, XF86XK_AudioRewind,                                spawn,               SHCMD("mpc seek -10") },
   { 0, XF86XK_AudioForward,                               spawn,               SHCMD("mpc seek +10") },
   { MODKEY,                       XK_l,                   spawn,               SHCMD("slock") },
-  { MODKEY,                       XK_w,                   spawn,               {.v = browsercmd } },
-  { MODKEY|ShiftMask|ControlMask, XK_w,                   spawn,               {.v = bravecmd } },
+  { MODKEY,                       XK_w,                   spawn,               {.v = bravecmd } },
+  { MODKEY|ShiftMask|ControlMask, XK_w,                   spawn,               {.v = browsercmd } },
   { MODKEY|ShiftMask,             XK_w,                   spawn,               {.v = altbrowsercmd } },
   { MODKEY,                       XK_f,                   spawn,               {.v = filecmd } },
   { 0,                            XK_Print,               spawn,               {.v = scrotcmd } },
