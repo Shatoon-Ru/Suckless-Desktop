@@ -1,42 +1,36 @@
 # soap - simple xdg-open replacement with fallback
 
-include config.mk
+
+# install location
+PREFIX = /usr/local
+
+# compiler and linker
+CC = cc
+CFLAGS = -pedantic -Wall -Wextra -O2 ${INCS}
+LDFLAGS = -s
 
 SRC = soap.c
 OBJ = ${SRC:.c=.o}
 
-all: options soap
-
-options:
-	@echo soap build options:
-	@echo "CFLAGS   = ${CFLAGS}"
-	@echo "LDFLAGS  = ${LDFLAGS}"
-	@echo "CC       = ${CC}"
+all: soap
 
 .c.o:
-	@echo CC $<
-	@${CC} -c ${CFLAGS} $<
+	${CC} -c ${CFLAGS} $<
 
-${OBJ}: config.h config.mk
+${OBJ}: config.h
 
 config.h:
-	@echo creating $@ from config.def.h
-	@cp config.def.h $@
+	cp config.def.h $@
 
 soap: ${OBJ}
-	@echo CC -o $@
-	@${CC} -o $@ ${OBJ} ${LDFLAGS}
+	${CC} -o $@ ${OBJ} ${LDFLAGS}
 
 clean:
-	@echo cleaning
-	@rm -f soap ${OBJ}
+	rm -f soap ${OBJ}
 
 install: all
-	@test -f /usr/bin/xdg-open_ || (echo backing up to /usr/bin/xdg-open_; mv /usr/bin/xdg-open /usr/bin/xdg-open_)
-	@echo installing new xdg-open
-	@cp -f soap /usr/bin/xdg-open
-	@chmod 755 /usr/bin/xdg-open
+	install -Dm755 soap ${DESTDIR}${PREFIX}/bin
+	ln -sf ${DESTDIR}${PREFIX}/bin/soap ${DESTDIR}${PREFIX}/bin/xdg-open
 
 uninstall:
-	@echo moving xdg-open_ back into place
-	@(test -f /usr/bin/xdg-open_ && mv /usr/bin/xdg-open_ /usr/bin/xdg-open) || echo ERROR: xdg-open_ does not exist
+	rm -f ${DESTDIR}${PREFIX}/bin/soap ${DESTDIR}${PREFIX}/bin/xdg-open

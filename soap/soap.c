@@ -1,6 +1,11 @@
 /* See LICENSE file for copyright and license details. */
+#define _XOPEN_SOURCE 700
+
+#include <sys/stat.h>
+
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 #include <regex.h>
 
 typedef struct {
@@ -10,23 +15,21 @@ typedef struct {
 
 #include "config.h"
 
-int
-main(int argc, char *argv[]){
-	size_t g, h, i;
-	char cmd[BUFSIZ], sharg[BUFSIZ];
+
+int main(int argc, char *argv[])
+{
+	struct stat s;
 	regex_t regex;
+	size_t g, h, i;
+	const char *act, *fileURI = "file://";
+	char cmd[BUFSIZ + 32], sharg[BUFSIZ];
 
 	/* we only take one argument */
-	if (argc != 2)
-		return EXIT_FAILURE;
+	if (argc != 2) return EXIT_FAILURE;
 
-	/* make the argument shell-ready
-	 *   1) start with '
-	 *   2) escape ' to '\''
-	 *   3) close with '\0
-	 */
+	/* make arg shell-ready, strong quote, escape single quotes, and null terminate */
 	sharg[0] = '\'';
-	for (g=0, h=1; argv[1][g] && h < BUFSIZ-1-3-2; ++g, ++h) {
+	for (g = 0, h = 1; argv[1][g] && h < BUFSIZ - 6; g++, h++) {
 		sharg[h] = argv[1][g];
 		if (argv[1][g] == '\'') {
 			sharg[++h] = '\\';
@@ -35,26 +38,35 @@ main(int argc, char *argv[]){
 		}
 	}
 	sharg[h] = '\'';
-	sharg[++h] = 0;
+	sharg[++h] = '\0';
+
+	/* special case for directories and file:// URI */
+	size_t len = strlen(fileURI);
+	if (((!strncmp(argv[1], fileURI, len) && !lstat(((char *)argv[1]) + len, &s))
+				|| !lstat(argv[1], &s)) && S_ISDIR(s.st_mode))
+	{
+		act = dircmd;
+		goto run;
+	}
 
 	/* check regex and launch action if it matches argv[1] */
-	for (i=0; i < sizeof(pairs)/sizeof(*pairs); ++i) {
-		if (regcomp(&regex, pairs[i].regex,
-		    REG_EXTENDED | REG_NOSUB)) {
+	for (i = 0; i < sizeof(pairs) / sizeof(*pairs); i++) {
+		if (regcomp(&regex, pairs[i].regex, REG_EXTENDED|REG_NOSUB)) {
 			fprintf(stderr, "invalid regex: %s\n", pairs[i].regex);
-			return EXIT_FAILURE;
+			break;
 		}
 		if (!regexec(&regex, argv[1], 0, NULL, 0)) {
-			snprintf(cmd, sizeof cmd, pairs[i].action, sharg);
-			system(cmd);
+			act = (char *)pairs[i].action;
 			regfree(&regex);
-			return EXIT_SUCCESS;
+			goto run;
 		}
 		regfree(&regex);
 	}
 
-	/* alternatively, fall back to xdg-open_ */
-	snprintf(cmd, sizeof cmd, "xdg-open_ %s", sharg);
+	/* fall back to xdg-open */
+	act = "/usr/bin/xdg-open %s";
+run:
+	snprintf(cmd, sizeof(cmd), act, sharg); // NOLINT
 	system(cmd);
 	return EXIT_SUCCESS;
 }
