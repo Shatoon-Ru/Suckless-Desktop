@@ -8,7 +8,7 @@ static const unsigned int gappiv         = 10;  /* vert inner gap between window
 static const unsigned int gappoh         = 10;   /* horiz outer gap between windows and screen edge */
 static const unsigned int gappov         = 10;   /* vert outer gap between windows and screen edge */
 static const int smartgaps               = 1;   /* 1 means no outer gap when there is only one window */
-static const int showbar                 = 0;   /* 0 means no bar */
+static const int showbar                 = 1;   /* 0 means no bar */
 static const int topbar                  = 1;   /* 0 means bottom bar */
 static const int horizpadbar             = 6;   /* horizontal padding for statusbar */
 static const int vertpadbar              = 10;   /* vertical padding for statusbar */
@@ -21,10 +21,10 @@ static const int fancybar                = 1;   /* 0 means default behaviour, 1 
 static const int savefloats              = 1;   /* 0 means default behaviour, 1 = savefloats patch */
 static const int losefullscreen          = 1;   /* 0 means default behaviour, 1 = losefullscreen patch */
 static const int nrg_force_vsplit        = 1;   /* nrowgrid layout, 1 means force 2 clients to always split vertically */
-static const unsigned int systraypinning = 1;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
+static const unsigned int systraypinning = 2;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
 static const unsigned int systrayspacing = 0;   /* systray spacing */
-static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
-static const int showsystray             = 0;   /* 0 means no systray */
+static const int systraypinningfailfirst = 0;   /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
+static const int showsystray             = 1;   /* 0 means no systray */
 static const char *fonts[]         		 = {"Inter:style=Regular:size=10", "Font Awesome 5 Pro:style=Solid:pixelsize=12:antialias=true", "Font Awesome 5 Brands:style=Solid:pixelsize=12:antialias=true", "Material Design Icons:Regular:pixelsize=22:antialias=true"};
 static const char dmenufont[]            = "SF Pro Text:size=5";
 static const char col_gray1[]            = "#141414";
@@ -50,6 +50,9 @@ static const unsigned int alphas[][3] = {
 	[SchemeNorm] = { OPAQUE, baralpha, borderalpha },
 	[SchemeSel]  = { OPAQUE, baralpha, borderalpha },
 };
+
+/* staticstatus */
+static const int statmonval = 0;
 
 /* tagging */
 static const char *tags[] = { "", "", "", "", "", "", "", "", "", "" };
@@ -87,6 +90,7 @@ static const Rule rules[] = {
 	{ "Xfce4-mouse-settings", NULL, 			  	  NULL, 	   NULL,   1 << 9,    1,         1,    		  1,            0 },
     { "Lxappearance",   NULL, 			  			  NULL, 	   NULL,   1 << 9,    1,         1,    		  1,            1 },
     { "Blueman-manager", NULL, 			  			  NULL, 	   NULL,   1 << 9,    1,         1,    		  1,            1 },
+    { "Gucharmap", 		NULL, 			  			  NULL, 	   NULL,   1 << 6,    1,         1,    		  1,            0 },
     { "Gimp", 			NULL, 			  			  NULL, 	   NULL,   1 << 9,    1,         1,    		  1,            0 },
     { "firefox",		"GtkFileChooserDialog",       "Save File", NULL,   0,         0,         1,           1,            0 },
 };
@@ -137,12 +141,9 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run_history", NULL };
 static const char *roficmd[] = { "rofi", "-show", "drun", "-show-icons", NULL };
-/*static const char *scrotcmd[] = {"/usr/bin/scr", NULL};*/
 static const char *scrotcmd[] = {"teiler", NULL};
 static const char *termcmd[]  = { "st", NULL };
-/*static const char *browsercmd[] = { "firefox", NULL };*/
 static const char *browsercmd[] = { "brave", NULL };
-/*static const char *altbrowsercmd[] = { "qutebrowser", NULL };*/
 static const char *exitcmd[] = { "/usr/bin/stop.sh", NULL };
 static const char *munext[]  = { "/usr/bin/mpc", "next", NULL };
 static const char *muprev[]  = { "/usr/bin/mpc", "prev", NULL };
@@ -264,16 +265,12 @@ static Key keys[] = {
 	{ 0, XF86XK_AudioRewind,		spawn,						SHCMD("mpc seek -10") },
 	{ 0, XF86XK_AudioForward,		spawn,						SHCMD("mpc seek +10") },
 	{ MODKEY,						XK_w,		spawn,			{.v = browsercmd } },
-	/*{ MODKEY|ShiftMask,				XK_w,		spawn,			SHCMD("QT_SCALE_FACTOR=0.5 qutebrowser") },*/
 	{ MODKEY|ShiftMask,				XK_w,		spawn,			SHCMD("qutebrowser") },
 	{ MODKEY|Mod1Mask,				XK_w,		spawn,			SHCMD("google-chrome-stable") },
 	{ MODKEY,						XK_x,		spawn,			{.v = exitcmd } },
 	{ MODKEY,						XK_e,		spawn,			{.v = editcmd } },
 	{ MODKEY|ShiftMask, 			XK_e,		spawn,			{.v = vimcmd } },
 	{ MODKEY|ShiftMask,				XK_p,		spawn,			SHCMD("rofi -modi \"clipboard:greenclip print\" -show clipboard -run-command '{cmd}'") },
-	/*{ MODKEY|ShiftMask,				XK_p,		spawn,			SHCMD("clipmenu") },*/
-	/*{ MODKEY,						XK_b,		spawn,		    SHCMD("buku-dmenu") },*/
-	/*{ MODKEY,						XK_m,		spawn,			SHCMD("st -c ncmpcpp -e ncmpcpp -S media_library") },*/
 	{ MODKEY,						XK_m,		spawn,			SHCMD("st -c ncmpcpp -e ncmpcpp") },
 	{ MODKEY|ShiftMask,				XK_m,		spawn,			SHCMD("QT_SCALE_FACTOR=0.5 audacious") },
 	{ MODKEY,						XK_f,		spawn,			{.v = filecmd } },
