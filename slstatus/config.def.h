@@ -1,14 +1,3 @@
-/*
- *     _   __  _                __ 
- *    / | / / (_)___  _________/ / 
- *   /  |/ / / / __ \/ ___/ __  /  
- *  / /|  / / / /_/ / /  / /_/ /   
- * /_/ |_/_/ /\____/_/   \__,_/    
- *      /___/                      
- *       
- * Author: Lucas Cruz dos Reis(L.C.R.) 
- * Github: https://github.com/LCRERGO 
-*/
 /* See LICENSE file for copyright and license details. */
 
 /* interval between updates (in ms) */
@@ -56,6 +45,7 @@ static const char unknown_str[] = "n/a";
  * ram_total           total memory size in GB         NULL
  * ram_used            used memory in GB               NULL
  * run_command         custom shell command            command (echo foo)
+ * separator           string to echo                  NULL
  * swap_free           free swap in GB                 NULL
  * swap_perc           swap usage in percent           NULL
  * swap_total          total swap size in GB           NULL
@@ -69,18 +59,18 @@ static const char unknown_str[] = "n/a";
  * uptime              system uptime                   NULL
  * username            username of current user        NULL
  * vol_perc            OSS/ALSA volume in percent      mixer file (/dev/mixer)
+ *                                                     NULL on OpenBSD
  * wifi_perc           WiFi signal in percent          interface name (wlan0)
  * wifi_essid          WiFi ESSID                      interface name (wlan0)
- *
- * -- Unicode Functions(default functions with characters)
- * ubattery     battery percentage               battery name(BAT0) 
- * ucpu_freq    cpu frequency in MHz             NULL
- * udatetime    date and time                    NULL
- * uram_perc    memory usage in percent          NULL
- * uwifi_perc   WiFi signal in percent           interface name (wlan0)
  */
 static const struct arg args[] = {
-	/* function             format          argument    bg          fg */
-        { media_mpd_stat,       " %s",          NULL,      },
-        { udatetime,            " %s ",         NULL,      },
+	/* function	format          	argument */
+	{ cpu_perc,	"  %3s%%   ",	NULL },
+	{ ram_perc,	" %3s%%   ",	NULL },
+	{ wifi_essid,	" %s @ ",		"wlp60s0" },
+	{ wifi_perc,	"%3s%%   ",		"wlp60s0" },
+	{ run_command,	" %4s   ",		"amixer sget Master | awk -F\"[][]\" '/%/ { print $2 }' | head -n1" },
+	{ battery_perc,	" %3s%% | ",	"BAT1" },
+	{ datetime,	"%s   ",           	"%F %H:%M" },
+	{ username,	"%s ",			NULL },
 };

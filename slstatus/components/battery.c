@@ -52,6 +52,7 @@
 		} map[] = {
 			{ "Charging",    "+" },
 			{ "Discharging", "-" },
+			{ "Full",        "o" },
 		};
 		size_t i;
 		char path[PATH_MAX], state[12];
@@ -115,95 +116,6 @@
 
 		return "";
 	}
-
-        const char *
-        ubattery(const char *bat)
-        {
-                static struct {
-                        char *state;
-                        char *symbol;
-                } map [] = {
-                        { "Charging",       "+" },
-                        { "Discharging",    "-" },
-                        { "Full",           "=" },
-                        { "Unknown",        "!" },
-                };
-                size_t i;
-                int perc;
-                char path[PATH_MAX], state[12], symbol[2];
-
-                if (esnprintf(path, sizeof(path),
-                            "/sys/class/power_supply/%s/status", bat) < 0) {
-                        return NULL;
-                }
-
-                if (pscanf(path, "%12s", state) != 1) {
-                        return NULL;
-                }
-
-                for (i = 0; i < LEN(map); i++) {
-                        if (!strcmp(map[i].state, state)) {
-                                break;
-                        }
-                }
-                strcpy(symbol, ((i == LEN(map)) ? "?" : map[i].symbol));
-
-                if (esnprintf(path, sizeof(path),
-                            "/sys/class/power_supply/%s/capacity", bat) < 0) {
-                        return NULL;
-                }
-                if (pscanf(path, "%d", &perc) != 1) {
-                        return NULL;
-                }
-
-                if (!strcmp(symbol, "=")) {
-                        /* is full */
-                        return bprintf("\uf584 %2d%%", perc);
-                } else if (!strcmp(symbol, "+")) {
-                        /* is charging */
-                        if (perc < 100 && perc >= 90) {
-                                return bprintf("\uf58a %2d%%", perc);
-                        } else if (perc < 90 && perc >= 80) {
-                                return bprintf("\uf589 %2d%%", perc);
-                        } else if (perc < 80 && perc >= 60) {
-                                return bprintf("\uf588 %2d%%", perc);
-                        } else if (perc < 60 && perc >= 40) {
-                                return bprintf("\uf587 %2d%%", perc);
-                        } else if (perc < 40 && perc >= 30) {
-                                return bprintf("\uf586 %2d%%", perc);
-                        } else {
-                                /* perc < 30 */
-                                return bprintf("\uf585 %2d%%", perc);
-                        }                
-                } else if (!strcmp(symbol, "-")) {
-                        /* is discharging */
-                        if (perc == 100) {
-                                return bprintf("\uf578 %2d%%", perc);
-                        } else if (perc < 100 && perc >= 90) {
-                                return bprintf("\uf581 %2d%%", perc);
-                        } else if (perc < 90 && perc >= 80) {
-                                return bprintf("\uf580 %2d%%", perc);
-                        } else if (perc < 80 && perc >= 70) {
-                                return bprintf("\uf57f %2d%%", perc);
-                        } else if (perc < 70 && perc >= 60) {
-                                return bprintf("\uf57e %2d%%", perc);
-                        } else if (perc < 60 && perc >= 50) {
-                                return bprintf("\uf57d %2d%%", perc);
-                        } else if (perc < 50 && perc >= 40) {
-                                return bprintf("\uf57c %2d%%", perc);
-                        } else if (perc < 40 && perc >= 30) {
-                                return bprintf("\uf57b %2d%%", perc);
-                        } else if (perc < 30 && perc >= 20) {
-                                return bprintf("\uf57a %2d%%", perc);
-                        } else {
-                                /* perc < 20 */
-                                return bprintf("\uf579 %2d%%", perc);
-                        }                
-                } else {
-                        /* unknown */
-                        return bprintf("\uf582 ?");
-                }
-        }
 #elif defined(__OpenBSD__)
 	#include <fcntl.h>
 	#include <machine/apmvar.h>

@@ -48,32 +48,32 @@ static const Rule rules[] = {
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-   /* class      instance    title       tags mask     switchtotag    isfloating   monitor */
-   { "qutebrowser",NULL,      NULL,       1,            1,             0,           -1 },
-   { "firefox",    NULL,      NULL,       1,            1,             0,           -1 },
-   { "Nightly",    NULL,      NULL,       1,            1,             0,           -1 },
-   { "Vivaldi-stable", NULL,  NULL,       1,            1,             0,           -1 },
-   { "Brave-browser",NULL,    NULL,       1,            1,             0,           -1 },
-   { "St",         NULL,      NULL,       1 << 1,       1,             0,           -1 },
-   { "Alacritty",  NULL,      NULL,       1 << 1,       1,             0,           -1 },
-   { "mpv",        NULL,      NULL,       1 << 4,       1,             1,           -1 },
-   { "ncmpcpp",    NULL,      NULL,       1 << 3,       1,             0,           -1 },
-   { "Transmission-gtk", NULL, NULL,      1 << 2,       1,             0,           -1 },
-   { "SoulsekkQt", NULL,      NULL,       1 << 2,       1,             0,           -1 },
-   { "Caja",       NULL,      NULL,       1 << 4,       1,             0,           -1 },
-   { "Pcmanfm",    NULL,      NULL,       1 << 4,       1,             0,           -1 },
-   { "Nitrogen",   NULL,      NULL,       1 << 4,       1,             1,           -1 },
-   { "Thunar",     NULL,      NULL,       1 << 4,       1,             0,           -1 },
-   { "File-roller", NULL,     NULL,       1 << 4,       1,             1,           -1 },
-   { "MuPDF",      NULL,      NULL,       1 << 4,       1,             1,           -1 },
-   { "Subl3",      NULL,      NULL,       1 << 6,       1,             0,           -1 },
-   { "Easytag",    NULL,      NULL,       1 << 8,       1,             0,           -1 },
-   { "Xfce4-taskmanager", NULL, NULL,     1 << 9,       1,             0,           -1 },
-   { "Xfce4-appearance-settings", NULL, NULL, 1 << 9,   1,             1,           -1 },
-   { "Xfce4-mouse-settings", NULL, NULL,  1 << 9,       1,             1,           -1 },
-   { "Lxappearance",NULL,     NULL,       1 << 9,       1,             1,           -1 },
-   { "Blueman-manager", NULL, NULL,       1 << 9,       1,             1,           -1 },
-   { "Slack",      NULL,      NULL,       1 << 7,       1,             0,           -1 },
+   /* class                         instance    title       tags mask     switchtotag    isfloating   monitor */
+   { "qutebrowser",                 NULL,      NULL,       1,            1,             0,           0 },
+   { "firefox",                     NULL,      NULL,       1,            1,             0,           0 },
+   { "Nightly",                     NULL,      NULL,       1,            1,             0,           0 },
+   { "Vivaldi-stable",              NULL,      NULL,       1,            1,             0,           0 },
+   { "Brave-browser",               NULL,      NULL,       1,            1,             0,           0 },
+   { "St",                          NULL,      NULL,       1 << 1,       1,             0,           0 },
+   { "Alacritty",                   NULL,      NULL,       1 << 1,       1,             0,           0 },
+   { "mpv",                         NULL,      NULL,       1 << 4,       1,             1,           0 },
+   { "ncmpcpp",                     NULL,      NULL,       1 << 3,       1,             0,           1 },
+   { "Transmission-gtk",            NULL,      NULL,       1 << 2,       1,             0,           0 },
+   { "SoulsekkQt",                  NULL,      NULL,       1 << 2,       1,             0,           0 },
+   { "Caja",                        NULL,      NULL,       1 << 4,       1,             0,           0 },
+   { "Pcmanfm",                     NULL,      NULL,       1 << 4,       1,             0,           0 },
+   { "Nitrogen",                    NULL,      NULL,       1 << 4,       1,             1,           1 },
+   { "Thunar",                      NULL,      NULL,       1 << 4,       1,             0,           0 },
+   { "File-roller",                 NULL,      NULL,       1 << 4,       1,             1,           0 },
+   { "MuPDF",                       NULL,      NULL,       1 << 4,       1,             1,           0 },
+   { "Subl",                       NULL,      NULL,       1 << 6,       1,             0,           0 },
+   { "Easytag",                     NULL,      NULL,       1 << 8,       1,             0,           0 },
+   { "Xfce4-taskmanager",           NULL,      NULL,       1 << 9,       1,             0,           0 },
+   { "Xfce4-appearance-settings",   NULL,      NULL,       1 << 9,       1,             1,           1 },
+   { "Xfce4-mouse-settings",        NULL,      NULL,       1 << 9,       1,             1,           1 },
+   { "Lxappearance",                NULL,      NULL,       1 << 9,       1,             1,           1 },
+   { "Blueman-manager",             NULL,      NULL,       1 << 9,       1,             1,           1 },
+   { "Slack",                       NULL,      NULL,       1 << 7,       1,             0,           1 },
 };
 
 /* layout(s) */
@@ -114,7 +114,7 @@ static const char *mupause[] = { "/usr/bin/mpc", "toggle", NULL };
 static const char *scrotcmd[] = {"teiler", NULL};
 /*static const char *browsercmd[] = { "firefox", NULL };*/
 static const char *browsercmd[] = { "vivaldi-stable", NULL };
-static const char *bravecmd[] = { "brave", NULL };
+static const char *qutecmd[] = { "brave", NULL };
 static const char *altbrowsercmd[] = { "qutebrowser", NULL };
 static const char *termcmd[] = { "st", NULL };
 /*static const char *termcmd[] = { "alacritty", NULL };*/
@@ -124,7 +124,7 @@ static const char *qdmenucmd[] = { "dmenu_qutebrowser", NULL };
 static const char scratchpadname[] = "scratchpad";
 static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "120x34", NULL };
 static const char *exitcmd[] = { "/usr/bin/stop.sh", NULL };
-static const char *editcmd[] = { "subl3", NULL };
+static const char *editcmd[] = { "subl", NULL };
 static const char *filecmd[] = { "thunar", NULL };
 
 #include <X11/XF86keysym.h>
@@ -141,8 +141,8 @@ static Key keys[] = {
   { 0, XF86XK_AudioRewind,                                spawn,               SHCMD("mpc seek -10") },
   { 0, XF86XK_AudioForward,                               spawn,               SHCMD("mpc seek +10") },
   { MODKEY,                       XK_l,                   spawn,               SHCMD("slock") },
-  { MODKEY,                       XK_w,                   spawn,               {.v = bravecmd } },
-  { MODKEY|ShiftMask|ControlMask, XK_w,                   spawn,               {.v = browsercmd } },
+  { MODKEY,                       XK_w,                   spawn,               {.v = browsercmd } },
+  { MODKEY|ShiftMask|ControlMask, XK_w,                   spawn,               {.v = qutecmd } },
   { MODKEY|ShiftMask,             XK_w,                   spawn,               {.v = altbrowsercmd } },
   { MODKEY,                       XK_f,                   spawn,               {.v = filecmd } },
   { 0,                            XK_Print,               spawn,               {.v = scrotcmd } },
@@ -179,7 +179,7 @@ static Key keys[] = {
   { MODKEY,                       XK_period,              focusmon,            {.i = +1 } },
   { MODKEY|ShiftMask,             XK_comma,               tagmon,              {.i = -1 } },
   { MODKEY|ShiftMask,             XK_period,              tagmon,              {.i = +1 } },
-	{ MODKEY|Mod4Mask,              XK_u,                   incrgaps,            {.i = +1 } },
+  { MODKEY|Mod4Mask,              XK_u,                   incrgaps,            {.i = +1 } },
   { MODKEY|Mod4Mask|ShiftMask,    XK_u,                   incrgaps,            {.i = -1 } },
   { MODKEY|Mod4Mask,              XK_i,                   incrigaps,           {.i = +1 } },
   { MODKEY|Mod4Mask|ShiftMask,    XK_i,                   incrigaps,           {.i = -1 } },

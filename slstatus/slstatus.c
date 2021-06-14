@@ -1,16 +1,3 @@
-/*
- *     _   __  _                __ 
- *    / | / / (_)___  _________/ / 
- *   /  |/ / / / __ \/ ___/ __  /  
- *  / /|  / / / /_/ / /  / /_/ /   
- * /_/ |_/_/ /\____/_/   \__,_/    
- *      /___/                      
- *       
- * Author: Lucas Cruz dos Reis(L.C.R.) 
- * Github: https://github.com/LCRERGO 
-*/
-
-
 /* See LICENSE file for copyright and license details. */
 #include <errno.h>
 #include <signal.h>
@@ -28,12 +15,10 @@ struct arg {
 	const char *(*func)();
 	const char *fmt;
 	const char *args;
-        const char *background_color;
-        const char *foreground_color;
 };
 
 char buf[1024];
-static int done;
+static volatile sig_atomic_t done;
 static Display *dpy;
 
 #include "config.h"
@@ -41,9 +26,8 @@ static Display *dpy;
 static void
 terminate(const int signo)
 {
-	(void)signo;
-
-	done = 1;
+	if (signo != SIGUSR1)
+		done = 1;
 }
 
 static void
@@ -57,7 +41,7 @@ difftimespec(struct timespec *res, struct timespec *a, struct timespec *b)
 static void
 usage(void)
 {
-	die("usage: %s [-s]", argv0);
+	die("usage: %s [-s] [-1]", argv0);
 }
 
 int
@@ -72,6 +56,9 @@ main(int argc, char *argv[])
 
 	sflag = 0;
 	ARGBEGIN {
+		case '1':
+			done = 1;
+			/* fallthrough */
 		case 's':
 			sflag = 1;
 			break;
@@ -87,12 +74,14 @@ main(int argc, char *argv[])
 	act.sa_handler = terminate;
 	sigaction(SIGINT,  &act, NULL);
 	sigaction(SIGTERM, &act, NULL);
+	act.sa_flags |= SA_RESTART;
+	sigaction(SIGUSR1, &act, NULL);
 
 	if (!sflag && !(dpy = XOpenDisplay(NULL))) {
 		die("XOpenDisplay: Failed to open display");
 	}
 
-	while (!done) {
+	do {
 		if (clock_gettime(CLOCK_MONOTONIC, &start) < 0) {
 			die("clock_gettime:");
 		}
@@ -102,8 +91,7 @@ main(int argc, char *argv[])
 			if (!(res = args[i].func(args[i].args))) {
 				res = unknown_str;
 			}
-			if ((ret = csnprintf(status + len, sizeof(status) - len,
-                                            args[i].background_color, args[i].foreground_color,
+			if ((ret = esnprintf(status + len, sizeof(status) - len,
 			                    args[i].fmt, res)) < 0) {
 				break;
 			}
@@ -140,7 +128,7 @@ main(int argc, char *argv[])
 				}
 			}
 		}
-	}
+	} while (!done);
 
 	if (!sflag) {
 		XStoreName(dpy, DefaultRootWindow(dpy), NULL);

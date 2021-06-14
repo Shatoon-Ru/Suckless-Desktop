@@ -1,14 +1,3 @@
-/*
- *     _   __  _                __ 
- *    / | / / (_)___  _________/ / 
- *   /  |/ / / / __ \/ ___/ __  /  
- *  / /|  / / / /_/ / /  / /_/ /   
- * /_/ |_/_/ /\____/_/   \__,_/    
- *      /___/                      
- *       
- * Author: Lucas Cruz dos Reis(L.C.R.) 
- * Github: https://github.com/LCRERGO 
-*/
 /* See LICENSE file for copyright and license details. */
 #include <errno.h>
 #include <stdarg.h>
@@ -154,45 +143,4 @@ pscanf(const char *path, const char *fmt, ...)
 	fclose(fp);
 
 	return (n == EOF) ? -1 : n;
-}
-
-char *
-setcolor(const char *original, const char *bg, const char *fg)
-{
-        /* Sets background and foreground colors based on the value of ground,
-         * colorval must be in the "#RRGGBB"(must be uppercased) format.
-        */
-        char *ret;
-        ret = (char *)malloc(1024);
-        
-        if (!bg && !fg) {
-                    strncpy(ret ,original, 1024);
-        } else {
-                if (bg && !fg) {
-                        snprintf(ret, 1024, "^b%s^%s%s", bg, original, "^d^");
-                } else if (!bg && fg) {
-                        snprintf(ret, 1024, "^c%s^%s%s", fg, original, "^d^");
-                } else {
-                        snprintf(ret, 1024, "^b%s^^c%s^%s%s", bg, fg, original, "^d^");
-                }
-        }
-        
-        return ret;
-}
-
-int
-csnprintf(char *str, size_t size, const char *bg, const char *fg,
-        const char *fmt, ...)
-{
-        va_list ap;
-        int ret;
-        char *color_fmt;
-        
-        color_fmt = setcolor(fmt, bg, fg);
-        va_start(ap, fmt);
-        ret = evsnprintf(str, size, color_fmt, ap);
-        va_end(ap);
-        free(color_fmt);
-
-        return ret;
 }

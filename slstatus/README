@@ -1,9 +1,7 @@
-slstatus - suckless status(Njord build)
+slstatus - suckless status
 ==========================
 slstatus is a suckless status monitor for window managers that use WM_NAME
-(e.g. dwm) or stdin to fill the status bar. This is a custom build of 
-slstatus where it is used in Njord's dwm build. It has custom unicode functions
-(only works on Linux).
+(e.g. dwm) or stdin to fill the status bar.
 
 
 Features
@@ -22,14 +20,13 @@ Features
 - Keyboard indicators
 - Keymap
 - Load average
-- MPD music helper
 - Network speeds (RX and TX)
 - Number of files in a directory (hint: Maildir)
 - Memory status (free memory, percentage, total memory and used memory)
 - Swap status (free swap, percentage, total swap and used swap)
 - Temperature
 - Uptime
-- Volume percentage (OSS/ALSA)
+- Volume percentage
 - WiFi signal percentage and ESSID
 
 
@@ -61,6 +58,8 @@ slstatus can be customized by creating a custom config.h and (re)compiling the
 source code. This keeps it fast, secure and simple.
 
 
-Todo
-----
-Cleaning up the whole codebase it the goal before thinking about a release.
+Upcoming
+--------
+
+A release (v1.0) will come soon... ;)
+After a long phase of inactivity, development has been continued!

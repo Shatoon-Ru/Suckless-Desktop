@@ -1,7 +1,7 @@
 static const char *background_color = "#212121";
 static const char *border_color = "#ececec";
 static const char *font_color = "#ececec";
-static const char *font_pattern = "SF Pro Text:style=Regular:size=6";
+static const char *font_pattern = "SF Pro Text:style=Regular:size=11";
 static const unsigned line_spacing = 5;
 static const unsigned int padding = 15;
 

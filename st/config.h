@@ -5,10 +5,10 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "Iosevka:pixelsize=13:hinting=true:antialias=true";
+static char *font = "Code New Roman:pixelsize=14:hinting=true:antialias=true";
 /*static char *font = "Scientifica:pixelsize=16:hinting=true:antialias=true";*/
-static char *font2[] = { "Hack Nerd Font:pixelsize=12:hinting=true:antialias=true" };
-static int borderpx = 25;
+static char *font2[] = { "Iosevka:pixelsize=14:hinting=true:antialias=true" };
+static int borderpx = 30;
 
 /*
  * What program is execed by st depends of these precedence rules:
@@ -109,7 +109,7 @@ char *termname = "st-256color";
 unsigned int tabspaces = 8;
 
 /* bg opacity */
-float alpha = 0.98;
+float alpha = 1.0;
 
 /* Terminal colors (16 first used in escape sequence) */
 static const char *colorname[] = {

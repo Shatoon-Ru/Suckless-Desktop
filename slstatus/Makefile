@@ -17,11 +17,11 @@ COM =\
 	components/keyboard_indicators\
 	components/keymap\
 	components/load_avg\
-	components/media\
 	components/netspeeds\
 	components/num_files\
 	components/ram\
 	components/run_command\
+	components/separator\
 	components/swap\
 	components/temperature\
 	components/uptime\
@@ -44,7 +44,7 @@ slstatus: slstatus.o $(COM:=.o) $(REQ:=.o)
 	$(CC) -o $@ $(LDFLAGS) $(COM:=.o) $(REQ:=.o) slstatus.o $(LDLIBS)
 
 clean:
-	rm -f slstatus slstatus.o config.h $(COM:=.o) $(REQ:=.o)
+	rm -f slstatus slstatus.o $(COM:=.o) $(REQ:=.o)
 
 dist:
 	rm -rf "slstatus-$(VERSION)"
