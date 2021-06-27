@@ -66,7 +66,7 @@ static const Rule rules[] = {
    { "Thunar",                      NULL,      NULL,       1 << 4,       1,             0,           0 },
    { "File-roller",                 NULL,      NULL,       1 << 4,       1,             1,           0 },
    { "MuPDF",                       NULL,      NULL,       1 << 4,       1,             1,           0 },
-   { "Subl",                       NULL,      NULL,       1 << 6,       1,             0,           0 },
+   { "Subl",                        NULL,      NULL,       1 << 6,       1,             0,           0 },
    { "Easytag",                     NULL,      NULL,       1 << 8,       1,             0,           0 },
    { "Xfce4-taskmanager",           NULL,      NULL,       1 << 9,       1,             0,           0 },
    { "Xfce4-appearance-settings",   NULL,      NULL,       1 << 9,       1,             1,           1 },
@@ -113,9 +113,9 @@ static const char *muprev[]  = { "/usr/bin/mpc", "prev", NULL };
 static const char *mupause[] = { "/usr/bin/mpc", "toggle", NULL };
 static const char *scrotcmd[] = {"teiler", NULL};
 /*static const char *browsercmd[] = { "firefox", NULL };*/
-static const char *browsercmd[] = { "vivaldi-stable", NULL };
-static const char *qutecmd[] = { "brave", NULL };
-static const char *altbrowsercmd[] = { "qutebrowser", NULL };
+static const char *browsercmd[] = { "firefox", NULL };
+static const char *qutecmd[] = { "qutebrowser", NULL };
+static const char *altbrowsercmd[] = { "surf", NULL };
 static const char *termcmd[] = { "st", NULL };
 /*static const char *termcmd[] = { "alacritty", NULL };*/
 static const char *dmenucmd[] = { "dmenu_run_history", NULL };

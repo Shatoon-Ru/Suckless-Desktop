@@ -219,7 +219,7 @@ static Key keys[] = {
 	{ MODKEY|Mod4Mask|ControlMask,  XK_0,      setlayout,         {.v = &layouts[9]} },
 	{ MODKEY|Mod4Mask|ControlMask,  XK_w,      setflexlayout,     {.i = 293 } }, // centered master
 	{ MODKEY|ControlMask,           XK_e,      setflexlayout,     {.i = 273 } }, // bstackhoriz layout
-	{ MODKEY,                       XK_r,      setflexlayout,     {.i = 272 } }, // bstack layout
+	{ MODKEY|ShiftMask,             XK_r,      setflexlayout,     {.i = 272 } }, // bstack layout
 	{ MODKEY|ControlMask,           XK_t,      setflexlayout,     {.i = 261 } }, // default tile layout
 	{ MODKEY|ShiftMask,             XK_g,      setflexlayout,     {.i = 263 } }, // tile + grid layout
 	{ MODKEY|ShiftMask|ControlMask, XK_w,      setflexlayout,     {.i =   7 } }, // grid
@@ -277,9 +277,9 @@ static Key keys[] = {
 	{ 0, XF86XK_AudioStop,			spawn,						{.v = mupause } },
 	{ 0, XF86XK_AudioRewind,		spawn,						SHCMD("mpc seek -10") },
 	{ 0, XF86XK_AudioForward,		spawn,						SHCMD("mpc seek +10") },
-	{ MODKEY,						XK_w,		spawn,			{.v = browsercmd } },
+	{ MODKEY,						XK_w,		spawn,			{.v = ffcmd } },
 	{ MODKEY|ControlMask,			XK_w,		spawn,			{.v = surfcmd } },
-	{ MODKEY|ControlMask,			XK_v,		spawn,			{.v = ffcmd } },
+	{ MODKEY|ControlMask,			XK_v,		spawn,			{.v = browsercmd } },
 	{ MODKEY|ShiftMask,				XK_w,		spawn,			SHCMD("qutebrowser") },
 	{ MODKEY|Mod1Mask,				XK_w,		spawn,			SHCMD("google-chrome-stable") },
 	{ MODKEY,						XK_x,		spawn,			{.v = exitcmd } },
@@ -291,6 +291,7 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,				XK_m,		spawn,			SHCMD("QT_SCALE_FACTOR=0.5 audacious") },
 	{ MODKEY,						XK_f,		spawn,			{.v = filecmd } },
 	{ MODKEY,						XK_l,       spawn,		    SHCMD("slock") },
+	{ MODKEY,						XK_r,       spawn,		    SHCMD("buku_run") },
 };
  
 /* button definitions */
