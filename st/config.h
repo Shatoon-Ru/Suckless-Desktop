@@ -5,8 +5,8 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "Hack Nerd Font:pixelsize=13:hinting=true:antialias=true";
-static int borderpx = 35;
+static char *font = "Iosevka:pixelsize=14:hinting=true:antialias=true";
+static int borderpx = 55;
 
 /*
  * What program is execed by st depends of these precedence rules:
@@ -86,7 +86,7 @@ const int boxdraw_braille = 1;
 static int bellvolume = 0;
 
 /* default TERM value */
-char *termname = "st-256color";
+char *termname = "st";
 
 /*
  * spaces per tab
