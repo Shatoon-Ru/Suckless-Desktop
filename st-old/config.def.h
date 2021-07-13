@@ -5,8 +5,8 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "Iosevka:pixelsize=14:hinting=true:antialias=true";
-static int borderpx = 55;
+static char *font = "Hack Nerd Font:pixelsize=13:hinting=true:antialias=true";
+static int borderpx = 30;
 
 /*
  * What program is execed by st depends of these precedence rules:
@@ -86,7 +86,7 @@ const int boxdraw_braille = 1;
 static int bellvolume = 0;
 
 /* default TERM value */
-char *termname = "st";
+char *termname = "st-256color";
 
 /*
  * spaces per tab
@@ -111,28 +111,28 @@ float alpha = 1.0f;
 /* Terminal colors (16 first used in escape sequence) */
 static const char *colorname[] = {
 	/* 8 normal colors */
-	[0] = "#252525", /* black   */
-	[1] = "#a3535a", /* red     */
-	[2] = "#8f9d6a", /* green   */
-	[3] = "#d7ad87", /* yellow  */
-	[4] = "#7587a6", /* blue    */
-	[5] = "#9b859d", /* magenta */
-	[6] = "#afc4db", /* cyan    */
-	[7] = "#a7a7a7", /* white   */
+	[0] = "#292929", /* black   */
+	[1] = "#cf6a4c", /* red     */
+	[2] = "#19cb00", /* green   */
+	[3] = "#fad07a", /* yellow  */
+	[4] = "#8197bf", /* blue    */
+	[5] = "#8787af", /* magenta */
+	[6] = "#668799", /* cyan    */
+	[7] = "#888888", /* white   */
 
 	/* 8 bright colors */
-	[8]  = "#5f5a60", /* black   */
-	[9]  = "#a3535a", /* red     */
-	[10] = "#8f9d6a", /* green   */
-	[11] = "#d7ad87", /* yellow  */
-	[12] = "#7587a6", /* blue    */
-	[13] = "#9b859a", /* magenta */
-	[14] = "#afc4db", /* cyan    */
-	[15] = "#ccc9c9", /* white   */
+	[8]  = "#525252", /* black   */
+	[9]  = "#ff9d80", /* red     */
+	[10] = "#23fd00", /* green   */
+	[11] = "#ffefbf", /* yellow  */
+	[12] = "#accaff", /* blue    */
+	[13] = "#c4c4ff", /* magenta */
+	[14] = "#80bfaf", /* cyan    */
+	[15] = "#e8e8d3", /* white   */
 
 	/* special colors */
-	[256] = "#252525", /* background */
-	[257] = "#a7a7a7", /* foreground */
+	[256] = "#090909", /* background */
+	[257] = "#FFFFFF", /* foreground */
 };
 
 
