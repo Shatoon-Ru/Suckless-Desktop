@@ -21,12 +21,12 @@ static const int fancybar                = 1;   /* 0 means default behaviour, 1 
 static const int savefloats              = 1;   /* 0 means default behaviour, 1 = savefloats patch */
 static const int losefullscreen          = 1;   /* 0 means default behaviour, 1 = losefullscreen patch */
 static const int nrg_force_vsplit        = 1;   /* nrowgrid layout, 1 means force 2 clients to always split vertically */
-static const unsigned int systraypinning = 2;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
+static const unsigned int systraypinning = 1;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
 static const unsigned int systrayspacing = 0;   /* systray spacing */
 static const int systraypinningfailfirst = 0;   /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
 static const int showsystray             = 0;   /* 0 means no systray */
 /*static const char *fonts[]         		 = {"Hack Nerd Font:style=Regular:size=10", "Font Awesome 5 Pro:style=Solid:pixelsize=12:antialias=true", "Font Awesome 5 Brands:style=Solid:pixelsize=12:antialias=true", "Material Design Icons:Regular:pixelsize=21:antialias=true"};*/
-static const char *fonts[]          	 = { "monospace:size=10", "Font Awesome 5 Pro:style=Solid:pixelsize=12:antialias=true", "Font Awesome 5 Brands:style=Solid:pixelsize=12:antialias=true", "Material Design Icons:Regular:pixelsize=21:antialias=true"};
+static const char *fonts[]          	 = { "Inter:size=10.5", "Font Awesome 5 Pro:style=Solid:pixelsize=12:antialias=true", "Font Awesome 5 Brands:style=Solid:pixelsize=12:antialias=true", "Material Design Icons:Regular:pixelsize=21:antialias=true", "-wuncon-siji-medium-r-normal--10-100-75-75-c-80-iso10646-1"};
 static const char dmenufont[]            = "monospace:size=10";
 static const char col_gray1[]            = "#141414";
 static const char col_gray2[]            = "#505050";
@@ -86,11 +86,13 @@ static const Rule rules[] = {
 	{ "Vivaldi-stable", 				NULL,                         NULL,        NULL,   1,	      1,         	0,           0,            0 },
 	{ "Surf",           				NULL,                         NULL,        NULL,   1,	      1,         	0,           0,            0 },
 	{ "ncmpcpp",   						NULL,  				  		  NULL,   	   NULL,   1 << 3,    1,         	0,			 0,		       1 },
+	{ "St",	            				NULL,                         NULL,        NULL,   1 << 1,    1,         	0,           0,            0 },
 	{ "st",	            				NULL,                         NULL,        NULL,   1 << 1,    1,         	0,           0,            0 },
 	{ "URxvt",          				NULL,                         NULL,        NULL,   1 << 1,    1,         	0,           0,            0 },
 	{ "Transmission-gtk",				NULL,                         NULL,        NULL,   1 << 2,    1,         	0,           0,            0 },
 	{ "SoulseekQt",						NULL,                         NULL,        NULL,   1 << 2,    1,         	0,           0,            0 },
 	{ "Thunar",		    				NULL,                         NULL,        NULL,   1 << 4,    1,         	0,           0,            0 },
+	{ "Sxiv",		    				NULL,                         NULL,        NULL,   1 << 4,    1,         	1,           1,            0 },
 	{ "File-roller",    				NULL,                         NULL,        NULL,   1 << 4,    1,         	1,           1,            0 },
 	{ "mpv",          					NULL,                         NULL,        NULL,   1 << 4,    1,         	0,           1,            0 },
 	{ "Subl",		    				NULL,                         NULL,        NULL,   1 << 6,    1,         	0,           0,            0 },
@@ -109,7 +111,7 @@ static const Rule rules[] = {
     { "Blueman-manager", 				NULL, 			  			  NULL, 	   NULL,   1 << 9,    1,         	1,    		 1,            1 },
     { "Solaar", 						NULL, 			  			  NULL, 	   NULL,   1 << 9,    1,         	1,    		 1,            1 },
     { "Piper", 							NULL, 			  			  NULL, 	   NULL,   1 << 9,    1,         	1,    		 1,            1 },
-    { "Gucharmap", 						NULL, 			  			  NULL, 	   NULL,   1 << 6,    1,         	1,    		 1,            1 },
+    { "Gucharmap", 						NULL, 			  			  NULL, 	   NULL,   1 << 6,    1,         	1,    		 1,            0 },
     { "Gimp", 							NULL, 			  			  NULL, 	   NULL,   1 << 9,    1,         	1,    		 1,            0 },
     { "firefox",		"GtkFileChooserDialog",       "Save File",    NULL,   	   0,      0,         1,            1,            			   0 },
 };	
@@ -127,13 +129,14 @@ static const int layoutaxis[] = {
 	TOP_TO_BOTTOM,    /* stack axis:  1 = x (from left to right), 2 = y (from top to bottom), 3 = z (monocle), 4 = grid */
 };
 
-/*static const Layout layouts[] = {
-	{ "󰕴",	dwindle },
+static const Layout layouts[] = {
+	/* symbol	arrange function */
+	{ "󰕴",	dwindle }, /* first entry is default */
 	{ "󰙀",	tile },
 	{ "󰕰", grid },
 	{ "󰕫", centeredmaster },
 	{ "󰕬", centeredfloatingmaster },
-	{ "󰕯",	NULL },
+	{ "󰕯",	NULL },    /* no layout function means floating behavior */
 	{ "󰾍",	bstack },
 	{ "󱇚",	bstackhoriz },
 	{ "󱒈",	gaplessgrid },
@@ -142,24 +145,6 @@ static const int layoutaxis[] = {
 	{ "󰡃",	spiral },
 	{ "󰃚",	monocle },
 	{ "󱒉",	deck },
-	{ NULL,	NULL },
-};*/
-
-static const Layout layouts[] = {
-	{ "D",	dwindle },
-	{ "T",	tile },
-	{ "G", grid },
-	{ "CM", centeredmaster },
-	{ "CF", centeredfloatingmaster },
-	{ "N",	NULL },
-	{ "B",	bstack },
-	{ "BH",	bstackhoriz },
-	{ "GG",	gaplessgrid },
-	{ "HG",	horizgrid },
-	{ "NG",	nrowgrid },
-	{ "S",	spiral },
-	{ "M",	monocle },
-	{ "DE",	deck },
 	{ NULL,	NULL },
 };
 
@@ -175,9 +160,12 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run_history", NULL };
+/*static const char *dmenucmd[] = { "dmenu_run_history", NULL };*/
+/*static const char *dmenucmd[] = { "dmenu_run", "-b", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray4, "-sb", col_gray2, "-sf", col_gray1, NULL };*/
 static const char *roficmd[] = { "rofi", "-show", "drun", "-show-icons", NULL };
 static const char *scrotcmd[] = {"/usr/bin/scr", NULL};
+static const char *clipcmd[] = {"/usr/bin/clip", NULL};
+static const char *dmenucmd[] = {"/usr/bin/dmenu.sh", NULL};
 static const char *termcmd[]  = { "st", NULL };
 /*static const char *termcmd[]  = { "urxvt", NULL };*/
 static const char *browsercmd[] = { "vivaldi-stable", NULL };
@@ -312,13 +300,13 @@ static Key keys[] = {
 	{ MODKEY,						XK_x,		spawn,			{.v = exitcmd } },
 	{ MODKEY,						XK_e,		spawn,			{.v = editcmd } },
 	{ MODKEY|ShiftMask, 			XK_e,		spawn,			{.v = vimcmd } },
-	{ MODKEY|ShiftMask,				XK_p,		spawn,			SHCMD("rofi -modi \"clipboard:greenclip print\" -show clipboard -run-command '{cmd}'") },
+	/*{ MODKEY|ShiftMask,				XK_p,		spawn,			SHCMD("greenclip print | sed '/^$/d' | dmenu -l 10 -b -nb "#141414" -nf "#505050" -sb "#505050" -sf "#000000" -p clipboard | xargs -r -d'\n' -I '{}' greenclip print '{}'") },*/
+	/*{ MODKEY|ShiftMask,				XK_p,		spawn,			SHCMD("rofi -modi \"clipboard:greenclip print\" -show clipboard -run-command '{cmd}'") },*/
+	{ MODKEY|ShiftMask,				XK_p,		spawn,			{.v = clipcmd } },
 	{ MODKEY,						XK_m,		spawn,			SHCMD("st -c ncmpcpp -e ncmpcpp") },
 	/*{ MODKEY,						XK_m,		spawn,			SHCMD("urxvt -c ncmpcpp -e ncmpcpp") },*/
-	{ MODKEY|ShiftMask,				XK_m,		spawn,			SHCMD("QT_SCALE_FACTOR=0.5 audacious") },
 	{ MODKEY,						XK_f,		spawn,			{.v = filecmd } },
 	{ MODKEY,						XK_l,       spawn,		    SHCMD("slock") },
-	{ MODKEY,						XK_r,       spawn,		    SHCMD("buku_run") },
 };
  
 /* button definitions */
