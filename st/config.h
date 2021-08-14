@@ -5,8 +5,10 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "Iosevka:pixelsize=14:antialias=true:autohint=true";
-static char *font2[] = { "Iosevka:pixelsize=14:antialias=true:autohint=true" };
+static char *font = "Hack Nerd Font:pixelsize=14:antialias=true:autohint=true";
+static char *font2[] = { "Hack Nerd Font:pixelsize=14:antialias=true:autohint=true" };
+/*static char *font = "Iosevka:pixelsize=14:antialias=true:autohint=true";
+static char *font2[] = { "Iosevka:pixelsize=14:antialias=true:autohint=true" };*/
 static int borderpx = 55;
 
 /*
@@ -141,7 +143,7 @@ static const char *colorname[] = {
   /* more colors can be added after 255 to use with DefaultXX */
   "#cccccc", /* 256 -> cursor */
   "#555555", /* 257 -> rev cursor*/
-  "#030212", /* 258 -> bg */
+  "#252525", /* 258 -> bg */
   "#cecedb", /* 259 -> fg */
 };
 

@@ -1,7 +1,7 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const unsigned int borderpx       = 1;   /* border pixel of windows */
+static const unsigned int borderpx       = 0;   /* border pixel of windows */
 static const unsigned int snap           = 32;  /* snap pixel */
 static const unsigned int gappih         = 10;  /* horiz inner gap between windows */
 static const unsigned int gappiv         = 10;  /* vert inner gap between windows */
@@ -11,7 +11,7 @@ static const int smartgaps               = 1;   /* 1 means no outer gap when the
 static const int showbar                 = 1;   /* 0 means no bar */
 static const int topbar                  = 1;   /* 0 means bottom bar */
 static const int horizpadbar             = 6;   /* horizontal padding for statusbar */
-static const int vertpadbar              = 10;   /* vertical padding for statusbar */
+static const int vertpadbar              = 15;   /* vertical padding for statusbar */
 static const int focusonnetactive        = 1;   /* 0 means default behaviour, 1 means auto-focus on urgent window */
 static const int attachmode              = 2;   /* 0 = master (default), 1 = above, 2 = aside, 3 = below, 4 = bottom */
 static const int pertag                  = 1;   /* 0 means global layout across all tags (default), 1 = layout per tag (pertag) */
@@ -26,7 +26,7 @@ static const unsigned int systrayspacing = 0;   /* systray spacing */
 static const int systraypinningfailfirst = 0;   /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
 static const int showsystray             = 0;   /* 0 means no systray */
 /*static const char *fonts[]         		 = {"Hack Nerd Font:style=Regular:size=10", "Font Awesome 5 Pro:style=Solid:pixelsize=12:antialias=true", "Font Awesome 5 Brands:style=Solid:pixelsize=12:antialias=true", "Material Design Icons:Regular:pixelsize=21:antialias=true"};*/
-static const char *fonts[]          	 = { "Inter:size=10.5", "Font Awesome 5 Pro:style=Solid:pixelsize=12:antialias=true", "Font Awesome 5 Brands:style=Solid:pixelsize=12:antialias=true", "Material Design Icons:Regular:pixelsize=21:antialias=true", "-wuncon-siji-medium-r-normal--10-100-75-75-c-80-iso10646-1"};
+static const char *fonts[]          	   = { "Inter:size=10.5", "Font Awesome 5 Pro:style=Solid:pixelsize=12:antialias=true", "Font Awesome 5 Brands:style=Solid:pixelsize=12:antialias=true", "Material Design Icons:Regular:pixelsize=19:antialias=true" };
 static const char dmenufont[]            = "monospace:size=10";
 static const char col_gray1[]            = "#141414";
 static const char col_gray2[]            = "#505050";
@@ -36,7 +36,7 @@ static const char col_gray5[]            = "#fffefe";
 static const char col_gray6[]            = "#292929";
 static const char col_gray7[]            = "#212121";
 static const char col_cyan[]             = "#7e9cb9";
-static const char col_blue[]			 = "#6699cc";
+static const char col_blue[]			  = "#6699cc";
 static const char col1[]            = "#98971a";
 static const char col2[]            = "#d79921";
 static const char col3[]            = "#458588";
@@ -52,7 +52,8 @@ static const unsigned int borderalpha    = 255;
 static const char *colors[][3] = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray4, col_gray7, col_gray2 },
-	[SchemeSel]  = { col_gray5, col_gray6,  col_gray7  },
+	/*[SchemeSel]  = { col_cyan, col_gray6,  col_gray7  },*/
+	[SchemeSel]  = { col_cyan, col_gray7,  col_gray7  },
 };
 
 
@@ -76,44 +77,46 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 *  WM_WINDOW_ROLE(STRING) = role
 	 */
-	/* class            				role                          instance     title   tags mask  switchtotag  iscentered   isfloating   monitor */
-	{ "qutebrowser",    				NULL,                         NULL,        NULL,   1,	      1,         	0,           0,            0 },
-	{ "Brave-browser",  				NULL,                         NULL,        NULL,   1,	      1,         	0,           0,            0 },
-	{ "firefox",        				NULL,                         NULL,        NULL,   1,	      1,         	0,           0,            0 },
-	{ "Nightly",        				NULL,                         NULL,        NULL,   1,	      1,         	0,           0,            0 },
-	{ "Google-chrome",  				NULL,                         NULL,        NULL,   1,	      1,         	0,           0,            0 },
-	{ "Ghostery Dawn",  				NULL,                         NULL,        NULL,   1,	      1,         	0,           0,            0 },
-	{ "Vivaldi-stable", 				NULL,                         NULL,        NULL,   1,	      1,         	0,           0,            0 },
-	{ "Surf",           				NULL,                         NULL,        NULL,   1,	      1,         	0,           0,            0 },
-	{ "ncmpcpp",   						NULL,  				  		  NULL,   	   NULL,   1 << 3,    1,         	0,			 0,		       1 },
-	{ "St",	            				NULL,                         NULL,        NULL,   1 << 1,    1,         	0,           0,            0 },
-	{ "st",	            				NULL,                         NULL,        NULL,   1 << 1,    1,         	0,           0,            0 },
-	{ "URxvt",          				NULL,                         NULL,        NULL,   1 << 1,    1,         	0,           0,            0 },
-	{ "Transmission-gtk",				NULL,                         NULL,        NULL,   1 << 2,    1,         	0,           0,            0 },
-	{ "SoulseekQt",						NULL,                         NULL,        NULL,   1 << 2,    1,         	0,           0,            0 },
-	{ "Thunar",		    				NULL,                         NULL,        NULL,   1 << 4,    1,         	0,           0,            0 },
-	{ "Sxiv",		    				NULL,                         NULL,        NULL,   1 << 4,    1,         	1,           1,            0 },
-	{ "File-roller",    				NULL,                         NULL,        NULL,   1 << 4,    1,         	1,           1,            0 },
-	{ "mpv",          					NULL,                         NULL,        NULL,   1 << 4,    1,         	0,           1,            0 },
-	{ "Subl",		    				NULL,                         NULL,        NULL,   1 << 6,    1,         	0,           0,            0 },
-	{ "code-oss",	    				NULL,                         NULL,        NULL,   1 << 6,    1,         	0,           0,            0 },
-	{ "Code",		    				NULL,                         NULL,        NULL,   1 << 6,    1,         	0,           0,            0 },
-	{ "Steam",          				NULL,                         NULL,        NULL,   1 << 7,    1,         	0,           0,            0 },
-	{ "Slack",          				NULL,                         NULL,        NULL,   1 << 7,    1,         	0,           0,            1 },
-	{ "Easytag",	    				NULL,                         NULL,        NULL,   1 << 8,    1,         	1,           0,            0 },
-	{ "Xfce4-taskmanager",				NULL,                         NULL,        NULL,   1 << 9,    1,         	1,           0,            1 },
-	{ "Nitrogen",						NULL,                         NULL,        NULL,   1 << 9,    1,         	1,           1,            1 },
-	{ "Xfce4-appearance-settings", 		NULL, 			  			  NULL, 	   NULL,   1 << 9,    1,         	1,    		 1,            1 },
-	{ "Xfce4-mouse-settings", 			NULL, 			  	  		  NULL, 	   NULL,   1 << 9,    1,         	1,    		 1,            1 },
-	{ "Gpick", 							NULL, 			  	  		  NULL, 	   NULL,   0,    	  1,         	1,    		 1,            1 },
-	{ "MuPDF", 							NULL, 			  	  		  NULL, 	   NULL,   0,    	  1,         	1,    		 1,            0 },
-    { "Lxappearance",   				NULL, 			  			  NULL, 	   NULL,   1 << 9,    1,         	1,    		 1,            1 },
-    { "Blueman-manager", 				NULL, 			  			  NULL, 	   NULL,   1 << 9,    1,         	1,    		 1,            1 },
-    { "Solaar", 						NULL, 			  			  NULL, 	   NULL,   1 << 9,    1,         	1,    		 1,            1 },
-    { "Piper", 							NULL, 			  			  NULL, 	   NULL,   1 << 9,    1,         	1,    		 1,            1 },
-    { "Gucharmap", 						NULL, 			  			  NULL, 	   NULL,   1 << 6,    1,         	1,    		 1,            0 },
-    { "Gimp", 							NULL, 			  			  NULL, 	   NULL,   1 << 9,    1,         	1,    		 1,            0 },
-    { "firefox",		"GtkFileChooserDialog",       "Save File",    NULL,   	   0,      0,         1,            1,            			   0 },
+	/* class            				      role                          instance     title   tags mask  switchtotag  iscentered   isfloating   monitor */
+  { "qutebrowser",    				      NULL,                         NULL,        NULL,   1,	        1,         	0,           0,            0 },
+  { "Brave-browser",  				      NULL,                         NULL,        NULL,   1,	        1,         	0,           0,            0 },
+  { "firefox",        				      NULL,                         NULL,        NULL,   1,	        1,         	0,           0,            0 },
+  { "Nightly",        				      NULL,                         NULL,        NULL,   1,	        1,         	0,           0,            0 },
+  { "Google-chrome",  				      NULL,                         NULL,        NULL,   1,	        1,         	0,           0,            0 },
+  { "Ghostery Dawn",  				      NULL,                         NULL,        NULL,   1,	        1,         	0,           0,            0 },
+  { "Vivaldi-stable", 				      NULL,                         NULL,        NULL,   1,	        1,         	0,           0,            0 },
+  { "Surf",           				      NULL,                         NULL,        NULL,   1,	        1,         	0,           0,            0 },
+  { "ncmpcpp",   						  NULL,  				  		NULL,        NULL,   1 << 3,    1,         	0,			 0,		       1 },
+  { "St",	            				  NULL,                         NULL,        NULL,   1 << 1,    1,         	0,           0,            0 },
+  { "st",	            				  NULL,                         NULL,        NULL,   1 << 1,    1,         	0,           0,            0 },
+  { "URxvt",          				      NULL,                         NULL,        NULL,   1 << 1,    1,         	0,           0,            0 },
+  { "Transmission-gtk",				      NULL,                         NULL,        NULL,   1 << 2,    1,         	0,           0,            0 },
+  { "SoulseekQt",						  NULL,                         NULL,        NULL,   1 << 2,    1,         	0,           0,            0 },
+  { "Thunar",		    				  NULL,                         NULL,        NULL,   1 << 4,    1,         	0,           0,            0 },
+  { "Sxiv",		    				      NULL,                         NULL,        NULL,   1 << 4,    1,         	1,           1,            0 },
+  { "File-roller",    				      NULL,                         NULL,        NULL,   1 << 4,    1,         	1,           1,            0 },
+  { "mpv",          					  NULL,                         NULL,        NULL,   1 << 4,    1,         	0,           1,            0 },
+  { "Subl",		    				      NULL,                         NULL,        NULL,   1 << 6,    1,         	0,           0,            0 },
+  { "code-oss",	    				      NULL,                         NULL,        NULL,   1 << 6,    1,         	0,           0,            0 },
+  { "Code",		    				      NULL,                         NULL,        NULL,   1 << 6,    1,         	0,           0,            0 },
+  { "Steam",          				      NULL,                         NULL,        NULL,   1 << 7,    1,         	0,           0,            0 },
+  { "Slack",          				      NULL,                         NULL,        NULL,   1 << 7,    1,         	0,           0,            1 },
+  { "Easytag",	    				      NULL,                         NULL,        NULL,   1 << 8,    1,         	1,           0,            0 },
+  { "Xfce4-taskmanager",				  NULL,                         NULL,        NULL,   1 << 9,    1,         	1,           0,            1 },
+  { "Nitrogen",						      NULL,                         NULL,        NULL,   1 << 9,    1,         	1,           1,            1 },
+  { "Xfce4-appearance-settings", 		  NULL,     		  			NULL, 	     NULL,   1 << 9,    1,         	1,    		 1,            1 },
+  { "Xfce4-mouse-settings", 			  NULL, 			  	  		NULL, 	     NULL,   1 << 9,    1,         	1,    		 1,            1 },
+  { "Gpick", 							  NULL, 			  	  		NULL, 	     NULL,   0,    	    1,         	1,    		 1,            0 },
+  { "Sxiv", 							  NULL, 			  	  		NULL, 	     NULL,   0,    	    1,         	1,    		 1,            0 },
+  { "MuPDF", 							  NULL, 			  	  		NULL, 	     NULL,   0,    	    1,         	1,    		 1,            0 },
+  { "Lxappearance",   				      NULL, 			    		NULL, 	     NULL,   1 << 9,    1,         	1,    		 1,            1 },
+  { "Blueman-manager", 				      NULL, 		  	  			NULL, 	     NULL,   1 << 9,    1,         	1,    		 1,            1 },
+  { "Gnome-builder",  				      NULL, 		  	  			NULL, 	     NULL,   1 << 6,    1,         	1,    		 0,            0 },
+  { "Solaar", 						      NULL, 			    		NULL, 	     NULL,   1 << 9,    1,         	1,    		 1,            1 },
+  { "Piper", 							  NULL, 			  	  		NULL, 	     NULL,   1 << 9,    1,         	1,    		 1,            1 },
+  { "Gucharmap", 						  NULL, 			  		  	NULL, 	     NULL,   1 << 6,    1,         	1,    		 1,            0 },
+  { "Gimp", 							  NULL, 			  			NULL, 	     NULL,   1 << 9,    1,         	1,    		 1,            0 },
+  { "firefox",		"GtkFileChooserDialog",       "Save File",          NULL,   	 0,      0,         1,          1,    			   0 },
 };	
 
 /* layout(s) */
@@ -129,11 +132,30 @@ static const int layoutaxis[] = {
 	TOP_TO_BOTTOM,    /* stack axis:  1 = x (from left to right), 2 = y (from top to bottom), 3 = z (monocle), 4 = grid */
 };
 
+/*static const Layout layouts[] = {*/
+	/* symbol	arrange function */
+	/*{ "󰕴",	dwindle }, first entry is default */
+	/*{ "󰙀",	tile },
+	{ "󰕰", grid },
+	{ "󰕫", centeredmaster },
+	{ "󰕬", centeredfloatingmaster },
+	{ "󰕯",	NULL },    no layout function means floating behavior */
+	/*{ "󰾍",	bstack },
+	{ "󱇚",	bstackhoriz },
+	{ "󱒈",	gaplessgrid },
+	{ "󰕭",	horizgrid },
+	{ "󱒇",	nrowgrid },
+	{ "󰡃",	spiral },
+	{ "󰃚",	monocle },
+	{ "󱒉",	deck },
+	{ NULL,	NULL },
+};*/
+
 static const Layout layouts[] = {
 	/* symbol	arrange function */
-	{ "󰕴",	dwindle }, /* first entry is default */
-	{ "󰙀",	tile },
-	{ "󰕰", grid },
+	{ "",	dwindle }, /* first entry is default */
+	{ "",	tile },
+	{ "", grid },
 	{ "󰕫", centeredmaster },
 	{ "󰕬", centeredfloatingmaster },
 	{ "󰕯",	NULL },    /* no layout function means floating behavior */
@@ -163,7 +185,7 @@ static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() 
 /*static const char *dmenucmd[] = { "dmenu_run_history", NULL };*/
 /*static const char *dmenucmd[] = { "dmenu_run", "-b", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray4, "-sb", col_gray2, "-sf", col_gray1, NULL };*/
 static const char *roficmd[] = { "rofi", "-show", "drun", "-show-icons", NULL };
-static const char *scrotcmd[] = {"/usr/bin/scr", NULL};
+/*static const char *scrotcmd[] = {"/usr/bin/scr", NULL};*/
 static const char *clipcmd[] = {"/usr/bin/clip", NULL};
 static const char *dmenucmd[] = {"/usr/bin/dmenu.sh", NULL};
 static const char *termcmd[]  = { "st", NULL };
@@ -276,15 +298,16 @@ static Key keys[] = {
 	TAGKEYS(                        XK_F8,                        7)
 	TAGKEYS(                        XK_F9,                        8)
 	TAGKEYS(                        XK_F10,                       9)
-	{ MODKEY|ShiftMask,             XK_q,      quit,              {0} },
-	{ MODKEY|ControlMask,           XK_t,      rotatelayoutaxis,  {.i = 0} },    /* flextile, 0 = layout axis */
-	{ MODKEY|ControlMask,           XK_Tab,    rotatelayoutaxis,  {.i = 1} },    /* flextile, 1 = master axis */
-	{ MODKEY|ControlMask|ShiftMask, XK_Tab,    rotatelayoutaxis,  {.i = 2} },    /* flextile, 2 = stack axis */
-	{ MODKEY|ControlMask,           XK_Return, mirrorlayout,      {0} },         /* flextile, flip master and stack areas */
-	{ 0,							XK_Print,	spawn,			{.v = scrotcmd } },
-	{ 0, XF86XK_AudioMute,			spawn,						SHCMD("amixer sset Master toggle") },
-	{ 0, XF86XK_AudioRaiseVolume,	spawn,						SHCMD("/usr/bin/volume up") },
-	{ 0, XF86XK_AudioLowerVolume,	spawn,						SHCMD("/usr/bin/volume down") },
+	{ MODKEY|ShiftMask,             XK_q,       quit,              {0} },
+	{ MODKEY|ControlMask,           XK_t,       rotatelayoutaxis,  {.i = 0} },    /* flextile, 0 = layout axis */
+	{ MODKEY|ControlMask,           XK_Tab,     rotatelayoutaxis,  {.i = 1} },    /* flextile, 1 = master axis */
+	{ MODKEY|ControlMask|ShiftMask, XK_Tab,     rotatelayoutaxis,  {.i = 2} },    /* flextile, 2 = stack axis */
+	{ MODKEY|ControlMask,           XK_Return,  mirrorlayout,      {0} },         /* flextile, flip master and stack areas */
+	/*{ 0,							XK_Print,   spawn,		       {.v = scrotcmd } },*/
+	{ 0,							XK_Print,   spawn,		    SHCMD("flameshot gui -d 3000") },
+	{ 0, XF86XK_AudioMute,			            spawn,			SHCMD("amixer sset Master toggle") },
+	{ 0, XF86XK_AudioRaiseVolume,	            spawn,         	SHCMD("/usr/bin/volume up") },
+	{ 0, XF86XK_AudioLowerVolume,             	spawn,          SHCMD("/usr/bin/volume down") },
 	{ 0, XF86XK_AudioPrev,			spawn,		 				{.v = muprev } },
 	{ 0, XF86XK_AudioNext,			spawn,						{.v = munext } },
 	{ 0, XF86XK_AudioPause,			spawn,						{.v = mupause } },
@@ -296,7 +319,7 @@ static Key keys[] = {
 	{ MODKEY|ControlMask,			XK_w,		spawn,			{.v = surfcmd } },
 	{ MODKEY|ControlMask,			XK_v,		spawn,			{.v = browsercmd } },
 	{ MODKEY|ShiftMask,				XK_w,		spawn,			SHCMD("qutebrowser") },
-	{ MODKEY|Mod1Mask,				XK_w,		spawn,			SHCMD("google-chrome-stable") },
+	{ MODKEY|ShiftMask|ControlMask,	XK_w,		spawn,			SHCMD("google-chrome-stable") },
 	{ MODKEY,						XK_x,		spawn,			{.v = exitcmd } },
 	{ MODKEY,						XK_e,		spawn,			{.v = editcmd } },
 	{ MODKEY|ShiftMask, 			XK_e,		spawn,			{.v = vimcmd } },
