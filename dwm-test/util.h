@@ -10,7 +10,6 @@
 #define DEBUG(...)
 #endif
 
-
 void die(const char *fmt, ...);
 void *ecalloc(size_t nmemb, size_t size);
 int normalizepath(const char *path, char **normal);

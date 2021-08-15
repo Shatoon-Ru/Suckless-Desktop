@@ -3,7 +3,7 @@
 #include <X11/XF86keysym.h> // media keys
 
 /* appearance */
-static const unsigned int borderpx  = 1;        /* border pixel of windows */
+static const unsigned int borderpx  = 0;        /* border pixel of windows */
 static const unsigned int gappx     = 0;        /* gaps between windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const unsigned int gappih    = 10;       /* horiz inner gap between windows */
@@ -19,25 +19,27 @@ static const int usealtbar          = 1;        /* 1 means use non-dwm status ba
 static const char *altbarclass      = "Polybar"; /* Alternate bar class name */
 static const char *alttrayname      = "tray";    /* Polybar tray instance name */
 static const char *altbarcmd        = "$HOME/.config/polybar/launch.sh"; /* Alternate bar launch command */
-static const char *fonts[]          = {
-    "noto:size=14",
-	"Font Awesome 5 Free Regular-12",
-	"Font Awesome 5 Free Solid-12"
-};
+static const char *fonts[]          = { "Inter:size=10.5", "Font Awesome 5 Pro:style=Solid:pixelsize=12:antialias=true", "Font Awesome 5 Brands:style=Solid:pixelsize=12:antialias=true", "Material Design Icons:Regular:pixelsize=19:antialias=true" };
 static const char dmenufont[]       = "noto:size=14";
-static const char col_gray1[]            = "#141414";
-static const char col_gray2[]            = "#505050";
-static const char col_gray3[]            = "#353535";
-static const char col_gray4[]            = "#c6c6c6";
-static const char col_gray5[]            = "#fffefe";
-static const char col_gray6[]            = "#292929";
-static const char col_gray7[]            = "#212121";
-static const char col_cyan[]             = "#7e9cb9";
-static const char col_blue[]             = "#6699cc";
+static const char col_gray1[]       = "#141414";
+static const char col_gray2[]       = "#505050";
+static const char col_gray3[]       = "#353535";
+static const char col_gray4[]       = "#c6c6c6";
+static const char col_gray5[]       = "#fffefe";
+static const char col_gray6[]       = "#292929";
+static const char col_gray7[]       = "#212121";
+static const char col_cyan[]        = "#7e9cb9";
+static const char col_blue[]        = "#6699cc";
+static const char col1[]            = "#98971a";
+static const char col2[]            = "#d79921";
+static const char col3[]            = "#458588";
+static const char col4[]            = "#b16286";
+static const char col5[]            = "#689d6a";
+static const char col6[]            = "#a89984";
 static const char *colors[][3]      = {
     /*               fg         bg         border   */
-    [SchemeNorm] = { col_gray4, col_gray1, col_gray6 },
-    [SchemeSel]  = { col_gray5, col_gray6, col_blue },
+    [SchemeNorm] = { col_gray4, col_gray7, col_gray2 },
+    [SchemeSel]  = { col_cyan, col_gray7,  col_cyan  },
 };
 
 /* tagging */
@@ -49,31 +51,45 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
    /* class                         instance    title       tags mask     switchtotag    isfloating   monitor */
-   { "qutebrowser",                 NULL,      NULL,       1,            1,             0,           0 },
-   { "firefox",                     NULL,      NULL,       1,            1,             0,           0 },
-   { "Nightly",                     NULL,      NULL,       1,            1,             0,           0 },
-   { "Vivaldi-stable",              NULL,      NULL,       1,            1,             0,           0 },
-   { "Brave-browser",               NULL,      NULL,       1,            1,             0,           0 },
-   { "St",                          NULL,      NULL,       1 << 1,       1,             0,           0 },
-   { "Alacritty",                   NULL,      NULL,       1 << 1,       1,             0,           0 },
-   { "mpv",                         NULL,      NULL,       1 << 4,       1,             1,           0 },
-   { "ncmpcpp",                     NULL,      NULL,       1 << 3,       1,             0,           1 },
-   { "Transmission-gtk",            NULL,      NULL,       1 << 2,       1,             0,           0 },
-   { "SoulsekkQt",                  NULL,      NULL,       1 << 2,       1,             0,           0 },
-   { "Caja",                        NULL,      NULL,       1 << 4,       1,             0,           0 },
-   { "Pcmanfm",                     NULL,      NULL,       1 << 4,       1,             0,           0 },
-   { "Nitrogen",                    NULL,      NULL,       1 << 4,       1,             1,           1 },
-   { "Thunar",                      NULL,      NULL,       1 << 4,       1,             0,           0 },
-   { "File-roller",                 NULL,      NULL,       1 << 4,       1,             1,           0 },
-   { "MuPDF",                       NULL,      NULL,       1 << 4,       1,             1,           0 },
-   { "Subl",                        NULL,      NULL,       1 << 6,       1,             0,           0 },
-   { "Easytag",                     NULL,      NULL,       1 << 8,       1,             0,           0 },
-   { "Xfce4-taskmanager",           NULL,      NULL,       1 << 9,       1,             0,           0 },
-   { "Xfce4-appearance-settings",   NULL,      NULL,       1 << 9,       1,             1,           1 },
-   { "Xfce4-mouse-settings",        NULL,      NULL,       1 << 9,       1,             1,           1 },
-   { "Lxappearance",                NULL,      NULL,       1 << 9,       1,             1,           1 },
-   { "Blueman-manager",             NULL,      NULL,       1 << 9,       1,             1,           1 },
-   { "Slack",                       NULL,      NULL,       1 << 7,       1,             0,           1 },
+   { "qutebrowser",                 NULL,       NULL,       1,            1,             0,           0 },
+   { "Brave-browser",               NULL,       NULL,       1,            1,             0,           0 },
+   { "firefox",                     NULL,       NULL,       1,            1,             0,           0 },
+   { "Nightly",                     NULL,       NULL,       1,            1,             0,           0 },
+   { "Google-chrome",               NULL,       NULL,       1,            1,             0,           0 },
+   { "Ghostery Dawn",               NULL,       NULL,       1,            1,             0,           0 },
+   { "Vivaldi-stable",              NULL,       NULL,       1,            1,             0,           0 },
+   { "Surf",                        NULL,       NULL,       1,            1,             0,           0 },
+   { "ncmpcpp",                     NULL,       NULL,       1 << 3,       1,             0,           1 },
+   { "St",                          NULL,       NULL,       1 << 1,       1,             0,           0 },
+   { "st",                          NULL,       NULL,       1 << 1,       1,             0,           0 },
+   { "URxvt",                       NULL,       NULL,       1 << 1,       1,             0,           0 },
+   { "Transmission-gtk",            NULL,       NULL,       1 << 2,       1,             0,           0 },
+   { "SoulseekQt",                  NULL,       NULL,       1 << 2,       1,             0,           0 },
+   { "Thunar",                      NULL,       NULL,       1 << 4,       1,             0,           0 },
+   { "Sxiv",                        NULL,       NULL,       1 << 4,       1,             1,           0 },
+   { "File-roller",                 NULL,       NULL,       1 << 4,       1,             1,           0 },
+   { "mpv",                         NULL,       NULL,       1 << 4,       1,             1,           0 },
+   { "Subl",                        NULL,       NULL,       1 << 6,       1,             0,           0 },
+   { "code-oss",                    NULL,       NULL,       1 << 6,       1,             0,           0 },
+   { "Code",                        NULL,       NULL,       1 << 6,       1,             0,           0 },
+   { "Steam",                       NULL,       NULL,       1 << 7,       1,             0,           0 },
+   { "Slack",                       NULL,       NULL,       1 << 7,       1,             0,           1 },
+   { "Easytag",                     NULL,       NULL,       1 << 8,       1,             0,           0 },
+   { "Xfce4-taskmanager",           NULL,       NULL,       1 << 9,       1,             0,           1 },
+   { "Nitrogen",                    NULL,       NULL,       1 << 9,       1,             1,           1 },
+   { "Xfce4-appearance-settings",   NULL,       NULL,       1 << 9,       1,             1,           1 },
+   { "Xfce4-mouse-settings",        NULL,       NULL,       1 << 9,       1,             1,           1 },
+   { "Gpick",                       NULL,       NULL,       0,            1,             1,           0 },
+   { "Sxiv",                        NULL,       NULL,       0,            1,             1,           0 },
+   { "MuPDF",                       NULL,       NULL,       0,            1,             1,           0 },
+   { "Lxappearance",                NULL,       NULL,       1 << 9,       1,             1,           1 },
+   { "Blueman-manager",             NULL,       NULL,       1 << 9,       1,             1,           1 },
+   { "Gnome-builder",               NULL,       NULL,       1 << 6,       1,             0,           0 },
+   { "Solaar",                      NULL,       NULL,       1 << 9,       1,             1,           1 },
+   { "Piper",                       NULL,       NULL,       1 << 9,       1,             1,           1 },
+   { "Gucharmap",                   NULL,       NULL,       1 << 6,       1,             1,           0 },
+   { "Gimp",                        NULL,       NULL,       1 << 9,       1,             1,           0 },
+   { "firefox",   "GtkFileChooserDialog", "Save File",      0,            1,             1,           0 },
 };
 
 /* layout(s) */
@@ -108,28 +124,30 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2]         = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *munext[]  = { "/usr/bin/mpc", "next", NULL };
-static const char *muprev[]  = { "/usr/bin/mpc", "prev", NULL };
-static const char *mupause[] = { "/usr/bin/mpc", "toggle", NULL };
-static const char *scrotcmd[] = {"teiler", NULL};
-/*static const char *browsercmd[] = { "firefox", NULL };*/
-static const char *browsercmd[] = { "firefox", NULL };
-static const char *qutecmd[] = { "qutebrowser", NULL };
-static const char *altbrowsercmd[] = { "surf", NULL };
-static const char *termcmd[] = { "st", NULL };
-/*static const char *termcmd[] = { "alacritty", NULL };*/
-static const char *dmenucmd[] = { "dmenu_run_history", NULL };
-static const char *qdmenucmd[] = { "dmenu_qutebrowser", NULL };
-/*static const char *roficmd[] = { "rofi", "-show", "drun", "-show-icons", NULL };*/
+static const char *clipcmd[]    = {"/usr/bin/clip", NULL};
+static const char *dmenucmd[]   = {"/usr/bin/dmenu.sh", NULL};
+static const char *termcmd[]    = { "st", NULL };
+static const char *browsercmd[] = { "vivaldi-stable", NULL };
+static const char *surfcmd[]    = { "surf", NULL };
+static const char *ffcmd[]      = { "firefox", NULL };
+static const char *exitcmd[]    = { "/usr/bin/stop.sh", NULL };
+static const char *munext[]     = { "/usr/bin/mpc", "next", NULL };
+static const char *muprev[]     = { "/usr/bin/mpc", "prev", NULL };
+static const char *mupause[]    = { "/usr/bin/mpc", "toggle", NULL };
+static const char *filecmd[]    = { "thunar", NULL };
+static const char *editcmd[]    = { "subl", NULL };
+static const char *vimcmd[]     = { "gvim", NULL };
 static const char scratchpadname[] = "scratchpad";
 static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "120x34", NULL };
-static const char *exitcmd[] = { "/usr/bin/stop.sh", NULL };
-static const char *editcmd[] = { "subl", NULL };
-static const char *filecmd[] = { "thunar", NULL };
 
 #include <X11/XF86keysym.h>
 static Key keys[] = {
     /* modifier                     key                    function                   argument */
+  { MODKEY|ShiftMask,             XK_w,                   spawn,               SHCMD("qutebrowser") },
+  { MODKEY|ShiftMask|ControlMask, XK_w,                   spawn,               SHCMD("google-chrome-stable") },
+  { MODKEY,                       XK_l,                   spawn,               SHCMD("slock") },
+  { MODKEY,                       XK_m,                   spawn,               SHCMD("st -c ncmpcpp -e ncmpcpp") },
+  { 0,                            XK_Print,               spawn,               SHCMD("flameshot gui -d 3000") },
   { 0, XF86XK_AudioMute,                                  spawn,               SHCMD("amixer sset Master toggle") },
   { 0, XF86XK_AudioRaiseVolume,                           spawn,               SHCMD("/usr/bin/volume up") },
   { 0, XF86XK_AudioLowerVolume,                           spawn,               SHCMD("/usr/bin/volume down") },
@@ -140,21 +158,17 @@ static Key keys[] = {
   { 0, XF86XK_AudioStop,                                  spawn,               {.v = mupause } },
   { 0, XF86XK_AudioRewind,                                spawn,               SHCMD("mpc seek -10") },
   { 0, XF86XK_AudioForward,                               spawn,               SHCMD("mpc seek +10") },
-  { MODKEY,                       XK_l,                   spawn,               SHCMD("slock") },
-  { MODKEY,                       XK_w,                   spawn,               {.v = browsercmd } },
-  { MODKEY|ShiftMask|ControlMask, XK_w,                   spawn,               {.v = qutecmd } },
-  { MODKEY|ShiftMask,             XK_w,                   spawn,               {.v = altbrowsercmd } },
-  { MODKEY,                       XK_f,                   spawn,               {.v = filecmd } },
-  { 0,                            XK_Print,               spawn,               {.v = scrotcmd } },
-  { MODKEY,                       XK_space,               spawn,               {.v = dmenucmd } },
-  { MODKEY,                       XK_d,                   spawn,               {.v = qdmenucmd } },
-  { MODKEY,                       XK_t,                   spawn,               {.v = termcmd } },
-  { MODKEY,                       XK_grave,               togglescratch,       {.v = scratchpadcmd } },
+  { MODKEY,                       XK_w,                   spawn,               {.v = ffcmd } },
+  { MODKEY|ControlMask,           XK_w,                   spawn,               {.v = surfcmd } },
+  { MODKEY|ControlMask,           XK_v,                   spawn,               {.v = browsercmd } },
   { MODKEY,                       XK_x,                   spawn,               {.v = exitcmd } },
   { MODKEY,                       XK_e,                   spawn,               {.v = editcmd } },
-  { MODKEY|ShiftMask,             XK_p,                   spawn,               SHCMD("rofi -modi \"clipboard:greenclip print\" -show clipboard -run-command '{cmd}'") },
-  { MODKEY,                       XK_m,                   spawn,               SHCMD("st -c ncmpcpp -e ncmpcpp") },
-  /*{ MODKEY,                       XK_m,                   spawn,               SHCMD("alacritty --class ncmpcpp -e ncmpcpp") },*/
+  { MODKEY|ShiftMask,             XK_e,                   spawn,               {.v = vimcmd } },
+  { MODKEY|ShiftMask,             XK_p,                   spawn,               {.v = clipcmd } },
+  { MODKEY,                       XK_f,                   spawn,               {.v = filecmd } },
+  { MODKEY,                       XK_space,               spawn,               {.v = dmenucmd } },
+  { MODKEY,                       XK_t,                   spawn,               {.v = termcmd } },
+  { MODKEY,                       XK_grave,               togglescratch,       {.v = scratchpadcmd } },
   { MODKEY,                       XK_Tab,                 focusstack,          {.i = +1 } },
   { MODKEY,                       XK_b,                   togglebar,           {0} },
   { MODKEY,                       XK_j,                   focusstack,          {.i = +1 } },
