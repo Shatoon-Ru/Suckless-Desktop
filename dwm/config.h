@@ -34,7 +34,7 @@ static const char col_gray3[]            = "#353535";
 static const char col_gray4[]            = "#c6c6c6";
 static const char col_gray5[]            = "#fffefe";
 static const char col_gray6[]            = "#292929";
-static const char col_gray7[]            = "#212121";
+static const char col_gray7[]            = "#2d2d2d";
 static const char col_cyan[]             = "#7e9cb9";
 static const char col_blue[]			  = "#6699cc";
 static const char col1[]            = "#98971a";
@@ -77,46 +77,45 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 *  WM_WINDOW_ROLE(STRING) = role
 	 */
-	/* class            				      role                          instance     title   tags mask  switchtotag  iscentered   isfloating   monitor */
-  { "qutebrowser",    				      NULL,                         NULL,        NULL,   1,	        1,         	0,           0,            0 },
-  { "Brave-browser",  				      NULL,                         NULL,        NULL,   1,	        1,         	0,           0,            0 },
-  { "firefox",        				      NULL,                         NULL,        NULL,   1,	        1,         	0,           0,            0 },
-  { "Nightly",        				      NULL,                         NULL,        NULL,   1,	        1,         	0,           0,            0 },
-  { "Google-chrome",  				      NULL,                         NULL,        NULL,   1,	        1,         	0,           0,            0 },
-  { "Ghostery Dawn",  				      NULL,                         NULL,        NULL,   1,	        1,         	0,           0,            0 },
-  { "Vivaldi-stable", 				      NULL,                         NULL,        NULL,   1,	        1,         	0,           0,            0 },
-  { "Surf",           				      NULL,                         NULL,        NULL,   1,	        1,         	0,           0,            0 },
-  { "ncmpcpp",   						  NULL,  				  		NULL,        NULL,   1 << 3,    1,         	0,			 0,		       1 },
-  { "St",	            				  NULL,                         NULL,        NULL,   1 << 1,    1,         	0,           0,            0 },
-  { "st",	            				  NULL,                         NULL,        NULL,   1 << 1,    1,         	0,           0,            0 },
-  { "URxvt",          				      NULL,                         NULL,        NULL,   1 << 1,    1,         	0,           0,            0 },
-  { "Transmission-gtk",				      NULL,                         NULL,        NULL,   1 << 2,    1,         	0,           0,            0 },
-  { "SoulseekQt",						  NULL,                         NULL,        NULL,   1 << 2,    1,         	0,           0,            0 },
-  { "Thunar",		    				  NULL,                         NULL,        NULL,   1 << 4,    1,         	0,           0,            0 },
-  { "Sxiv",		    				      NULL,                         NULL,        NULL,   1 << 4,    1,         	1,           1,            0 },
-  { "File-roller",    				      NULL,                         NULL,        NULL,   1 << 4,    1,         	1,           1,            0 },
-  { "mpv",          					  NULL,                         NULL,        NULL,   1 << 4,    1,         	0,           1,            0 },
-  { "Subl",		    				      NULL,                         NULL,        NULL,   1 << 6,    1,         	0,           0,            0 },
-  { "code-oss",	    				      NULL,                         NULL,        NULL,   1 << 6,    1,         	0,           0,            0 },
-  { "Code",		    				      NULL,                         NULL,        NULL,   1 << 6,    1,         	0,           0,            0 },
-  { "Steam",          				      NULL,                         NULL,        NULL,   1 << 7,    1,         	0,           0,            0 },
-  { "Slack",          				      NULL,                         NULL,        NULL,   1 << 7,    1,         	0,           0,            1 },
-  { "Easytag",	    				      NULL,                         NULL,        NULL,   1 << 8,    1,         	1,           0,            0 },
-  { "Xfce4-taskmanager",				  NULL,                         NULL,        NULL,   1 << 9,    1,         	1,           0,            1 },
-  { "Nitrogen",						      NULL,                         NULL,        NULL,   1 << 9,    1,         	1,           1,            1 },
-  { "Xfce4-appearance-settings", 		  NULL,     		  			NULL, 	     NULL,   1 << 9,    1,         	1,    		 1,            1 },
-  { "Xfce4-mouse-settings", 			  NULL, 			  	  		NULL, 	     NULL,   1 << 9,    1,         	1,    		 1,            1 },
-  { "Gpick", 							  NULL, 			  	  		NULL, 	     NULL,   0,    	    1,         	1,    		 1,            0 },
-  { "Sxiv", 							  NULL, 			  	  		NULL, 	     NULL,   0,    	    1,         	1,    		 1,            0 },
-  { "MuPDF", 							  NULL, 			  	  		NULL, 	     NULL,   0,    	    1,         	1,    		 1,            0 },
-  { "Lxappearance",   				      NULL, 			    		NULL, 	     NULL,   1 << 9,    1,         	1,    		 1,            1 },
-  { "Blueman-manager", 				      NULL, 		  	  			NULL, 	     NULL,   1 << 9,    1,         	1,    		 1,            1 },
-  { "Gnome-builder",  				      NULL, 		  	  			NULL, 	     NULL,   1 << 6,    1,         	1,    		 0,            0 },
-  { "Solaar", 						      NULL, 			    		NULL, 	     NULL,   1 << 9,    1,         	1,    		 1,            1 },
-  { "Piper", 							  NULL, 			  	  		NULL, 	     NULL,   1 << 9,    1,         	1,    		 1,            1 },
-  { "Gucharmap", 						  NULL, 			  		  	NULL, 	     NULL,   1 << 6,    1,         	1,    		 1,            0 },
-  { "Gimp", 							  NULL, 			  			NULL, 	     NULL,   1 << 9,    1,         	1,    		 1,            0 },
-  { "firefox",		"GtkFileChooserDialog",       "Save File",          NULL,   	 0,      0,         1,          1,    			   0 },
+	/* class            				  role             instance     title   tags mask  switchtotag  iscentered   isfloating   monitor */
+  { "qutebrowser",    				      NULL,               NULL,      NULL,   1,	        1,         	0,           0,            0 },
+  { "Brave-browser",  				      NULL,               NULL,      NULL,   1,	        1,         	0,           0,            0 },
+  { "firefox",        				      NULL,               NULL,      NULL,   1,	        1,         	0,           0,            0 },
+  { "Nightly",        				      NULL,               NULL,      NULL,   1,	        1,         	0,           0,            0 },
+  { "Google-chrome",  				      NULL,               NULL,      NULL,   1,	        1,         	0,           0,            0 },
+  { "Ghostery Dawn",  				      NULL,               NULL,      NULL,   1,	        1,         	0,           0,            0 },
+  { "Vivaldi-snapshot",				      NULL,               NULL,      NULL,   1,	        1,         	0,           0,            0 },
+  { "Surf",           				      NULL,               NULL,      NULL,   1,	        1,         	0,           0,            0 },
+  { "ncmpcpp",   						  NULL,  			  NULL,      NULL,   1 << 3,    1,         	0,			 0,		       1 },
+  { "URxvt",          				      NULL,               NULL,      NULL,   1 << 1,    1,         	0,           0,            0 },
+  { "Transmission-gtk",				      NULL,               NULL,      NULL,   1 << 2,    1,         	0,           0,            0 },
+  { "SoulseekQt",						  NULL,               NULL,      NULL,   1 << 2,    1,         	0,           0,            0 },
+  { "Thunar",		    				  NULL,               NULL,      NULL,   1 << 4,    1,         	0,           0,            0 },
+  { "Sxiv",		    				      NULL,               NULL,      NULL,   1 << 4,    1,         	1,           1,            0 },
+  { "File-roller",    				      NULL,               NULL,      NULL,   1 << 4,    1,         	1,           1,            0 },
+  { "mpv",          					  NULL,               NULL,      NULL,   1 << 4,    1,         	0,           1,            0 },
+  { "Subl",		    				      NULL,               NULL,      NULL,   1 << 6,    1,         	0,           0,            0 },
+  { "code-oss",	    				      NULL,               NULL,      NULL,   1 << 6,    1,         	0,           0,            0 },
+  { "Code",		    				      NULL,               NULL,      NULL,   1 << 6,    1,         	0,           0,            0 },
+  { "steam",          				      NULL,		       	  NULL,      NULL,   1 << 7,    1,         	0,           0,            0 },
+  { "Slack",          				      NULL,               NULL,      NULL,   1 << 7,    1,         	0,           0,            1 },
+  { "Easytag",	    				      NULL,               NULL,      NULL,   1 << 8,    1,         	1,           0,            0 },
+  { "Xfce4-taskmanager",				  NULL,               NULL,      NULL,   1 << 9,    1,         	1,           0,            1 },
+  { "Nitrogen",						      NULL,               NULL,      NULL,   1 << 9,    1,         	1,           1,            1 },
+  { "Xfce4-appearance-settings", 		  NULL,     		  NULL, 	 NULL,   1 << 9,    1,         	1,    		 1,            1 },
+  { "Xfce4-mouse-settings", 			  NULL, 			  NULL, 	 NULL,   1 << 9,    1,         	1,    		 1,            1 },
+  { "Gpick", 							  NULL, 			  NULL, 	 NULL,   0,    	    1,         	1,    		 1,            0 },
+  { "Sxiv", 							  NULL, 			  NULL, 	 NULL,   0,    	    1,         	1,    		 1,            0 },
+  { "MuPDF", 							  NULL, 			  NULL, 	 NULL,   0,    	    1,         	1,    		 1,            0 },
+  { "Lxappearance",   				      NULL, 			  NULL, 	 NULL,   1 << 9,    1,         	1,    		 1,            1 },
+  { "Blueman-manager", 				      NULL, 		  	  NULL, 	 NULL,   1 << 9,    1,         	1,    		 1,            1 },
+  { "Gnome-builder",  				      NULL, 		  	  NULL, 	 NULL,   1 << 6,    1,         	1,    		 0,            0 },
+  { "Solaar", 						      NULL, 			  NULL, 	 NULL,   1 << 9,    1,         	1,    		 1,            1 },
+  { "Piper", 							  NULL, 			  NULL, 	 NULL,   1 << 9,    1,         	1,    		 1,            1 },
+  { "Gucharmap", 						  NULL, 			  NULL, 	 NULL,   1 << 6,    1,         	1,    		 1,            0 },
+  { "Gimp", 							  NULL, 			  NULL, 	 NULL,   1 << 9,    1,         	1,    		 1,            0 },
+  { "St",	            				  NULL,               NULL,      NULL,   1 << 1,    1,         	0,           0,            0 },
+  { "firefox",					"GtkFileChooserDialog",    "Save File",  NULL,   0,	 	    0,          1,           1,			   0 },
 };	
 
 /* layout(s) */
@@ -182,154 +181,154 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-/*static const char *dmenucmd[] = { "dmenu_run_history", NULL };*/
-/*static const char *dmenucmd[] = { "dmenu_run", "-b", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray4, "-sb", col_gray2, "-sf", col_gray1, NULL };*/
-static const char *roficmd[] = { "rofi", "-show", "drun", "-show-icons", NULL };
-/*static const char *scrotcmd[] = {"/usr/bin/scr", NULL};*/
-static const char *clipcmd[] = {"/usr/bin/clip", NULL};
-static const char *dmenucmd[] = {"/usr/bin/dmenu.sh", NULL};
-static const char *termcmd[]  = { "st", NULL };
-/*static const char *termcmd[]  = { "urxvt", NULL };*/
-static const char *browsercmd[] = { "vivaldi-stable", NULL };
-static const char *surfcmd[] = { "surf", NULL };
-static const char *ffcmd[] = { "firefox", NULL };
-static const char *exitcmd[] = { "/usr/bin/stop.sh", NULL };
-static const char *munext[]  = { "/usr/bin/mpc", "next", NULL };
-static const char *muprev[]  = { "/usr/bin/mpc", "prev", NULL };
-static const char *mupause[]  = { "/usr/bin/mpc", "toggle", NULL };
-static const char *filecmd[] = { "thunar", NULL };
-static const char *editcmd[] = { "subl", NULL };
-/*static const char *editcmd[] = { "code-oss", NULL };*/
-static const char *vimcmd[] = { "gvim", NULL };
+static const char *roficmd[] 	= { "rofi", "-show", "drun", "-show-icons", NULL };
+static const char *clipcmd[] 	= {"/usr/bin/clip", NULL};
+static const char *dmenucmd[] 	= {"/usr/bin/dmenu.sh", NULL};
+static const char *termcmd[]  	= { "st", NULL };
+static const char *browsercmd[] = { "vivaldi-snapshot", NULL };
+static const char *surfcmd[] 	= { "surf", NULL };
+static const char *ffcmd[] 		= { "firefox", NULL };
+static const char *qutecmd[] 	= { "qutebrowser", NULL };
+static const char *exitcmd[] 	= { "/usr/bin/stop.sh", NULL };
+static const char *munext[]  	= { "/usr/bin/mpc", "next", NULL };
+static const char *muprev[]  	= { "/usr/bin/mpc", "prev", NULL };
+static const char *mupause[]  	= { "/usr/bin/mpc", "toggle", NULL };
+static const char *filecmd[] 	= { "thunar", NULL };
+static const char *editcmd[] 	= { "subl", NULL };
+static const char *vimcmd[] 	= { "gvim", NULL };
+static const char *mutecmd[] 	= { "amixer", "-q", "set", "Master", "toggle", NULL };
+static const char *volupcmd[] 	= { "amixer", "-q", "set", "Master", "1%+", "unmute", NULL };
+static const char *voldowncmd[] = { "amixer", "-q", "set", "Master", "1%-", "unmute", NULL };
 static const char scratchpadname[] = "scratchpad";
 static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "120x34", NULL };
 
 #include <X11/XF86keysym.h>
 static Key keys[] = {
-	/* modifier                     key        function           argument */
-	{ MODKEY,                       XK_space,  spawn,             {.v = dmenucmd } },
-	{ MODKEY, 						XK_d,  	   spawn, 			  {.v = roficmd } },
-	{ MODKEY,                       XK_t, 	   spawn,             {.v = termcmd } },
-	{ MODKEY,                       XK_grave,  togglescratch,  	  {.v = scratchpadcmd } },
-	{ MODKEY,			            XK_b,      togglebar,         {0} },
-	{ MODKEY,                       XK_j,      focusstack,        {.i = +1 } },
-	{ MODKEY,                       XK_k,      focusstack,        {.i = -1 } },
-	{ MODKEY|Mod4Mask,              XK_j,      rotatestack,       {.i = +1 } },
-	{ MODKEY|Mod4Mask,              XK_k,      rotatestack,       {.i = -1 } },
-	{ MODKEY,                       XK_i,      incnmaster,        {.i = +1 } },
-	{ MODKEY,                       XK_u,      incnmaster,        {.i = -1 } },
-	{ MODKEY,                       XK_h,      setmfact,          {.f = -0.05} },
-	{ MODKEY|ControlMask,           XK_l,      setmfact,          {.f = +0.05} },
-	{ MODKEY|ShiftMask,             XK_h,      setcfact,          {.f = +0.25} },
-	{ MODKEY|ShiftMask,             XK_l,      setcfact,          {.f = -0.25} },
-	{ MODKEY|ShiftMask,             XK_o,      setcfact,          {.f =  0.00} },
-	{ MODKEY|Mod4Mask,              XK_m,      zoom,              {0} },
-	{ MODKEY|Mod4Mask,              XK_u,      incrgaps,          {.i = +1 } },
-	{ MODKEY|Mod4Mask|ShiftMask,    XK_u,      incrgaps,          {.i = -1 } },
-	{ MODKEY|Mod4Mask,              XK_i,      incrigaps,         {.i = +1 } },
-	{ MODKEY|Mod4Mask|ShiftMask,    XK_i,      incrigaps,         {.i = -1 } },
-	{ MODKEY|Mod4Mask,              XK_o,      incrogaps,         {.i = +1 } },
-	{ MODKEY|Mod4Mask|ShiftMask,    XK_o,      incrogaps,         {.i = -1 } },
-	{ MODKEY|Mod4Mask,              XK_6,      incrihgaps,        {.i = +1 } },
-	{ MODKEY|Mod4Mask|ShiftMask,    XK_6,      incrihgaps,        {.i = -1 } },
-	{ MODKEY|Mod4Mask,              XK_7,      incrivgaps,        {.i = +1 } },
-	{ MODKEY|Mod4Mask|ShiftMask,    XK_7,      incrivgaps,        {.i = -1 } },
-	{ MODKEY|Mod4Mask,              XK_8,      incrohgaps,        {.i = +1 } },
-	{ MODKEY|Mod4Mask|ShiftMask,    XK_8,      incrohgaps,        {.i = -1 } },
-	{ MODKEY|Mod4Mask,              XK_9,      incrovgaps,        {.i = +1 } },
-	{ MODKEY|Mod4Mask|ShiftMask,    XK_9,      incrovgaps,        {.i = -1 } },
-	{ MODKEY|Mod4Mask,              XK_0,      togglegaps,        {0} },
-	{ MODKEY|Mod4Mask|ShiftMask,    XK_0,      defaultgaps,       {0} },
-	{ MODKEY,                       XK_Tab,    view,              {0} },
-	{ Mod1Mask,                     XK_Tab,    view,              {0} },
-	{ Mod1Mask|ControlMask,         XK_Tab,    view,              {0} },
-	{ MODKEY,                       XK_q,      killclient,        {0} },
-	{ MODKEY|Mod4Mask|ControlMask,  XK_1,      setlayout,         {.v = &layouts[0]} },
-	{ MODKEY|Mod4Mask|ControlMask,  XK_2,      setlayout,         {.v = &layouts[1]} },
-	{ MODKEY|Mod4Mask|ControlMask,  XK_3,      setlayout,         {.v = &layouts[2]} },
-	{ MODKEY|Mod4Mask|ControlMask,  XK_4,      setlayout,         {.v = &layouts[3]} },
-	{ MODKEY|Mod4Mask|ControlMask,  XK_5,      setlayout,         {.v = &layouts[4]} },
-	{ MODKEY|Mod4Mask|ControlMask,  XK_6,      setlayout,         {.v = &layouts[5]} },
-	{ MODKEY|Mod4Mask|ControlMask,  XK_7,      setlayout,         {.v = &layouts[6]} },
-	{ MODKEY|Mod4Mask|ControlMask,  XK_8,      setlayout,         {.v = &layouts[7]} },
-	{ MODKEY|Mod4Mask|ControlMask,  XK_9,      setlayout,         {.v = &layouts[8]} },
-	{ MODKEY|Mod4Mask|ControlMask,  XK_0,      setlayout,         {.v = &layouts[9]} },
-	{ MODKEY|Mod4Mask|ControlMask,  XK_w,      setflexlayout,     {.i = 293 } }, // centered master
-	{ MODKEY|ControlMask,           XK_e,      setflexlayout,     {.i = 273 } }, // bstackhoriz layout
-	{ MODKEY|ShiftMask,             XK_r,      setflexlayout,     {.i = 272 } }, // bstack layout
-	{ MODKEY|ControlMask,           XK_t,      setflexlayout,     {.i = 261 } }, // default tile layout
-	{ MODKEY|ShiftMask,             XK_g,      setflexlayout,     {.i = 263 } }, // tile + grid layout
-	{ MODKEY|ShiftMask|ControlMask, XK_w,      setflexlayout,     {.i =   7 } }, // grid
-	{ MODKEY|Mod4Mask|ControlMask,  XK_e,      setflexlayout,     {.i = 262 } }, // deck layout
-	{ MODKEY|ControlMask,           XK_r,      setflexlayout,     {.i =   6 } }, // monocle
-	{ MODKEY|ControlMask,           XK_g,      setflexlayout,     {.i = 257 } }, // columns (col) layout
-	{ MODKEY|ControlMask,           XK_space,  setlayout,         {0} },
-	{ MODKEY|ShiftMask,             XK_space,  togglefloating,    {0} },
-	{ MODKEY|ShiftMask,             XK_f,      togglefullscreen,  {0} },
-	{ MODKEY,                       XK_n,      view,              {.ui = ~0 } },
-	{ MODKEY|ShiftMask,             XK_0,      tag,               {.ui = ~0 } },
-	{ MODKEY,                       XK_comma,  focusmon,          {.i = -1 } },
-	{ MODKEY,                       XK_period, focusmon,          {.i = +1 } },
-	{ MODKEY|ControlMask,           XK_comma,  cyclelayout,       {.i = -1 } },
-	{ MODKEY|ControlMask,           XK_period, cyclelayout,       {.i = +1 } },
-	{ MODKEY|Mod4Mask,              XK_comma,  tagmon,            {.i = +1 } },
-	{ MODKEY|Mod4Mask,              XK_period, tagmon,            {.i = -1 } },
-	{ MODKEY|Mod4Mask|ShiftMask,    XK_comma,  tagallmon,         {.i = +1 } },
-	{ MODKEY|Mod4Mask|ShiftMask,    XK_period, tagallmon,         {.i = -1 } },
-	{ MODKEY|Mod4Mask|ControlMask,  XK_comma,  tagswapmon,        {.i = +1 } },
-	{ MODKEY|Mod4Mask|ControlMask,  XK_period, tagswapmon,        {.i = -1 } },
-	TAGKEYS(                        XK_1,                         0)
-	TAGKEYS(                        XK_2,                         1)
-	TAGKEYS(                        XK_3,                         2)
-	TAGKEYS(                        XK_4,                         3)
-	TAGKEYS(                        XK_5,                         4)
-	TAGKEYS(                        XK_6,                         5)
-	TAGKEYS(                        XK_7,                         6)
-	TAGKEYS(                        XK_8,                         7)
-	TAGKEYS(                        XK_9,                         8)
-	TAGKEYS(                        XK_0,                         9)
-	TAGKEYS(                        XK_F1,                        0)
-	TAGKEYS(                        XK_F2,                        1)
-	TAGKEYS(                        XK_F3,                        2)
-	TAGKEYS(                        XK_F4,                        3)
-	TAGKEYS(                        XK_F5,                        4)
-	TAGKEYS(                        XK_F6,                        5)
-	TAGKEYS(                        XK_F7,                        6)
-	TAGKEYS(                        XK_F8,                        7)
-	TAGKEYS(                        XK_F9,                        8)
-	TAGKEYS(                        XK_F10,                       9)
-	{ MODKEY|ShiftMask,             XK_q,       quit,              {0} },
-	{ MODKEY|ControlMask,           XK_t,       rotatelayoutaxis,  {.i = 0} },    /* flextile, 0 = layout axis */
-	{ MODKEY|ControlMask,           XK_Tab,     rotatelayoutaxis,  {.i = 1} },    /* flextile, 1 = master axis */
-	{ MODKEY|ControlMask|ShiftMask, XK_Tab,     rotatelayoutaxis,  {.i = 2} },    /* flextile, 2 = stack axis */
-	{ MODKEY|ControlMask,           XK_Return,  mirrorlayout,      {0} },         /* flextile, flip master and stack areas */
-	/*{ 0,							XK_Print,   spawn,		       {.v = scrotcmd } },*/
-	{ 0,							XK_Print,   spawn,		    SHCMD("flameshot gui -d 3000") },
-	{ 0, XF86XK_AudioMute,			            spawn,			SHCMD("amixer sset Master toggle") },
-	{ 0, XF86XK_AudioRaiseVolume,	            spawn,         	SHCMD("/usr/bin/volume up") },
-	{ 0, XF86XK_AudioLowerVolume,             	spawn,          SHCMD("/usr/bin/volume down") },
-	{ 0, XF86XK_AudioPrev,			spawn,		 				{.v = muprev } },
-	{ 0, XF86XK_AudioNext,			spawn,						{.v = munext } },
-	{ 0, XF86XK_AudioPause,			spawn,						{.v = mupause } },
-	{ 0, XF86XK_AudioPlay,			spawn,						{.v = mupause } },
-	{ 0, XF86XK_AudioStop,			spawn,						{.v = mupause } },
-	{ 0, XF86XK_AudioRewind,		spawn,						SHCMD("mpc seek -10") },
-	{ 0, XF86XK_AudioForward,		spawn,						SHCMD("mpc seek +10") },
-	{ MODKEY,						XK_w,		spawn,			{.v = ffcmd } },
-	{ MODKEY|ControlMask,			XK_w,		spawn,			{.v = surfcmd } },
-	{ MODKEY|ControlMask,			XK_v,		spawn,			{.v = browsercmd } },
-	{ MODKEY|ShiftMask,				XK_w,		spawn,			SHCMD("qutebrowser") },
-	{ MODKEY|ShiftMask|ControlMask,	XK_w,		spawn,			SHCMD("google-chrome-stable") },
-	{ MODKEY,						XK_x,		spawn,			{.v = exitcmd } },
-	{ MODKEY,						XK_e,		spawn,			{.v = editcmd } },
-	{ MODKEY|ShiftMask, 			XK_e,		spawn,			{.v = vimcmd } },
-	/*{ MODKEY|ShiftMask,				XK_p,		spawn,			SHCMD("greenclip print | sed '/^$/d' | dmenu -l 10 -b -nb "#141414" -nf "#505050" -sb "#505050" -sf "#000000" -p clipboard | xargs -r -d'\n' -I '{}' greenclip print '{}'") },*/
-	/*{ MODKEY|ShiftMask,				XK_p,		spawn,			SHCMD("rofi -modi \"clipboard:greenclip print\" -show clipboard -run-command '{cmd}'") },*/
-	{ MODKEY|ShiftMask,				XK_p,		spawn,			{.v = clipcmd } },
-	{ MODKEY,						XK_m,		spawn,			SHCMD("st -c ncmpcpp -e ncmpcpp") },
-	/*{ MODKEY,						XK_m,		spawn,			SHCMD("urxvt -c ncmpcpp -e ncmpcpp") },*/
-	{ MODKEY,						XK_f,		spawn,			{.v = filecmd } },
-	{ MODKEY,						XK_l,       spawn,		    SHCMD("slock") },
+	/* modifier                     key        function             argument */
+	{ MODKEY,                       XK_space,  spawn,               {.v = dmenucmd } },
+	{ MODKEY, 						XK_d,  	   spawn, 			    {.v = roficmd } },
+	{ MODKEY,                       XK_t, 	   spawn,               {.v = termcmd } },
+	{ MODKEY,                       XK_grave,  togglescratch,  	    {.v = scratchpadcmd } },
+	{ MODKEY,			            XK_b,      togglebar,           {0} },
+	{ MODKEY,                       XK_j,      focusstack,          {.i = +1 } },
+	{ MODKEY,                       XK_k,      focusstack,          {.i = -1 } },
+	{ MODKEY|Mod4Mask,              XK_j,      rotatestack,         {.i = +1 } },
+	{ MODKEY|Mod4Mask,              XK_k,      rotatestack,         {.i = -1 } },
+	{ MODKEY,                       XK_i,      incnmaster,          {.i = +1 } },
+	{ MODKEY,                       XK_u,      incnmaster,          {.i = -1 } },
+	{ MODKEY,                       XK_h,      setmfact,            {.f = -0.05} },
+	{ MODKEY|ControlMask,           XK_l,      setmfact,            {.f = +0.05} },
+	{ MODKEY|ShiftMask,             XK_h,      setcfact,            {.f = +0.25} },
+	{ MODKEY|ShiftMask,             XK_l,      setcfact,            {.f = -0.25} },
+	{ MODKEY|ShiftMask,             XK_o,      setcfact,            {.f =  0.00} },
+	{ MODKEY|Mod4Mask,              XK_m,      zoom,                {0} },
+	{ MODKEY|Mod4Mask,              XK_u,      incrgaps,            {.i = +1 } },
+	{ MODKEY|Mod4Mask|ShiftMask,    XK_u,      incrgaps,            {.i = -1 } },
+	{ MODKEY|Mod4Mask,              XK_i,      incrigaps,           {.i = +1 } },
+	{ MODKEY|Mod4Mask|ShiftMask,    XK_i,      incrigaps,           {.i = -1 } },
+	{ MODKEY|Mod4Mask,              XK_o,      incrogaps,           {.i = +1 } },
+	{ MODKEY|Mod4Mask|ShiftMask,    XK_o,      incrogaps,           {.i = -1 } },
+	{ MODKEY|Mod4Mask,              XK_6,      incrihgaps,          {.i = +1 } },
+	{ MODKEY|Mod4Mask|ShiftMask,    XK_6,      incrihgaps,          {.i = -1 } },
+	{ MODKEY|Mod4Mask,              XK_7,      incrivgaps,          {.i = +1 } },
+	{ MODKEY|Mod4Mask|ShiftMask,    XK_7,      incrivgaps,          {.i = -1 } },
+	{ MODKEY|Mod4Mask,              XK_8,      incrohgaps,          {.i = +1 } },
+	{ MODKEY|Mod4Mask|ShiftMask,    XK_8,      incrohgaps,          {.i = -1 } },
+	{ MODKEY|Mod4Mask,              XK_9,      incrovgaps,          {.i = +1 } },
+	{ MODKEY|Mod4Mask|ShiftMask,    XK_9,      incrovgaps,          {.i = -1 } },
+	{ MODKEY|Mod4Mask,              XK_0,      togglegaps,          {0} },
+	{ MODKEY|Mod4Mask|ShiftMask,    XK_0,      defaultgaps,         {0} },
+	{ MODKEY,                       XK_Tab,    view,                {0} },
+	{ Mod1Mask,                     XK_Tab,    view,                {0} },
+	{ Mod1Mask|ControlMask,         XK_Tab,    view,                {0} },
+	{ MODKEY,                       XK_q,      killclient,          {0} },
+	{ MODKEY|Mod4Mask|ControlMask,  XK_1,      setlayout,           {.v = &layouts[0]} },
+	{ MODKEY|Mod4Mask|ControlMask,  XK_2,      setlayout,           {.v = &layouts[1]} },
+	{ MODKEY|Mod4Mask|ControlMask,  XK_3,      setlayout,           {.v = &layouts[2]} },
+	{ MODKEY|Mod4Mask|ControlMask,  XK_4,      setlayout,           {.v = &layouts[3]} },
+	{ MODKEY|Mod4Mask|ControlMask,  XK_5,      setlayout,           {.v = &layouts[4]} },
+	{ MODKEY|Mod4Mask|ControlMask,  XK_6,      setlayout,           {.v = &layouts[5]} },
+	{ MODKEY|Mod4Mask|ControlMask,  XK_7,      setlayout,           {.v = &layouts[6]} },
+	{ MODKEY|Mod4Mask|ControlMask,  XK_8,      setlayout,           {.v = &layouts[7]} },
+	{ MODKEY|Mod4Mask|ControlMask,  XK_9,      setlayout,           {.v = &layouts[8]} },
+	{ MODKEY|Mod4Mask|ControlMask,  XK_0,      setlayout,           {.v = &layouts[9]} },
+	{ MODKEY|Mod4Mask|ControlMask,  XK_w,      setflexlayout,       {.i = 293 } }, // centered master
+	{ MODKEY|ControlMask,           XK_e,      setflexlayout,       {.i = 273 } }, // bstackhoriz layout
+	{ MODKEY|ShiftMask,             XK_r,      setflexlayout,       {.i = 272 } }, // bstack layout
+	{ MODKEY|ControlMask,           XK_t,      setflexlayout,       {.i = 261 } }, // default tile layout
+	{ MODKEY|ShiftMask,             XK_g,      setflexlayout,       {.i = 263 } }, // tile + grid layout
+	{ MODKEY|ShiftMask|ControlMask, XK_w,      setflexlayout,       {.i =   7 } }, // grid
+	{ MODKEY|Mod4Mask|ControlMask,  XK_e,      setflexlayout,       {.i = 262 } }, // deck layout
+	{ MODKEY|ControlMask,           XK_r,      setflexlayout,       {.i =   6 } }, // monocle
+	{ MODKEY|ControlMask,           XK_g,      setflexlayout,       {.i = 257 } }, // columns (col) layout
+	{ MODKEY|ControlMask,           XK_space,  setlayout,           {0} },
+	{ MODKEY|ShiftMask,             XK_space,  togglefloating,      {0} },
+	{ MODKEY|ShiftMask,             XK_f,      togglefullscreen,    {0} },
+	{ MODKEY,                       XK_n,      view,                {.ui = ~0 } },
+	{ MODKEY|ShiftMask,             XK_0,      tag,                 {.ui = ~0 } },
+	{ MODKEY,                       XK_comma,  focusmon,            {.i = -1 } },
+	{ MODKEY,                       XK_period, focusmon,            {.i = +1 } },
+	{ MODKEY|ControlMask,           XK_comma,  cyclelayout,         {.i = -1 } },
+	{ MODKEY|ControlMask,           XK_period, cyclelayout,         {.i = +1 } },
+	{ MODKEY|Mod4Mask,              XK_comma,  tagmon,              {.i = +1 } },
+	{ MODKEY|Mod4Mask,              XK_period, tagmon,              {.i = -1 } },
+	{ MODKEY|Mod4Mask|ShiftMask,    XK_comma,  tagallmon,           {.i = +1 } },
+	{ MODKEY|Mod4Mask|ShiftMask,    XK_period, tagallmon,           {.i = -1 } },
+	{ MODKEY|Mod4Mask|ControlMask,  XK_comma,  tagswapmon,          {.i = +1 } },
+	{ MODKEY|Mod4Mask|ControlMask,  XK_period, tagswapmon,          {.i = -1 } },
+	TAGKEYS(                        XK_1,                           0)
+	TAGKEYS(                        XK_2,                           1)
+	TAGKEYS(                        XK_3,                           2)
+	TAGKEYS(                        XK_4,                           3)
+	TAGKEYS(                        XK_5,                           4)
+	TAGKEYS(                        XK_6,                           5)
+	TAGKEYS(                        XK_7,                           6)
+	TAGKEYS(                        XK_8,                           7)
+	TAGKEYS(                        XK_9,                           8)
+	TAGKEYS(                        XK_0,                           9)
+	TAGKEYS(                        XK_F1,                          0)
+	TAGKEYS(                        XK_F2,                          1)
+	TAGKEYS(                        XK_F3,                          2)
+	TAGKEYS(                        XK_F4,                          3)
+	TAGKEYS(                        XK_F5,                          4)
+	TAGKEYS(                        XK_F6,                          5)
+	TAGKEYS(                        XK_F7,                          6)
+	TAGKEYS(                        XK_F8,                          7)
+	TAGKEYS(                        XK_F9,                          8)
+	TAGKEYS(                        XK_F10,                         9)
+	{ MODKEY|ShiftMask,             XK_q,       quit,               {0} },
+	{ MODKEY|ControlMask,           XK_t,       rotatelayoutaxis,   {.i = 0} },    /* flextile, 0 = layout axis */
+	{ MODKEY|ControlMask,           XK_Tab,     rotatelayoutaxis,   {.i = 1} },    /* flextile, 1 = master axis */
+	{ MODKEY|ControlMask|ShiftMask, XK_Tab,     rotatelayoutaxis,   {.i = 2} },    /* flextile, 2 = stack axis */
+	{ MODKEY|ControlMask,           XK_Return,  mirrorlayout,       {0} },         /* flextile, flip master and stack areas */
+	{ MODKEY|ShiftMask,				XK_w,		spawn,				SHCMD("qutebrowser") },
+	{ MODKEY|ShiftMask|ControlMask,	XK_w,		spawn,				SHCMD("google-chrome-stable") },
+	{ MODKEY,						XK_l,       spawn,		    	SHCMD("slock") },
+	{ MODKEY,						XK_m,		spawn,				SHCMD("st -c ncmpcpp -e ncmpcpp") },
+	{ 0,							XK_Print,   spawn,		    	SHCMD("/usr/bin/scr") },
+	{ ShiftMask,					XK_Print,   spawn,		    	SHCMD("teiler") },
+	{ 0, XF86XK_AudioMute,			            spawn,				SHCMD("amixer sset Master toggle") },
+	/*{ 0, XF86XK_AudioRaiseVolume,	            spawn,         		SHCMD("/usr/bin/volume up") },
+	{ 0, XF86XK_AudioLowerVolume,             	spawn,          	SHCMD("/usr/bin/volume down") },*/
+	{ 0, XF86XK_AudioLowerVolume, 				spawn, 				{.v = voldowncmd } },
+	{ 0, XF86XK_AudioRaiseVolume, 				spawn, 				{.v = volupcmd } },
+	{ 0, XF86XK_AudioMute, 						spawn, 				{.v = mutecmd } },
+	{ 0, XF86XK_AudioPrev,			spawn,		 					{.v = muprev } },
+	{ 0, XF86XK_AudioNext,			spawn,							{.v = munext } },
+	{ 0, XF86XK_AudioPause,			spawn,							{.v = mupause } },
+	{ 0, XF86XK_AudioPlay,			spawn,							{.v = mupause } },
+	{ 0, XF86XK_AudioStop,			spawn,							{.v = mupause } },
+	{ 0, XF86XK_AudioRewind,		spawn,							SHCMD("mpc seek -10") },
+	{ 0, XF86XK_AudioForward,		spawn,							SHCMD("mpc seek +10") },
+	{ MODKEY,						XK_w,		spawn,				{.v = ffcmd } },
+	{ MODKEY|ControlMask,			XK_u,		spawn,				{.v = qutecmd   }	},
+	{ MODKEY|ControlMask,			XK_w,		spawn,				{.v = surfcmd } },
+	{ MODKEY|ControlMask,			XK_v,		spawn,				{.v = browsercmd } },
+	{ MODKEY,						XK_x,		spawn,				{.v = exitcmd } },
+	{ MODKEY,						XK_e,		spawn,				{.v = editcmd } },
+	{ MODKEY|ShiftMask, 			XK_e,		spawn,				{.v = vimcmd } },
+	{ MODKEY|ShiftMask,				XK_p,		spawn,				{.v = clipcmd } },
+	{ MODKEY,						XK_f,		spawn,				{.v = filecmd } },
 };
  
 /* button definitions */
