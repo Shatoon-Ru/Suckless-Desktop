@@ -50,7 +50,7 @@ static const Rule rules[] = {
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-   /* class                         instance    title       tags mask     switchtotag    isfloating   monitor */
+   /* class                         instance    title       tags mask     switchtag    isfloating   monitor */
    { "qutebrowser",                 NULL,       NULL,       1,            1,             0,           0 },
    { "Brave-browser",               NULL,       NULL,       1,            1,             0,           0 },
    { "firefox",                     NULL,       NULL,       1,            1,             0,           0 },
