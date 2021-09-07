@@ -6,10 +6,8 @@
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
 static char *font = "FantasqueSansMono Nerd font:pixelsize=15:antialias=true:autohint=true";
-static char *font2[] = { "Hack Nerd Font:pixelsize=14:antialias=true:autohint=true" };
-/*static char *font = "Iosevka:pixelsize=14:antialias=true:autohint=true";
-static char *font2[] = { "Iosevka:pixelsize=14:antialias=true:autohint=true" };*/
-static int borderpx = 55;
+static char *font2[] = { "fontawesome:pixelsize=10:antialias=true:autohint=true" };
+static int borderpx = 50;
 
 /*
  * What program is execed by st depends of these precedence rules:
@@ -105,13 +103,13 @@ char *termname = "st-256color";
  * the st.info and appropriately install the st.info in the environment where
  * you use this st version.
  *
- *  it#$tabspaces,
+ *	it#$tabspaces,
  *
  * Secondly make sure your kernel is not expanding tabs. When running `stty
  * -a` »tab0« should appear. You can tell the terminal to not expand tabs by
  *  running following command:
  *
- *  stty tabs
+ *	stty tabs
  */
 unsigned int tabspaces = 8;
 
@@ -120,30 +118,30 @@ float alpha = 1.0;
 
 /* Terminal colors (16 first used in escape sequence) */
 static const char *colorname[] = {
-  "#803fbf",
-  "#fb8888",
-  "#56b76a",
-  "#ce4989",
-  "#88bdfb",
-  "#884fc2",
-  "#8888fb",
-  "#cecedb",
+	"#803fbf",
+	"#fb8888",
+	"#56b76a",
+	"#ce4989",
+	"#88bdfb",
+	"#884fc2",
+	"#8888fb",
+	"#cecedb",
 
-  /* 8 bright colors */
-  "#7fbaff",
-  "#fb8888",
-  "#a0a0ce",
-  "#fb8888",
-  "#8888fb",
-  "#884fc2",
-  "#8888fb",
-  "#e2e2e9",
+	/* 8 bright colors */
+	"#7fbaff",
+	"#fb8888",
+	"#a0a0ce",
+	"#fb8888",
+	"#8888fb",
+	"#884fc2",
+	"#8888fb",
+	"#e2e2e9",
 
   [255] = 0,
   /* more colors can be added after 255 to use with DefaultXX */
   "#cccccc", /* 256 -> cursor */
   "#555555", /* 257 -> rev cursor*/
-  "#252525", /* 258 -> bg */
+  "#030212", /* 258 -> bg */
   "#cecedb", /* 259 -> fg */
 };
 
@@ -266,7 +264,7 @@ static Shortcut shortcuts[] = {
   { ControlMask | ShiftMask,               XK_C,           clipcopy,       {.i =  0} },
   { ShiftMask,            XK_Insert,      clippaste,      {.i =  0} },
   { ControlMask | ShiftMask,               XK_V,           clippaste,      {.i =  0} },
-  { XK_ANY_MOD,   Button2,  selpaste, {.i =  0} },
+  { XK_ANY_MOD,		Button2,	selpaste,	{.i =  0} },
   { MODKEY,               XK_Num_Lock,    numlock,        {.i =  0} },
   { MODKEY,               XK_Control_L,   iso14755,       {.i =  0} },
   { ShiftMask,            XK_Page_Up,     kscrollup,      {.i = -1} },
@@ -279,9 +277,9 @@ static Shortcut shortcuts[] = {
   { MODKEY,               XK_Down,        kscrolldown,    {.i =  1} },
   { MODKEY,               XK_u,           kscrollup,      {.i = -1} },
   { MODKEY,               XK_d,           kscrolldown,    {.i = -1} },
-  { MODKEY,   XK_s,   changealpha,  {.f = -0.05} },
-  { MODKEY,   XK_a,   changealpha,  {.f = +0.05} },
-  { MODKEY,   XK_m,   changealpha,  {.f = +2.00} },
+  { MODKEY,		XK_s,		changealpha,	{.f = -0.05} },
+  { MODKEY,		XK_a,		changealpha,	{.f = +0.05} },
+  { MODKEY,		XK_m,		changealpha,	{.f = +2.00} },
   { TERMMOD,              XK_Up,          zoom,           {.f = +1} },
   { TERMMOD,              XK_Down,        zoom,           {.f = -1} },
   { TERMMOD,              XK_K,           zoom,           {.f = +1} },

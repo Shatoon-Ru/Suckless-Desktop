@@ -70,6 +70,7 @@ static const Rule rules[] = {
    { "File-roller",                 NULL,       NULL,       1 << 4,       1,             1,           0 },
    { "mpv",                         NULL,       NULL,       1 << 4,       1,             1,           0 },
    { "Subl",                        NULL,       NULL,       1 << 6,       1,             0,           0 },
+   { "nvim",                        NULL,       NULL,       1 << 6,       1,             0,           0 },
    { "code-oss",                    NULL,       NULL,       1 << 6,       1,             0,           0 },
    { "Code",                        NULL,       NULL,       1 << 6,       1,             0,           0 },
    { "Steam",                       NULL,       NULL,       1 << 7,       1,             0,           0 },
@@ -147,6 +148,7 @@ static Key keys[] = {
   { MODKEY|ShiftMask|ControlMask, XK_w,                   spawn,               SHCMD("google-chrome-stable") },
   { MODKEY,                       XK_l,                   spawn,               SHCMD("slock") },
   { MODKEY,                       XK_m,                   spawn,               SHCMD("st -c ncmpcpp -e ncmpcpp") },
+  { MODKEY|ShiftMask,             XK_e,                   spawn,               SHCMD("st -c nvim -e nvim") },
   { 0,                            XK_Print,               spawn,               SHCMD("flameshot gui -d 3000") },
   { 0, XF86XK_AudioMute,                                  spawn,               SHCMD("amixer sset Master toggle") },
   { 0, XF86XK_AudioRaiseVolume,                           spawn,               SHCMD("/usr/bin/volume up") },
@@ -163,7 +165,7 @@ static Key keys[] = {
   { MODKEY|ControlMask,           XK_v,                   spawn,               {.v = browsercmd } },
   { MODKEY,                       XK_x,                   spawn,               {.v = exitcmd } },
   { MODKEY,                       XK_e,                   spawn,               {.v = editcmd } },
-  { MODKEY|ShiftMask,             XK_e,                   spawn,               {.v = vimcmd } },
+  { MODKEY|ControlMask,           XK_e,                   spawn,               {.v = vimcmd } },
   { MODKEY|ShiftMask,             XK_p,                   spawn,               {.v = clipcmd } },
   { MODKEY,                       XK_f,                   spawn,               {.v = filecmd } },
   { MODKEY,                       XK_space,               spawn,               {.v = dmenucmd } },
@@ -220,6 +222,7 @@ static Key keys[] = {
     TAGKEYS(                      XK_9,                                        8)
     TAGKEYS(                      XK_0,                                        9)
     { MODKEY|ShiftMask,           XK_q,                   quit,                {0} },
+    { MODKEY|ControlMask|ShiftMask, XK_q,                 quit,                {1} },
 };
 
 /* button definitions */
