@@ -47,9 +47,10 @@ static const char *tags[] = { "", "", "", "", "", "", "", "
 
 static const Rule rules[] = {
     /* xprop(1):
-	 *	WM_CLASS(STRING) = instance, class
-	 *	WM_NAME(STRING) = title
-	 */
+     *  WM_CLASS(STRING) = instance, class
+     *  WM_NAME(STRING) = title
+     *  WM_WINDOW_ROLE(STRING) = role
+     */
    /* class                         instance    title       tags mask     switchtag    isfloating   monitor */
    { "qutebrowser",                 NULL,       NULL,       1,            1,             0,           0 },
    { "Brave-browser",               NULL,       NULL,       1,            1,             0,           0 },
@@ -60,6 +61,7 @@ static const Rule rules[] = {
    { "Vivaldi-stable",              NULL,       NULL,       1,            1,             0,           0 },
    { "Surf",                        NULL,       NULL,       1,            1,             0,           0 },
    { "ncmpcpp",                     NULL,       NULL,       1 << 3,       1,             0,           1 },
+   { "Sonata",                      NULL,       NULL,       1 << 3,       1,             0,           1 },
    { "St",                          NULL,       NULL,       1 << 1,       1,             0,           0 },
    { "st",                          NULL,       NULL,       1 << 1,       1,             0,           0 },
    { "URxvt",                       NULL,       NULL,       1 << 1,       1,             0,           0 },
@@ -90,7 +92,8 @@ static const Rule rules[] = {
    { "Piper",                       NULL,       NULL,       1 << 9,       1,             1,           1 },
    { "Gucharmap",                   NULL,       NULL,       1 << 6,       1,             1,           0 },
    { "Gimp",                        NULL,       NULL,       1 << 9,       1,             1,           0 },
-   { "firefox",   "GtkFileChooserDialog", "Save File",      0,            1,             1,           0 },
+   { "firefox",   "GtkFileChooserDialog",   "Save File",    0,            1,             1,           0 },
+   { "firefox",                "Toolkit", "Picture-in-Picture",      0,            1,             1,           0 },
 };
 
 /* layout(s) */
@@ -138,6 +141,9 @@ static const char *mupause[]    = { "/usr/bin/mpc", "toggle", NULL };
 static const char *filecmd[]    = { "thunar", NULL };
 static const char *editcmd[]    = { "subl", NULL };
 static const char *vimcmd[]     = { "gvim", NULL };
+/*static const char *mutecmd[]    = { "amixer", "-q", "set", "Master", "toggle", NULL };
+static const char *volupcmd[]   = { "amixer", "-q", "set", "Master", "2%+", "unmute", NULL };
+static const char *voldowncmd[] = { "amixer", "-q", "set", "Master", "2%-", "unmute", NULL };*/
 static const char scratchpadname[] = "scratchpad";
 static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "120x34", NULL };
 
@@ -149,10 +155,13 @@ static Key keys[] = {
   { MODKEY,                       XK_l,                   spawn,               SHCMD("slock") },
   { MODKEY,                       XK_m,                   spawn,               SHCMD("st -c ncmpcpp -e ncmpcpp") },
   { MODKEY|ShiftMask,             XK_e,                   spawn,               SHCMD("st -c nvim -e nvim") },
-  { 0,                            XK_Print,               spawn,               SHCMD("flameshot gui -d 3000") },
+  { 0,                            XK_Print,               spawn,               SHCMD("/usr/bin/scr") },
   { 0, XF86XK_AudioMute,                                  spawn,               SHCMD("amixer sset Master toggle") },
   { 0, XF86XK_AudioRaiseVolume,                           spawn,               SHCMD("/usr/bin/volume up") },
   { 0, XF86XK_AudioLowerVolume,                           spawn,               SHCMD("/usr/bin/volume down") },
+  /*{ 0, XF86XK_AudioLowerVolume,                           spawn,               {.v = voldowncmd } },*/
+  /*{ 0, XF86XK_AudioRaiseVolume,                           spawn,               {.v = volupcmd } },*/
+  /*{ 0, XF86XK_AudioMute,                                  spawn,               {.v = mutecmd } },*/
   { 0, XF86XK_AudioPrev,                                  spawn,               {.v = muprev } },
   { 0, XF86XK_AudioNext,                                  spawn,               {.v = munext } },
   { 0, XF86XK_AudioPause,                                 spawn,               {.v = mupause } },

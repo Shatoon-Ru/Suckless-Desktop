@@ -55,36 +55,37 @@ static const Rule rules[] = {
   { "Ghostery Dawn",  				      NULL,     NULL,     	1,	       				1,         	0,           0,            0 },
   { "Vivaldi-snapshot",				      NULL,     NULL,     	1,	       				1,         	0,           0,            0 },
   { "Surf",           				      NULL,     NULL,     	1,	       				1,         	0,           0,            0 },
-  { "ncmpcpp",   						  			NULL,  		NULL,     	1 << 3,    				1,         	0,			 		 0,		       	 1 },
+  { "ncmpcpp",   						  NULL,		NULL,     	1 << 3,    				1,         	0,			 0,		       1 },
   { "URxvt",          				      NULL,     NULL,     	1 << 1,    				1,         	0,           0,            0 },
   { "Transmission-gtk",				      NULL,     NULL,     	1 << 2,    				1,         	0,           0,            0 },
-  { "SoulseekQt",						  			NULL,     NULL,     	1 << 2,    				1,         	0,           0,            0 },
-  { "Thunar",		    				  			NULL,     NULL,     	1 << 4,    				1,         	0,           0,            0 },
-  { "Sxiv",		    				      		NULL,     NULL,     	1 << 4,    				1,         	1,           1,            0 },
+  { "SoulseekQt",						  NULL,     NULL,     	1 << 2,    				1,         	0,           0,            0 },
+  { "Thunar",		    				  NULL,     NULL,     	1 << 4,    				1,         	0,           0,            0 },
+  { "Sxiv",		    				      NULL,     NULL,     	1 << 4,    				1,         	1,           1,            0 },
   { "File-roller",    				      NULL,     NULL,     	1 << 4,    				1,         	1,           1,            0 },
-  { "mpv",          					  		NULL,     NULL,     	1 << 4,    				1,         	0,           1,            0 },
-  { "Subl",		    				      		NULL,     NULL,     	1 << 6,    				1,         	0,           0,            0 },
-  { "code-oss",	    				      	NULL,     NULL,     	1 << 6,    				1,         	0,           0,            0 },
-  { "Code",		    				      		NULL,     NULL,     	1 << 6,    				1,         	0,           0,            0 },
-  { "steam",          				      NULL,		  NULL,     	1 << 7,    				1,         	0,           0,            0 },
+  { "mpv",          					  NULL,     NULL,     	1 << 4,    				1,         	0,           1,            0 },
+  { "Subl",		    				      NULL,     NULL,     	1 << 6,    				1,         	0,           0,            0 },
+  { "code-oss",	    				      NULL,     NULL,     	1 << 6,    				1,         	0,           0,            0 },
+  { "Code",		    				      NULL,     NULL,     	1 << 6,    				1,         	0,           0,            0 },
+  { "steam",          				      NULL,		 NULL,     	1 << 7,    				1,         	0,           0,            0 },
   { "Slack",          				      NULL,     NULL,     	1 << 7,    				1,         	0,           0,            1 },
-  { "Easytag",	    				      	NULL,     NULL,     	1 << 8,    				1,         	1,           0,            0 },
-  { "Xfce4-taskmanager",				  	NULL,     NULL,     	1 << 9,    				1,         	1,           0,            1 },
-  { "Nitrogen",						      		NULL,     NULL,     	1 << 9,    				1,         	1,           1,            1 },
-  { "Xfce4-appearance-settings", 		NULL,    	NULL, 	  	1 << 9,    				1,         	1,    		 	 1,            1 },
-  { "Xfce4-mouse-settings", 			  NULL, 		NULL, 	  	1 << 9,    				1,         	1,    		 	 1,            1 },
-  { "Gpick", 							  				NULL, 		NULL, 	  	0,    	   				1,         	1,    		 	 1,            0 },
-  { "Sxiv", 							  				NULL, 		NULL, 	  	0,    	   				1,         	1,    		 	 1,            0 },
-  { "MuPDF", 							  				NULL, 		NULL, 	  	0,    	   				1,         	1,    		 	 1,            0 },
-  { "Lxappearance",   				      NULL, 		NULL, 	  	1 << 9,    				1,         	1,    		 	 1,            1 },
-  { "Blueman-manager", 				      NULL, 		NULL, 	  	1 << 9,    				1,         	1,    		 	 1,            1 },
-  { "Gnome-builder",  				      NULL, 		NULL, 	  	1 << 6,    				1,         	1,    		 	 0,            0 },
-  { "Solaar", 						      		NULL, 		NULL, 	  	1 << 9,    				1,         	1,    		 	 1,            1 },
-  { "Piper", 							  				NULL, 		NULL, 	  	1 << 9,    				1,         	1,    		 	 1,            1 },
-  { "Gucharmap", 						  			NULL, 		NULL, 	  	1 << 6,    				1,         	1,    		 	 1,            0 },
-  { "Gimp", 							  				NULL, 		NULL, 	  	1 << 9,    				1,         	1,    		 	 1,            0 },
-  { "St",	            				  		NULL,     NULL,       1 << 1,    				1,         	0,           0,            0 },
-  { "firefox",					"GtkFileChooserDialog",    "Save File",   0,	 	    0,          1,           1,			   		 0 },
+  { "Easytag",	    				      NULL,     NULL,     	1 << 8,    				1,         	1,           0,            0 },
+  { "Xfce4-taskmanager",				  NULL,     NULL,     	1 << 9,    				1,         	1,           0,            1 },
+  { "Nitrogen",						      NULL,     NULL,     	1 << 9,    				1,         	1,           1,            1 },
+  { "Xfce4-appearance-settings", 		  NULL,    	NULL, 	  	1 << 9,    				1,         	1,    		 1,            1 },
+  { "Xfce4-mouse-settings", 			  NULL, 	NULL, 	  	1 << 9,    				1,         	1,    		 1,            1 },
+  { "Gpick", 							  NULL, 	NULL, 	  	0,    	   				1,         	1,    		 1,            0 },
+  { "Sxiv", 							  NULL, 	NULL, 	  	0,    	   				1,         	1,    		 1,            0 },
+  { "MuPDF", 							  NULL, 	NULL, 	  	0,    	   				1,         	1,    		 1,            0 },
+  { "Lxappearance",   				      NULL, 	NULL, 	  	1 << 9,    				1,         	1,    		 1,            1 },
+  { "Blueman-manager", 				      NULL, 	NULL, 	  	1 << 9,    				1,         	1,    		 1,            1 },
+  { "Gnome-builder",  				      NULL, 	NULL, 	  	1 << 6,    				1,         	1,    		 0,            0 },
+  { "Solaar", 						      NULL, 	NULL, 	  	1 << 9,    				1,         	1,    		 1,            1 },
+  { "Piper", 							  NULL, 	NULL, 	  	1 << 9,    				1,         	1,    		 1,            1 },
+  { "Gucharmap", 						  NULL, 	NULL, 	  	1 << 6,    				1,         	1,    		 1,            0 },
+  { "Gimp", 							  NULL, 	NULL, 	  	1 << 9,    				1,         	1,    		 1,            0 },
+  { "St",	            				  NULL,     NULL,       1 << 1,    				1,         	0,           0,            0 },
+  { "firefox",	      "GtkFileChooserDialog", "Save File",      0,	 	    			0,          1,           1,			   0 },
+  { "firefox",        "Toolkit", 	 "Picture-in-Picture",      0,            			0,          1,           1,			   0 },
 };
 
 /* layout(s) */
@@ -118,7 +119,6 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *roficmd[] 	= { "rofi", "-show", "drun", "-show-icons", NULL };
 static const char *clipcmd[] 	= {"/usr/bin/clip", NULL};
 static const char *dmenucmd[] 	= {"/usr/bin/dmenu.sh", NULL};
 static const char *termcmd[]  	= { "st", NULL };
@@ -133,9 +133,9 @@ static const char *mupause[]  	= { "/usr/bin/mpc", "toggle", NULL };
 static const char *filecmd[] 	= { "thunar", NULL };
 static const char *editcmd[] 	= { "subl", NULL };
 static const char *vimcmd[] 	= { "gvim", NULL };
-static const char *mutecmd[] 	= { "amixer", "-q", "set", "Master", "toggle", NULL };
-static const char *volupcmd[] 	= { "amixer", "-q", "set", "Master", "1%+", "unmute", NULL };
-static const char *voldowncmd[] = { "amixer", "-q", "set", "Master", "1%-", "unmute", NULL };
+static const char *mutecmd[]    = { "amixer", "-q", "set", "Master", "toggle", NULL };
+static const char *volupcmd[]   = { "amixer", "-q", "set", "Master", "3%+", "unmute", NULL };
+static const char *voldowncmd[] = { "amixer", "-q", "set", "Master", "3%-", "unmute", NULL };
 static const char scratchpadname[] = "scratchpad";
 static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "120x34", NULL };
 
@@ -144,8 +144,7 @@ static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "120x34
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_space,  spawn,          {.v = dmenucmd } },
-	{ MODKEY, 											XK_d,  	   spawn, 		     {.v = roficmd } },
-	{ MODKEY,       					      XK_t, 		 spawn,          {.v = termcmd } },
+	{ MODKEY,       				XK_t, 	   spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_grave,  togglescratch,  {.v = scratchpadcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
@@ -179,7 +178,7 @@ static Key keys[] = {
 	{ MODKEY|ControlMask,           XK_space,  setlayout,      {0} },
 	{ MODKEY,                       XK_r,      setlayout,      {.v = &layouts[3]} },
 	{ MODKEY|ShiftMask,             XK_r,      setlayout,      {.v = &layouts[4]} },
-	{ MODKEY|ControlMask,						XK_comma,  cyclelayout,    {.i = -1 } },
+	{ MODKEY|ControlMask,			XK_comma,  cyclelayout,    {.i = -1 } },
 	{ MODKEY|ControlMask,           XK_period, cyclelayout,    {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_j,      rotatestack,    {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_k,      rotatestack,    {.i = -1 } },
@@ -214,32 +213,29 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
 	{ MODKEY|ControlMask|ShiftMask, XK_q,      quit,           {1} },
 	{ MODKEY,                       XK_u,      focusurgent,    {0} },
-	{ MODKEY|ShiftMask,							XK_w,			 spawn,		       SHCMD("qutebrowser") },
-	{ MODKEY|ShiftMask|ControlMask,	XK_w,			 spawn,		       SHCMD("google-chrome-stable") },
-	{ MODKEY,												XK_l,      spawn,		       SHCMD("slock") },
-	{ MODKEY,												XK_m,		   spawn,		       SHCMD("st -c ncmpcpp -e ncmpcpp") },
-	{ 0,														XK_Print,  spawn,		       SHCMD("/usr/bin/scr") },
-	{ ShiftMask,										XK_Print,  spawn,		       SHCMD("teiler") },
-	{ 0, XF86XK_AudioMute,			            	 spawn,		       SHCMD("amixer sset Master toggle") },
-	{ 0, XF86XK_AudioLowerVolume, 						 spawn, 		   	 {.v = voldowncmd } },
-	{ 0, XF86XK_AudioRaiseVolume, 						 spawn, 		   	 {.v = volupcmd } },
-	{ 0, XF86XK_AudioMute, 										 spawn, 		   	 {.v = mutecmd } },
-	{ 0, XF86XK_AudioPrev,										 spawn,		   		 {.v = muprev } },
-	{ 0, XF86XK_AudioNext,										 spawn,		   		 {.v = munext } },
-	{ 0, XF86XK_AudioPause,										 spawn,		   		 {.v = mupause } },
-	{ 0, XF86XK_AudioPlay,										 spawn,		   		 {.v = mupause } },
-	{ 0, XF86XK_AudioStop,										 spawn,		   		 {.v = mupause } },
-	{ 0, XF86XK_AudioRewind,									 spawn,		   		 SHCMD("mpc seek -10") },
-	{ 0, XF86XK_AudioForward,									 spawn,		   		 SHCMD("mpc seek +10") },
-	{ MODKEY,												XK_w,			 spawn,		   		 {.v = ffcmd } },
-	{ MODKEY|ControlMask,						XK_u,			 spawn,		   		 {.v = qutecmd } },
-	{ MODKEY|ControlMask,						XK_w,			 spawn,		   		 {.v = surfcmd } },
-	{ MODKEY|ControlMask,						XK_v,			 spawn,		   		 {.v = browsercmd } },
-	{ MODKEY,												XK_x,			 spawn,		   		 {.v = exitcmd } },
-	{ MODKEY,												XK_e,			 spawn,		   		 {.v = editcmd } },
-	{ MODKEY|ShiftMask, 						XK_e,			 spawn,		   		 {.v = vimcmd } },
-	{ MODKEY|ShiftMask,							XK_p,			 spawn,		   		 {.v = clipcmd } },
-	{ MODKEY,												XK_f,			 spawn,		   		 {.v = filecmd } },
+	{ MODKEY,						XK_l,      spawn,		   SHCMD("slock") },
+	{ MODKEY,						XK_m,	   spawn,		   SHCMD("st -c ncmpcpp -e ncmpcpp") },
+	{ 0,							XK_Print,  spawn,		   SHCMD("/usr/bin/scr") },
+	{ 0, XF86XK_AudioMute,			           spawn,		   SHCMD("amixer sset Master toggle") },
+	{ 0, XF86XK_AudioLowerVolume, 			   spawn, 		   {.v = voldowncmd } },
+	{ 0, XF86XK_AudioRaiseVolume, 			   spawn, 		   {.v = volupcmd } },
+	{ 0, XF86XK_AudioMute, 					   spawn, 		   {.v = mutecmd } },
+	{ 0, XF86XK_AudioPrev,					   spawn,		   {.v = muprev } },
+	{ 0, XF86XK_AudioNext,					   spawn,		   {.v = munext } },
+	{ 0, XF86XK_AudioPause,					   spawn,		   {.v = mupause } },
+	{ 0, XF86XK_AudioPlay,					   spawn,		   {.v = mupause } },
+	{ 0, XF86XK_AudioStop,					   spawn,		   {.v = mupause } },
+	{ 0, XF86XK_AudioRewind,				   spawn,		   SHCMD("mpc seek -10") },
+	{ 0, XF86XK_AudioForward,				   spawn,		   SHCMD("mpc seek +10") },
+	{ MODKEY,						XK_w,      spawn,		   {.v = ffcmd } },
+	{ MODKEY|ControlMask,			XK_u,      spawn,		   {.v = qutecmd } },
+	{ MODKEY|ControlMask,			XK_w,      spawn,		   {.v = surfcmd } },
+	{ MODKEY|ControlMask,			XK_v,	   spawn,		   {.v = browsercmd } },
+	{ MODKEY,						XK_x,	   spawn,		   {.v = exitcmd } },
+	{ MODKEY,						XK_e,	   spawn,		   {.v = editcmd } },
+	{ MODKEY|ShiftMask, 			XK_e,	   spawn,		   {.v = vimcmd } },
+	{ MODKEY|ShiftMask,				XK_p,	   spawn,		   {.v = clipcmd } },
+	{ MODKEY,						XK_f,	  spawn,		   {.v = filecmd } },
 };		
 
 /* button definitions */

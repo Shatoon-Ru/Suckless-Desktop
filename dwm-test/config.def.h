@@ -47,50 +47,52 @@ static const char *tags[] = { "", "", "", "", "", "", "", "
 
 static const Rule rules[] = {
     /* xprop(1):
-	 *	WM_CLASS(STRING) = instance, class
-	 *	WM_NAME(STRING) = title
-	 */
-   /* class                         instance    title       tags mask     switchtag    isfloating   monitor */
-   { "qutebrowser",                 NULL,       NULL,       1,            1,             0,           0 },
-   { "Brave-browser",               NULL,       NULL,       1,            1,             0,           0 },
-   { "firefox",                     NULL,       NULL,       1,            1,             0,           0 },
-   { "Nightly",                     NULL,       NULL,       1,            1,             0,           0 },
-   { "Google-chrome",               NULL,       NULL,       1,            1,             0,           0 },
-   { "Ghostery Dawn",               NULL,       NULL,       1,            1,             0,           0 },
-   { "Vivaldi-stable",              NULL,       NULL,       1,            1,             0,           0 },
-   { "Surf",                        NULL,       NULL,       1,            1,             0,           0 },
-   { "ncmpcpp",                     NULL,       NULL,       1 << 3,       1,             0,           1 },
-   { "St",                          NULL,       NULL,       1 << 1,       1,             0,           0 },
-   { "st",                          NULL,       NULL,       1 << 1,       1,             0,           0 },
-   { "URxvt",                       NULL,       NULL,       1 << 1,       1,             0,           0 },
-   { "Transmission-gtk",            NULL,       NULL,       1 << 2,       1,             0,           0 },
-   { "SoulseekQt",                  NULL,       NULL,       1 << 2,       1,             0,           0 },
-   { "Thunar",                      NULL,       NULL,       1 << 4,       1,             0,           0 },
-   { "Sxiv",                        NULL,       NULL,       1 << 4,       1,             1,           0 },
-   { "File-roller",                 NULL,       NULL,       1 << 4,       1,             1,           0 },
-   { "mpv",                         NULL,       NULL,       1 << 4,       1,             1,           0 },
-   { "Subl",                        NULL,       NULL,       1 << 6,       1,             0,           0 },
-   { "nvim",                        NULL,       NULL,       1 << 6,       1,             0,           0 },
-   { "code-oss",                    NULL,       NULL,       1 << 6,       1,             0,           0 },
-   { "Code",                        NULL,       NULL,       1 << 6,       1,             0,           0 },
-   { "Steam",                       NULL,       NULL,       1 << 7,       1,             0,           0 },
-   { "Slack",                       NULL,       NULL,       1 << 7,       1,             0,           1 },
-   { "Easytag",                     NULL,       NULL,       1 << 8,       1,             0,           0 },
-   { "Xfce4-taskmanager",           NULL,       NULL,       1 << 9,       1,             0,           1 },
-   { "Nitrogen",                    NULL,       NULL,       1 << 9,       1,             1,           1 },
-   { "Xfce4-appearance-settings",   NULL,       NULL,       1 << 9,       1,             1,           1 },
-   { "Xfce4-mouse-settings",        NULL,       NULL,       1 << 9,       1,             1,           1 },
-   { "Gpick",                       NULL,       NULL,       0,            1,             1,           0 },
-   { "Sxiv",                        NULL,       NULL,       0,            1,             1,           0 },
-   { "MuPDF",                       NULL,       NULL,       0,            1,             1,           0 },
-   { "Lxappearance",                NULL,       NULL,       1 << 9,       1,             1,           1 },
-   { "Blueman-manager",             NULL,       NULL,       1 << 9,       1,             1,           1 },
-   { "Gnome-builder",               NULL,       NULL,       1 << 6,       1,             0,           0 },
-   { "Solaar",                      NULL,       NULL,       1 << 9,       1,             1,           1 },
-   { "Piper",                       NULL,       NULL,       1 << 9,       1,             1,           1 },
-   { "Gucharmap",                   NULL,       NULL,       1 << 6,       1,             1,           0 },
-   { "Gimp",                        NULL,       NULL,       1 << 9,       1,             1,           0 },
-   { "firefox",   "GtkFileChooserDialog", "Save File",      0,            1,             1,           0 },
+     *  WM_CLASS(STRING) = instance, class
+     *  WM_NAME(STRING) = title
+     *  WM_WINDOW_ROLE(STRING) = role
+     */
+   /* class                         instance    title       tags mask     switchtag    isfloating   monitor   float x,y,w,h  floatborderpx */
+   { "qutebrowser",                 NULL,       NULL,       1,            1,             0,           0,                                    },
+   { "Brave-browser",               NULL,       NULL,       1,            1,             0,           0,                                    },
+   { "firefox",                     NULL,       NULL,       1,            1,             0,           0,                                    },
+   { "Nightly",                     NULL,       NULL,       1,            1,             0,           0,                                    },
+   { "Google-chrome",               NULL,       NULL,       1,            1,             0,           0,                                    },
+   { "Ghostery Dawn",               NULL,       NULL,       1,            1,             0,           0,                                    },
+   { "Vivaldi-stable",              NULL,       NULL,       1,            1,             0,           0,                                    },
+   { "Surf",                        NULL,       NULL,       1,            1,             0,           0,                                    },
+   { "ncmpcpp",                     NULL,       NULL,       1 << 3,       1,             0,           1,                                    },
+   { "St",                          NULL,       NULL,       1 << 1,       1,             0,           0,                                    },
+   { "st",                          NULL,       NULL,       1 << 1,       1,             0,           0,                                    },
+   { "URxvt",                       NULL,       NULL,       1 << 1,       1,             0,           0,                                    },
+   { "Transmission-gtk",            NULL,       NULL,       1 << 2,       1,             0,           0,                                    },
+   { "SoulseekQt",                  NULL,       NULL,       1 << 2,       1,             0,           0,                                    },
+   { "Thunar",                      NULL,       NULL,       1 << 4,       1,             0,           0,                                    },
+   { "Sxiv",                        NULL,       NULL,       1 << 4,       1,             1,           0,                                    },
+   { "File-roller",                 NULL,       NULL,       1 << 4,       1,             1,           0,                                    },
+   { "mpv",                         NULL,       NULL,       1 << 4,       1,             1,           0,                                    },
+   { "Subl",                        NULL,       NULL,       1 << 6,       1,             0,           0,                                    },
+   { "nvim",                        NULL,       NULL,       1 << 6,       1,             0,           0,                                    },
+   { "code-oss",                    NULL,       NULL,       1 << 6,       1,             0,           0,                                    },
+   { "Code",                        NULL,       NULL,       1 << 6,       1,             0,           0,                                    },
+   { "Steam",                       NULL,       NULL,       1 << 7,       1,             0,           0,                                    },
+   { "Slack",                       NULL,       NULL,       1 << 7,       1,             0,           1,                                    },
+   { "Easytag",                     NULL,       NULL,       1 << 8,       1,             0,           0,                                    },
+   { "Xfce4-taskmanager",           NULL,       NULL,       1 << 9,       1,             0,           1,                                    },
+   { "Nitrogen",                    NULL,       NULL,       1 << 9,       1,             1,           1,                                    },
+   { "Xfce4-appearance-settings",   NULL,       NULL,       1 << 9,       1,             1,           1,                                    },
+   { "Xfce4-mouse-settings",        NULL,       NULL,       1 << 9,       1,             1,           1,                                    },
+   { "Gpick",                       NULL,       NULL,       0,            1,             1,           0,                                    },
+   { "Sxiv",                        NULL,       NULL,       0,            1,             1,           0,                                    },
+   { "MuPDF",                       NULL,       NULL,       0,            1,             1,           0,                                    },
+   { "Lxappearance",                NULL,       NULL,       1 << 9,       1,             1,           1,                                    },
+   { "Blueman-manager",             NULL,       NULL,       1 << 9,       1,             1,           1,                                    },
+   { "Gnome-builder",               NULL,       NULL,       1 << 6,       1,             0,           0,                                    },
+   { "Solaar",                      NULL,       NULL,       1 << 9,       1,             1,           1,                                    },
+   { "Piper",                       NULL,       NULL,       1 << 9,       1,             1,           1,                                    },
+   { "Gucharmap",                   NULL,       NULL,       1 << 6,       1,             1,           0,                                    },
+   { "Gimp",                        NULL,       NULL,       1 << 9,       1,             1,           0,                                    },
+   { "firefox",   "GtkFileChooserDialog",   "Save File",    0,            1,             1,           0,     50,50,120,34            5      },
+   { "firefox",       "Toolkit", "Picture-in-Picture",      0,            1,             1,           0,     50,50,120,34            5      },
 };
 
 /* layout(s) */
@@ -138,6 +140,9 @@ static const char *mupause[]    = { "/usr/bin/mpc", "toggle", NULL };
 static const char *filecmd[]    = { "thunar", NULL };
 static const char *editcmd[]    = { "subl", NULL };
 static const char *vimcmd[]     = { "gvim", NULL };
+static const char *mutecmd[]    = { "amixer", "-q", "set", "Master", "toggle", NULL };
+static const char *volupcmd[]   = { "amixer", "-q", "set", "Master", "2%+", "unmute", NULL };
+static const char *voldowncmd[] = { "amixer", "-q", "set", "Master", "2%-", "unmute", NULL };
 static const char scratchpadname[] = "scratchpad";
 static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "120x34", NULL };
 
@@ -149,10 +154,13 @@ static Key keys[] = {
   { MODKEY,                       XK_l,                   spawn,               SHCMD("slock") },
   { MODKEY,                       XK_m,                   spawn,               SHCMD("st -c ncmpcpp -e ncmpcpp") },
   { MODKEY|ShiftMask,             XK_e,                   spawn,               SHCMD("st -c nvim -e nvim") },
-  { 0,                            XK_Print,               spawn,               SHCMD("flameshot gui -d 3000") },
-  { 0, XF86XK_AudioMute,                                  spawn,               SHCMD("amixer sset Master toggle") },
-  { 0, XF86XK_AudioRaiseVolume,                           spawn,               SHCMD("/usr/bin/volume up") },
-  { 0, XF86XK_AudioLowerVolume,                           spawn,               SHCMD("/usr/bin/volume down") },
+  { 0,                            XK_Print,               spawn,               SHCMD("/usr/bin/scr") },
+  /*{ 0, XF86XK_AudioMute,                                spawn,               SHCMD("amixer sset Master toggle") },*/
+  /*{ 0, XF86XK_AudioRaiseVolume,                         spawn,               SHCMD("/usr/bin/volume up") },
+  { 0, XF86XK_AudioLowerVolume,                           spawn,               SHCMD("/usr/bin/volume down") },*/
+  { 0, XF86XK_AudioLowerVolume,                           spawn,               {.v = voldowncmd } },
+  { 0, XF86XK_AudioRaiseVolume,                           spawn,               {.v = volupcmd } },
+  { 0, XF86XK_AudioMute,                                  spawn,               {.v = mutecmd } },
   { 0, XF86XK_AudioPrev,                                  spawn,               {.v = muprev } },
   { 0, XF86XK_AudioNext,                                  spawn,               {.v = munext } },
   { 0, XF86XK_AudioPause,                                 spawn,               {.v = mupause } },
