@@ -1,53 +1,54 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const unsigned int borderpx       = 0;   /* border pixel of windows */
-static const unsigned int snap           = 32;  /* snap pixel */
-static const unsigned int gappih         = 10;  /* horiz inner gap between windows */
-static const unsigned int gappiv         = 10;  /* vert inner gap between windows */
-static const unsigned int gappoh         = 10;   /* horiz outer gap between windows and screen edge */
-static const unsigned int gappov         = 10;   /* vert outer gap between windows and screen edge */
-static const int smartgaps               = 1;   /* 1 means no outer gap when there is only one window */
-static const int showbar                 = 1;   /* 0 means no bar */
-static const int topbar                  = 1;   /* 0 means bottom bar */
-static const int horizpadbar             = 6;   /* horizontal padding for statusbar */
-static const int vertpadbar              = 15;   /* vertical padding for statusbar */
-static const int focusonnetactive        = 1;   /* 0 means default behaviour, 1 means auto-focus on urgent window */
-static const int attachmode              = 2;   /* 0 = master (default), 1 = above, 2 = aside, 3 = below, 4 = bottom */
-static const int pertag                  = 1;   /* 0 means global layout across all tags (default), 1 = layout per tag (pertag) */
-static const int pertagbar               = 0;   /* 0 means using pertag, but with the same barpos, 1 = normal pertag */
-static const int zoomswap                = 1;   /* 0 means default behaviour, 1 = zoomswap patch */
-static const int fancybar                = 1;   /* 0 means default behaviour, 1 = fancybar patch */
-static const int savefloats              = 1;   /* 0 means default behaviour, 1 = savefloats patch */
-static const int losefullscreen          = 1;   /* 0 means default behaviour, 1 = losefullscreen patch */
-static const int nrg_force_vsplit        = 1;   /* nrowgrid layout, 1 means force 2 clients to always split vertically */
-static const unsigned int systraypinning = 1;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
-static const unsigned int systrayspacing = 0;   /* systray spacing */
-static const int systraypinningfailfirst = 0;   /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
-static const int showsystray             = 0;   /* 0 means no systray */
+static const unsigned int borderpx         = 0;   /* border pixel of windows */
+static const unsigned int snap             = 32;  /* snap pixel */
+static const unsigned int gappih           = 10;  /* horiz inner gap between windows */
+static const unsigned int gappiv           = 10;  /* vert inner gap between windows */
+static const unsigned int gappoh           = 10;   /* horiz outer gap between windows and screen edge */
+static const unsigned int gappov           = 10;   /* vert outer gap between windows and screen edge */
+static const int smartgaps                 = 1;   /* 1 means no outer gap when there is only one window */
+static const int showbar                   = 1;   /* 0 means no bar */
+static const int topbar                    = 1;   /* 0 means bottom bar */
+static const int horizpadbar               = 10;   /* horizontal padding for statusbar */
+static const int vertpadbar                = 15;   /* vertical padding for statusbar */
+static const int focusonnetactive          = 1;   /* 0 means default behaviour, 1 means auto-focus on urgent window */
+static const int attachmode                = 2;   /* 0 = master (default), 1 = above, 2 = aside, 3 = below, 4 = bottom */
+static const int pertag                    = 1;   /* 0 means global layout across all tags (default), 1 = layout per tag (pertag) */
+static const int pertagbar                 = 0;   /* 0 means using pertag, but with the same barpos, 1 = normal pertag */
+static const int zoomswap                  = 1;   /* 0 means default behaviour, 1 = zoomswap patch */
+static const int fancybar                  = 1;   /* 0 means default behaviour, 1 = fancybar patch */
+static const int savefloats                = 1;   /* 0 means default behaviour, 1 = savefloats patch */
+static const int losefullscreen            = 1;   /* 0 means default behaviour, 1 = losefullscreen patch */
+static const int nrg_force_vsplit          = 1;   /* nrowgrid layout, 1 means force 2 clients to always split vertically */
+static const unsigned int systraypinning   = 2;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
+static const unsigned int systrayspacing   = 5;   /* systray spacing */
+static const int systraypinningfailfirst   = 0;   /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
+static const int showsystray               = 1;   /* 0 means no systray */
+static const unsigned int systrayiconsize  = 16; /* systray icon size in px */
 /*static const char *fonts[]         		 = {"Hack Nerd Font:style=Regular:size=10", "Font Awesome 5 Pro:style=Solid:pixelsize=12:antialias=true", "Font Awesome 5 Brands:style=Solid:pixelsize=12:antialias=true", "Material Design Icons:Regular:pixelsize=21:antialias=true"};*/
 static const char *fonts[]          	   = { "Inter:size=10.5", "Font Awesome 5 Pro:style=Solid:pixelsize=12:antialias=true", "Font Awesome 5 Brands:style=Solid:pixelsize=12:antialias=true", "Material Design Icons:Regular:pixelsize=19:antialias=true" };
-static const char dmenufont[]            = "monospace:size=10";
-static const char col_gray1[]            = "#141414";
-static const char col_gray2[]            = "#505050";
-static const char col_gray3[]            = "#353535";
-static const char col_gray4[]            = "#c6c6c6";
-static const char col_gray5[]            = "#fffefe";
-static const char col_gray6[]            = "#292929";
-static const char col_gray7[]            = "#2d2d2d";
-static const char col_cyan[]             = "#7e9cb9";
-static const char col_blue[]			  = "#6699cc";
-static const char col1[]            = "#98971a";
-static const char col2[]            = "#d79921";
-static const char col3[]            = "#458588";
-static const char col4[]            = "#b16286";
-static const char col5[]            = "#689d6a";
-static const char col6[]            = "#a89984";
+static const char dmenufont[]              = "monospace:size=10";
+static const char col_gray1[]              = "#141414";
+static const char col_gray2[]              = "#505050";
+static const char col_gray3[]              = "#353535";
+static const char col_gray4[]              = "#c6c6c6";
+static const char col_gray5[]              = "#fffefe";
+static const char col_gray6[]              = "#292929";
+static const char col_gray7[]              = "#282828";
+static const char col_cyan[]               = "#7e9cb9";
+static const char col_blue[]			   = "#6699cc";
+static const char col1[]                   = "#98971a";
+static const char col2[]                   = "#d79921";
+static const char col3[]                   = "#458588";
+static const char col4[]                   = "#b16286";
+static const char col5[]                   = "#689d6a";
+static const char col6[]                   = "#a89984";
 /*static const unsigned int baralpha       = 0xd0;*/
 /*static const unsigned int baralpha       = 225;*/
 /*static const unsigned int baralpha       = 235;*/
-static const unsigned int baralpha       = 255;
-static const unsigned int borderalpha    = 255;
+static const unsigned int baralpha         = 255;
+static const unsigned int borderalpha      = 255;
 
 static const char *colors[][3] = {
 	/*               fg         bg         border   */
@@ -68,7 +69,7 @@ static const int statmonval = 0;
 
 /* tagging */
 /*static const char *tags[] = { "󰲠", "󰲢", "󰲤", "󰲦", "󰲨", "󰲪", "󰲬", "󰲮", "󰲰", "󰲞" };*/
-static const char *tags[] = { "", "", "", "", "", "", "", "", "", "" };
+static const char *tags[] = { "", "", "", "", "", "", "", "", "", "" };
 /*static const char *tags[] = { "", "", "", "", "", "", "", "", "", "" };*/
 
 static const Rule rules[] = {
@@ -109,6 +110,7 @@ static const Rule rules[] = {
   { "MuPDF", 							  NULL, 			  NULL, 	 NULL,   0,    	    1,         	1,    		 1,            0 },
   { "Lxappearance",   				      NULL, 			  NULL, 	 NULL,   1 << 9,    1,         	1,    		 1,            1 },
   { "Blueman-manager", 				      NULL, 		  	  NULL, 	 NULL,   1 << 9,    1,         	1,    		 1,            1 },
+  { "Pavucontrol",                 		  NULL,		          NULL,      NULL,	 1 << 9,    1,          1,   		 1,            1 },
   { "Gnome-builder",  				      NULL, 		  	  NULL, 	 NULL,   1 << 6,    1,         	1,    		 0,            0 },
   { "Solaar", 						      NULL, 			  NULL, 	 NULL,   1 << 9,    1,         	1,    		 1,            1 },
   { "Piper", 							  NULL, 			  NULL, 	 NULL,   1 << 9,    1,         	1,    		 1,            1 },
@@ -116,6 +118,7 @@ static const Rule rules[] = {
   { "Gimp", 							  NULL, 			  NULL, 	 NULL,   1 << 9,    1,         	1,    		 1,            0 },
   { "St",	            				  NULL,               NULL,      NULL,   1 << 1,    1,         	0,           0,            0 },
   { "firefox",					"GtkFileChooserDialog",    "Save File",  NULL,   0,	 	    0,          1,           1,			   0 },
+  { "firefox",                		"Toolkit", "Picture-in-Picture",     NULL,   0,   		1,          1,           1,			   0 },
   { "nvim", NULL, NULL, NULL, 1 << 6, 1, 1, 0, 0,},
 };	
 
@@ -153,9 +156,9 @@ static const int layoutaxis[] = {
 
 static const Layout layouts[] = {
 	/* symbol	arrange function */
-	{ "",	dwindle }, /* first entry is default */
-	{ "",	tile },
-	{ "", grid },
+	{ "󰕴",	dwindle }, /* first entry is default */
+	{ "󰕰",	tile },
+	{ "󰡃", grid },
 	{ "󰕫", centeredmaster },
 	{ "󰕬", centeredfloatingmaster },
 	{ "󰕯",	NULL },    /* no layout function means floating behavior */
@@ -182,7 +185,6 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *roficmd[] 	= { "rofi", "-show", "drun", "-show-icons", NULL };
 static const char *clipcmd[] 	= {"/usr/bin/clip", NULL};
 static const char *dmenucmd[] 	= {"/usr/bin/dmenu.sh", NULL};
 static const char *termcmd[]  	= { "st", NULL };
@@ -196,7 +198,7 @@ static const char *muprev[]  	= { "/usr/bin/mpc", "prev", NULL };
 static const char *mupause[]  	= { "/usr/bin/mpc", "toggle", NULL };
 static const char *filecmd[] 	= { "thunar", NULL };
 static const char *editcmd[] 	= { "subl", NULL };
-static const char *vimcmd[] 	= { "gvim", NULL };
+/*static const char *vimcmd[] 	= { "gvim", NULL };*/
 static const char *mutecmd[] 	= { "amixer", "-q", "set", "Master", "toggle", NULL };
 static const char *volupcmd[] 	= { "amixer", "-q", "set", "Master", "1%+", "unmute", NULL };
 static const char *voldowncmd[] = { "amixer", "-q", "set", "Master", "1%-", "unmute", NULL };
@@ -207,7 +209,6 @@ static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "120x34
 static Key keys[] = {
 	/* modifier                     key        function             argument */
 	{ MODKEY,                       XK_space,  spawn,               {.v = dmenucmd } },
-	{ MODKEY, 						XK_d,  	   spawn, 			    {.v = roficmd } },
 	{ MODKEY,                       XK_t, 	   spawn,               {.v = termcmd } },
 	{ MODKEY,                       XK_grave,  togglescratch,  	    {.v = scratchpadcmd } },
 	{ MODKEY,			            XK_b,      togglebar,           {0} },
@@ -305,7 +306,8 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,				XK_w,		spawn,				SHCMD("qutebrowser") },
 	{ MODKEY|ShiftMask|ControlMask,	XK_w,		spawn,				SHCMD("google-chrome-stable") },
 	{ MODKEY,						XK_l,       spawn,		    	SHCMD("slock") },
-	{ MODKEY,						XK_m,		spawn,				SHCMD("st -c ncmpcpp -e ncmpcpp") },
+	/*{ MODKEY,						XK_m,		spawn,				SHCMD("st -c ncmpcpp -e ncmpcpp") },*/
+	{ MODKEY,                       XK_m,       spawn,              SHCMD("alacritty --class ncmpcpp,ncmpcpp -e ncmpcpp") },
 	{ 0,							XK_Print,   spawn,		    	SHCMD("/usr/bin/scr") },
 	{ ShiftMask,					XK_Print,   spawn,		    	SHCMD("teiler") },
 	{ 0, XF86XK_AudioMute,			            spawn,				SHCMD("amixer sset Master toggle") },
@@ -327,7 +329,7 @@ static Key keys[] = {
 	{ MODKEY|ControlMask,			XK_v,		spawn,				{.v = browsercmd } },
 	{ MODKEY,						XK_x,		spawn,				{.v = exitcmd } },
 	{ MODKEY,						XK_e,		spawn,				{.v = editcmd } },
-	{ MODKEY|ShiftMask, 			XK_e,		spawn,				{.v = vimcmd } },
+	{ MODKEY|ShiftMask,             XK_e,       spawn,              SHCMD("st -c nvim -e nvim") },
 	{ MODKEY|ShiftMask,				XK_p,		spawn,				{.v = clipcmd } },
 	{ MODKEY,						XK_f,		spawn,				{.v = filecmd } },
 };
