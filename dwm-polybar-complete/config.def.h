@@ -58,7 +58,7 @@ static const Rule rules[] = {
    { "Chromium-browser",            NULL,       NULL,       1,            1,             0,           0 },
    { "Nightly",                     NULL,       NULL,       1,            1,             0,           0 },
    { "Google-chrome",               NULL,       NULL,       1,            1,             0,           0 },
-   { "Ghostery Dawn",               NULL,       NULL,       1,            1,             0,           0 },
+   { "LibreWolf",                   NULL,       NULL,       1,            1,             0,           0 },
    { "Surf",                        NULL,       NULL,       1,            1,             0,           0 },
    { "ncmpcpp",                     NULL,       NULL,       1 << 3,       1,             0,           1 },
    { "Sonata",                      NULL,       NULL,       1 << 3,       1,             0,           1 },
@@ -134,9 +134,9 @@ static const char *clipcmd[]    = {"/usr/bin/clip", NULL};
 static const char *dmenucmd[]   = {"/usr/bin/dmenu.sh", NULL};
 static const char *termcmd[]    = { "st", NULL };
 /*static const char *termcmd[]    = { "alacritty", NULL };*/
-static const char *browsercmd[] = { "vivaldi-snapshot", NULL };
-static const char *surfcmd[]    = { "surf", NULL };
-static const char *ffcmd[]      = { "firefox", NULL };
+/*static const char *browsercmd[] = { "vivaldi-snapshot", NULL };*/
+/*  static const char *surfcmd[]    = { "surf", NULL };*/
+/*static const char *ffcmd[]      = { "librewolf", NULL };*/
 static const char *exitcmd[]    = { "/usr/bin/stop.sh", NULL };
 static const char *munext[]     = { "/usr/bin/mpc", "next", NULL };
 static const char *muprev[]     = { "/usr/bin/mpc", "prev", NULL };
@@ -150,14 +150,17 @@ static const char *voldowncmd[] = { "amixer", "-q", "set", "Master", "2%-", "unm
 static const char scratchpadname[] = "scratchpad";
 static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "120x34", NULL };
 
+#define APP_BROWSER             "librewolf"
+#define APP_BROWSER_            "librewolf --private-window"
+
 #include <X11/XF86keysym.h>
 static Key keys[] = {
-    /* modifier                     key                    function                   argument */
-  { MODKEY|ShiftMask,             XK_w,                   spawn,               SHCMD("qutebrowser") },
-  { MODKEY|ShiftMask|ControlMask, XK_w,                   spawn,               SHCMD("google-chrome-stable") },
+    /* modifier                   key                     function             argument */
+  { MODKEY,                       XK_F2,                  spawn,               SHCMD("qutebrowser") },
+  { MODKEY,                       XK_F3,                  spawn,               SHCMD("surf") },
   { MODKEY,                       XK_l,                   spawn,               SHCMD("slock") },
-  /*{ MODKEY,                       XK_m,                   spawn,               SHCMD("st -c ncmpcpp -e ncmpcpp") },*/
-  { MODKEY,                       XK_m,                   spawn,               SHCMD("alacritty --class ncmpcpp,ncmpcpp -e ncmpcpp") },
+  { MODKEY,                       XK_m,                   spawn,               SHCMD("st -c ncmpcpp -e ncmpcpp") },
+  /*{ MODKEY,                       XK_m,                   spawn,               SHCMD("alacritty --class ncmpcpp,ncmpcpp -e ncmpcpp") },*/
   { MODKEY|ShiftMask,             XK_e,                   spawn,               SHCMD("st -c nvim -e nvim") },
   { 0,                            XK_Print,               spawn,               SHCMD("/usr/bin/scr") },
   { 0, XF86XK_AudioMute,                                  spawn,               SHCMD("amixer sset Master toggle") },
@@ -173,9 +176,11 @@ static Key keys[] = {
   { 0, XF86XK_AudioStop,                                  spawn,               {.v = mupause } },
   { 0, XF86XK_AudioRewind,                                spawn,               SHCMD("mpc seek -10") },
   { 0, XF86XK_AudioForward,                               spawn,               SHCMD("mpc seek +10") },
-  { MODKEY,                       XK_w,                   spawn,               {.v = ffcmd } },
-  { MODKEY|ControlMask|ShiftMask, XK_w,                   spawn,               {.v = surfcmd } },
-  { MODKEY|ControlMask,           XK_w,                   spawn,               {.v = browsercmd } },
+  /*{ MODKEY,                       XK_w,                   spawn,               {.v = ffcmd } },*/
+  /*{ MODKEY|ControlMask|ShiftMask, XK_w,                   spawn,               {.v = surfcmd } },*/
+  { MODKEY,                       XK_w,                   spawn,               SHCMD(APP_BROWSER)  },
+  { MODKEY|ShiftMask,             XK_w,                   spawn,               SHCMD(APP_BROWSER_) },
+  /*{ MODKEY|ControlMask,           XK_w,                   spawn,               {.v = browsercmd } },*/
   { MODKEY,                       XK_x,                   spawn,               {.v = exitcmd } },
   { MODKEY,                       XK_e,                   spawn,               {.v = editcmd } },
   { MODKEY|ControlMask,           XK_e,                   spawn,               {.v = vimcmd } },
@@ -235,7 +240,7 @@ static Key keys[] = {
   TAGKEYS(                        XK_8,                                        7)
   TAGKEYS(                        XK_9,                                        8)
   TAGKEYS(                        XK_0,                                        9)
-  TAGKEYS(                        XK_F1,                                       0)
+  /*TAGKEYS(                        XK_F1,                                       0)
   TAGKEYS(                        XK_F2,                                       1)
   TAGKEYS(                        XK_F3,                                       2)
   TAGKEYS(                        XK_F4,                                       3)
@@ -244,7 +249,7 @@ static Key keys[] = {
   TAGKEYS(                        XK_F7,                                       6)
   TAGKEYS(                        XK_F8,                                       7)
   TAGKEYS(                        XK_F9,                                       8)
-  TAGKEYS(                        XK_F10,                                      9)
+  TAGKEYS(                        XK_F10,                                      9)*/
   { MODKEY|ShiftMask,             XK_q,                   quit,                {0} },
   { MODKEY|ControlMask|ShiftMask, XK_q,                   quit,                {1} },
 };
