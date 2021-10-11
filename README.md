@@ -10,6 +10,7 @@ A near perfect (for me) dwm and Polybar set up.
 
 Patches:
 - alwayscenter
+- anybar (polybar tray fix)
 - attachx
 - cyclelayouts
 - fibonacci
