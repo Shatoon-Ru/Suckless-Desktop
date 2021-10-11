@@ -1,27 +1,34 @@
 [colors]
-background = #212121
-bg3 = #212121
+background = #141414
+bg3 = #665c54
 foreground = #c6c6c6
-foreground-alt = #a7a7a7
-red = #a3535a
-green = #8f9d6a
-yellow = #d7ad87
-blue = #7587a6
-purple = #9b859d
-aqua = #afc4fb
-gray = #a7a7a7
-orange = #fbc4ab
+foreground-alt = #a4a4a4
+red = #cc241d
+green = #98971a
+yellow = #d79921
+blue = #458588
+purple = #b16286
+aqua = #689d6a
+gray = #928374
+orange = #d65d0e
+lightred = #fb4934
+lightgreen = #b8bb26
+lightyellow = #fabd2f
+lightblue = #83a598
+lightpurple = #d3869b
+lightaqua = #8ec07c
+lightgray = #a89984
+lightorange = #fe8019
 urgent = #f76767
 
-include-file = /home/dobbie/.config/polybar/powerline.config
+primary = ${xrdb:color1:#222}
+secondary = ${xrdb:color2:#222}
+alert = ${xrdb:color3:#222}
 
-;;;;;;;;;;;;;
-;; TOP BAR ;;
-;;;;;;;;;;;;;
 [bar/top]
 monitor = DisplayPort-0
 width = 100%
-height = 30
+height = 36
 radius = 0
 fixed-center = true
 
@@ -33,94 +40,49 @@ override-redirect = false
 line-size = 0
 line-color = #0ff
 
-border-color = #212121
+border-color = #141414
 border-bottom-size = 2
 border-top-size = 0
-border-bottom-color = #212121
-border-top-color = #212121
+border-bottom-color = #141414
+border-top-color = #141414
 
 padding-right = 0
 
 module-margin-left = 0
 module-margin-right = 0
 
-font-0 = Montserrat:weight=Medium:size=9.5;3
-font-1 = Font Awesome 5 Pro:style=Solid:pixelsize=11;2
-font-2 = Weather Icons:size=9;3
-font-3 = Font Awesome 5 Brands:pixelsize=11;2
-font-4 = Material Design Icons:pixelsize=15;5
-font-5 = Iosevka Nerd Font Mono:fontformat=truetype:size=14:antialias=true;3
-font-6 = Inconsolata for Powerline:pixelsize=26:antialias=true;3
-font-7 = Cozette:size=9;3
+;font-0 = JetBrains Mono NL,JetBrains Mono NL Medium:style=Medium,Regular:pixelsize=10;4
+;font-0 = Inter:style=regular:size=10;3
+;font-1 = Font Awesome 5 Pro:style=Solid:pixelsize=9;3
+;font-2 = Weather Icons:size=12;1
+;font-3 = Font Awesome 5 Pro:pixelsize=9;3
+;font-4 = Font Awesome 5 Brands:pixelsize=9;2
+;font-5 = Material Design Icons:pixelsize=15;5
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; MODULES USED - TOP BAR ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+font-0 = Inter:style=regular:size=10;3
+font-1 = Font Awesome 5 Pro:style=Solid:pixelsize=9;3
+font-2 = Weather Icons:size=9;3
+font-3 = Font Awesome 5 Brands:pixelsize=9;2
+font-4 = Material Design Icons:pixelsize=15;5
+font-5 = Cozette:size=9;3
+
+
+
+;;;;;;;;;;;;;;;;;;
+;; MODULES USED ;;
+;;;;;;;;;;;;;;;;;;
 ;modules-left = dwm2 xwindow
 ;i3;
 ;modules-left = i3 hour date mpd2 xwindow
 ;dwm;
-modules-left = dwm endld divider hour endl divider date endl divider mpd2 endl
-modules-center = xwindow 
-modules-right = modules-right = endr temp dividerr endr temperature dividerr endr volume dividerr endr filesystema dividerr endr filesystemm dividerr endr filesystem dividerr endr cpu dividerr endr memory dividerr endr xkeyboard
+modules-left = dwm hour date mpd2 xwindow
+modules-center = 
+modules-right = temp temperature volume filesystema filesystemm filesystem cpu memory xkeyboard
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; VERTICAL BARS - TOP & BOTTOM ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-[bar/vertt]
+[bar/vert]
 monitor = DVI-D-0
 width = 100%
-height = 30
-radius = 0
-fixed-center = true
-
-tray-position = right
-tray-padding = 4
-tray-background = #1d1d1d
-
-bottom = false
-
-background = ${colors.background}
-foreground = ${colors.foreground}
-override-redirect = false
-line-size = 0
-line-color = #0ff
-
-border-color = #212121
-border-bottom-size = 2
-border-top-size = 0
-border-bottom-color = #212121
-border-top-color = #212121
-
-padding-right = 0
-
-module-margin-left = 0
-module-margin-right = 0
-
-font-0 = Montserrat:weight=Medium:size=9.5;3
-font-1 = Font Awesome 5 Pro:style=Solid:pixelsize=11;2
-font-2 = Weather Icons:size=9;3
-font-3 = Font Awesome 5 Brands:pixelsize=11;2
-font-4 = Material Design Icons:pixelsize=15;5
-font-5 = Iosevka Nerd Font Mono:fontformat=truetype:size=14:antialias=true;3
-font-6 = Inconsolata for Powerline:pixelsize=26:antialias=true;3
-font-7 = Cozette:size=9;3
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; MODULES USED - VERTICAL TOP BAR;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-modules-left = dwm2 endld divider bluetooth endl 
-;modules-left = i3
-;modules-center = xwindow1
-modules-right = endr updates2 dividerr endr eth dividerr
-
-cursor-click = pointer
-cursor-scroll = ns-resize
-
-[bar/vertb]
-monitor = DVI-D-0
-width = 100%
-height = 30
+height = 36
 radius = 0
 fixed-center = true
 
@@ -128,52 +90,57 @@ fixed-center = true
 tray-padding = 4
 tray-background = #1d1d1d
 
-bottom = true
+bottom = false
 
 background = ${colors.background}
 foreground = ${colors.foreground}
-override-redirect = true
+override-redirect = false
 line-size = 0
 line-color = #0ff
 
-border-color = #212121
+border-color = #141414
 border-bottom-size = 2
 border-top-size = 0
-border-bottom-color = #212121
-border-top-color = #212121
+border-bottom-color = #141414
+border-top-color = #141414
 
 padding-right = 0
 
 module-margin-left = 0
 module-margin-right = 0
 
-font-0 = Montserrat:weight=Medium:size=9.5;3
-font-1 = Font Awesome 5 Pro:style=Solid:pixelsize=11;2
-font-2 = Weather Icons:size=9;3
-font-3 = Font Awesome 5 Brands:pixelsize=11;2
-font-4 = Material Design Icons:pixelsize=15;5
-font-5 = Iosevka Nerd Font Mono:fontformat=truetype:size=14:antialias=true;3
-font-6 = Inconsolata for Powerline:pixelsize=26:antialias=true;3
-font-7 = Cozette:size=9;3
+;font-0 = JetBrains Mono NL,JetBrains Mono NL Medium:style=Medium,Regular:pixelsize=10;4
+;font-0 = Inter:style=regular:size=10;3
+;font-1 = Font Awesome 5 Pro:style=Solid:pixelsize=9;3
+;font-2 = Weather Icons:size=12;1
+;font-3 = Font Awesome 5 Pro:pixelsize=9;3
+;font-4 = Font Awesome 5 Brands:pixelsize=9;2
+;font-5 = Material Design Icons:pixelsize=15;5
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; MODULES USED - VERTICAL BOTTOM BAR;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;modules-left = dwm2 endld divider bluetooth endl 
+font-0 = Inter:style=regular:size=10;3
+font-1 = Font Awesome 5 Pro:style=Solid:pixelsize=9;3
+;font-2 = Font Awesome 5 Pro:pixelsize=9;3
+font-2 = Font Awesome 5 Brands:pixelsize=9;2
+font-3 = Material Design Icons:pixelsize=15;5
+
+
+
+;;;;;;;;;;;;;;;;;;
+;; MODULES USED ;;
+;;;;;;;;;;;;;;;;;;
+modules-left = dwm2
 ;modules-left = i3
 ;modules-center = xwindow1
-modules-right = endr temp dividerr endr temperature dividerr endr volume dividerr endr filesystema dividerr endr filesystemm dividerr endr filesystem dividerr endr cpu dividerr endr memory dividerr endr xkeyboard
+modules-right = bluetooth weather2 updates2 eth
 
 cursor-click = pointer
 cursor-scroll = ns-resize
 
-;;;;;;;;;;;;;;;;;;;;;
-;; POLYBAR MODULES ;;
-;;;;;;;;;;;;;;;;;;;;;
 
-;;;;;;;;;;;;;;;
-;; BLUETOOTH ;;
-;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;
+;; MODULES ;;
+;;;;;;;;;;;;;
+
 [module/bluetooth]
 type = custom/script
 exec = ~/.config/polybar/bluetooth.sh
@@ -183,11 +150,8 @@ format-prefix = 
 format-prefix-padding = 2
 format-prefix-foreground = ${xrdb:color11}
 format-padding = 2
-format-background = #303030
+format-background = #3c3c3c
 
-;;;;;;;;;;;;;;
-;; UPDATESS ;;
-;;;;;;;;;;;;;;
 [module/updates]
 type = custom/script
 exec = ~/.config/polybar/update.sh
@@ -198,20 +162,17 @@ format-prefix = 󰈻
 format-prefix-padding = 2
 format-prefix-foreground = ${xrdb:color4}
 
-;;;;;;;;;;;;;;
-;; WEATHER2 ;;
-;;;;;;;;;;;;;;
 [module/weather2]
 type = custom/script
 exec = ~/.config/polybar/weather.sh
 interval = 600
 label-font = 3
 format-padding = 2
-format-background = #333333Linux machine 5.14.11-xanmod1-1 #1 SMP PREEMPT Sun, 10 Oct 2021 19:13:12 +0000 x86_64 GNU/Linux
+format-background = #333333
 
-;;;;;;;;;;;;;;
-;; UPDATES2 ;;
-;;;;;;;;;;;;;;
+
+
+
 [module/updates2]
 type = custom/script
 
@@ -240,7 +201,7 @@ format = <label>
 format-prefix = 
 format-prefix-padding = 2
 format-padding = 2
-format-background = #303030
+format-background = #2a2a2a
 format-prefix-foreground = ${xrdb:color8}
 
 ; Available tokens:
@@ -267,9 +228,9 @@ click-right = exo-open --launch TerminalEmulator &
 ;;scroll-up = echo scroll up %counter%
 ;;scroll-down = echo scroll down %counter%
 
-;;;;;;;;;;;;;;;
-;; XKEYBOARD ;;
-;;;;;;;;;;;;;;;
+
+
+
 [module/xkeyboard]
 type = internal/xkeyboard
 
@@ -292,7 +253,7 @@ format-spacing = 0
 ; Default: %layout%
 label-layout = %name%
 label-layout-padding = 2
-label-layout-background = #353535
+label-layout-background = #141414
 label-layout-foreground = 
 
 ; Available tokens:
@@ -314,7 +275,6 @@ indicator-icon-default =
 indicator-icon-0 = caps lock;-CL;+CL
 indicator-icon-1 = scroll lock;;+SL
 indicator-icon-2 = num lock;-NL;+NL
-indicator-icon-background = #303030
 
 ; Replaces label-indicator
 ; Available tokens:
@@ -341,16 +301,16 @@ label-indicator-off-numlock-padding = 2
 label-indicator-off-numlock-foreground = ${xrdb:color9}
 label-indicator-on-numlock-foreground = ${xrdb:color9}
 format-padding = 2
-format-background = #303030
+format-background = #141414
 
 [module/volume2]
 type = internal/alsa
 format-volume = <ramp-volume> <label-volume>
 format-volume-padding = 2
-format-volume-background = #212121
+format-volume-background = #141414
 label-volume = %percentage%%
 label-muted = ""
-label-muted-background = #212121
+label-muted-background = #141414
 label-muted-foreground = #f76767
 label-muted-padding = 2
 format-padding = 2
@@ -419,7 +379,7 @@ format-unmounted = <label-unmounted>
 format-unmounted-prefix-padding = 2
 label-mounted = %mountpoint%: %percentage_free%% of %total%
 label-mounted-padding = 2
-format-mounted-background = #303030
+format-mounted-background = #242424
 ; Available tokens:
 ;   %mountpoint%
 ; Default: %mountpoint% is not mounted
@@ -448,7 +408,7 @@ format-unmounted-prefix-padding = 2
 ;label-mounted = %mountpoint%: %percentage_free%% of %total%
 label-mounted = Music: %percentage_free%% of %total%
 label-mounted-padding = 2
-format-mounted-background = #303030
+format-mounted-background = #282828
 
 ; Available tokens:
 ;   %mountpoint%
@@ -531,13 +491,13 @@ exec=cpufr
 format=<label>
 format-prefix = 
 format-prefix-padding = 2
-format-prefix-background = #303030
+format-prefix-background = #484848
 format-prefix-foreground = ${xrdb:color1}
 internal=5
 label= %output%
 #label-foreground=#d19a66
 label-padding= 2
-label-background = #303030
+label-background = #484848
 
 [module/eth]
 type = internal/network
@@ -553,7 +513,7 @@ label-connected = %local_ip% 󰁞 %upspeed% 󰁆 %downspeed%
 label-disconnected = 󰈂
 label-disconnected-foreground = ${xrdb:color9}
 format-connected-padding = 2
-format-connected-background = #303030
+format-connected-background = #242424
 label-disconnected-padding = 2
 
 format-disconnected =
@@ -591,8 +551,7 @@ format-padding = 4
 ;format-prefix = 
 ;format-prefix-padding = 4
 ;format-prefix-foreground = ${xrdb:color3}
-;format-background = #33333i3
-format-background = #212121
+format-background = #333333
 
 ;;;;;;;;;;;;;
 ;; XWINDOW ;;
@@ -607,8 +566,7 @@ format-padding = 4
 ;format-prefix = 
 ;format-prefix-padding = 4
 ;format-prefix-foreground = ${xrdb:color3}
-;format-background = #3c3c3c
-format-background = #212121
+format-background = #3c3c3c
 
 ;;;;;;;;;;
 ;; TIME ;;
@@ -620,7 +578,7 @@ format-prefix = "  "
 format-prefix-foreground = ${xrdb:color1}
 date = %I:%M %p
 format = <label>
-format-background = #303030
+format-background = #1b1b1b
 format-foreground =#C6C6C6
 label = "%date%"
 format-padding = 2
@@ -636,7 +594,7 @@ format-prefix = " "
 format-prefix-foreground = ${xrdb:color2}
 date = %a, %d %b %Y%
 format = <label>
-format-background = #303030
+format-background = #1f1f1f
 format-foreground = #C6C6C6
 label = "%date%"
 format-padding = 2
@@ -663,19 +621,19 @@ ramp-volume-background = #353535
 label-muted = ""
 label-muted-padding = 2
 label-muted-foreground = ${xrdb:color5}
-label-muted-background = #303030
+label-muted-background = #353535
 ramp-volume-0 = ""
 ramp-volume-0-foreground = ${xrdb:color5}
-;ramp-volume-0-background = #303030
+;ramp-volume-0-background = #353535
 ramp-volume-1 = ""
 ramp-volume-1-foreground = ${xrdb:color5}
-;ramp-volume-1-background = #303030
+;ramp-volume-1-background = #353535
 ramp-volume-2 = ""
 ramp-volume-2-foreground = ${xrdb:color5}
-;ramp-volume-2-background = #303030
+;ramp-volume-2-background = #353535
 ramp-volume-3 = ""
 ramp-volume-3-foreground = ${colors.urgent}
-;ramp-volume-3-background = #303030
+;ramp-volume-3-background = #353535
 ramp-volume-padding = 2
 
 
@@ -730,9 +688,9 @@ label-visible-underline = #15539E
 label-visible-padding = 4
 
 label-urgent =  %icon%
-label-urgent-foreground = #212121
+label-urgent-foreground = #141414
 label-urgent-background = #cc6666
-label-urgent-underline = #212121
+label-urgent-underline = #141414
 label-urgent-padding = 4
 
 
@@ -787,15 +745,13 @@ format-online = "<toggle> <label-song> <label-time>"
 format-underline = #FF00DB
 format-prefix-foreground = #c6c6c6
 format-prefix = ""
-format--online-suffix = ""
-format-online-suffix-foreground = #c6c6c6
 
 label-song = %title% - %artist%, %album%
 label-song-foreground = #c6c6c6
-label-song-maxlen = 380
+label-song-maxlen = 180
 label-song-ellipsis = true
 ;format-online-foreground = ${colors.foreground}
-format-online-background = #303030
+format-online-background = #242424
 label-time-foreground = c6c6c6
 label-time-padding = 2
 icon-prev = 
@@ -814,61 +770,61 @@ icon-pause-foreground =  ${xrdb:color4}
 ;;;;;;;;;
 [module/dwm]
 type = internal/dwm
+format = <label-tags> <label-layout> <label-floating>
+;<label-floating> 
+;<label-title>
 
-socket-path = /tmp/dwm.sock
+label-floating = 
+label-floating-padding = 2
+label-floating-background = #CC6666
+label-floating-foreground = #282828
+
 enable-tags-click = true
-enable-tags-scroll = true
+enable-tags-scroll = false
+
 tags-scroll-empty = false
-tags-scroll-reverse = true
-tags-scroll-wrap = true
+tags-scroll-reverse = false
+tags-scroll-wrap = false
+
 enable-layout-click = true
-enable-layout-scroll = false
+enable-layout-scroll = true
 layout-scroll-wrap = true
 layout-scroll-reverse = true
 
 secondary-layout-symbol = 󰕰
-secondary-layout-symbol-background = #212121
 
-label-floating = 
-label-floating-padding = 2
-label-floating-background = #212121
-label-floating-foreground = #cc6666
-
-label-title =
+label-title = %title%
 label-title-maxlen = 35
 label-title-padding = 4
 label-title-foreground = #c6c6c6
-label-title-background = #212121
+label-title-background = #141414
 
 label-layout = %symbol%
 label-layout-padding = 4
 label-layout-foreground = #c6c6c6
-label-layout-background = #212121
+label-layout-background = #141414
 
 ; focused = Active tag on focused monitor
 label-focused = %name%
-label-focused-background = #212121
+label-focused-background = #141414
 label-focused-foreground = #c6c6c6
 label-focused-padding = 4
-label-focused-padding-background = #303030
 label-focused-font = 7
 label-focused-underline = #c6c6c6
 
 
 ; unfocused = Inactive tag on any monitor
 label-unfocused = %name%
-label-unfocused-background = #212121
+label-unfocused-background = #141414
 label-unfocused-foreground = #444444
 label-unfocused-padding = 4
-label-unfocused-padding-background = #303030
 label-unfocused-font = 7
 
 ; visible = Active tag on unfocused monitor
 label-visible = %name%
-label-visible-background = #212121
+label-visible-background = #141414
 label-visible-foreground = #7e9cb9
 label-visible-padding = 4
-label-visible-padding-background = #212121
 label-visible-font = 7
 label-visible-underline = #7e9cb9
 label-visible-underline-padding = 4
@@ -887,8 +843,8 @@ label-empty-foreground = #444444
 label-empty-font = 7
 
 ; Separator in between workspaces
-label-separator = 
-label-separator-padding = 0
+;label-separator = |
+;label-separator-padding = 2P
 
 ;;;;;;;;;;
 ;; EWMH ;;
@@ -947,7 +903,7 @@ format = <label-state>
 ; Default: %icon%  %name%
 label-active = %icon%
 label-active-foreground = #c6c6c6
-label-active-background = #212121
+label-active-background = #141414
 label-active-underline = #fba922
 label-active-padding = 4
 
@@ -979,7 +935,7 @@ label-urgent-padding = 4
 ; Default: %icon%  %name%
 label-empty = %icon%
 label-empty-foreground = #7e9cb9
-label0empty-background = #212121
+label0empty-background = #141414
 label-empty-padding = 4
 
 
@@ -1033,7 +989,7 @@ label-active-padding = 3
 
 label-occupied = %name%
 label-occupied-foreground = #c6c6c6
-label-occupied-background = #212121
+label-occupied-background = #141414
 label-occupied-padding = 3
 
 label-urgent = %name%
@@ -1043,7 +999,7 @@ label-urgent-padding = 1
 
 label-empty = %name%
 label-empty-foreground = #444444
-label-empty-background = #212121
+label-empty-background = #141414
 label-empty-padding = 3
 
 
@@ -1091,7 +1047,7 @@ label-active-padding = 3
 label-occupied = %icon%
 label-occupied-foreground = #c6c6c6
 ;label-occupied-foreground = ${colors.foreground}
-label-occupied-background = #212121
+label-occupied-background = #141414
 label-occupied-padding = 3
 
 label-urgent = %icon%
@@ -1101,7 +1057,7 @@ label-urgent-padding = 3
 
 label-empty = %icon%
 label-empty-foreground = #444444
-label-empty-background = #212121
+label-empty-background = #141414
 label-empty-padding = 3
 
 ;;;;;;;;;;;;;
@@ -1116,10 +1072,11 @@ exec = /home/dobbie/.config/polybar/dklayout.sh
 format-prefix = 
 interval = 1
 format-prefix-foreground = #c6c6c6
-format-prefix-background = #212121
-label-background = #212121
-format-background = #212121
+format-prefix-background = #141414
+label-background = #141414
+format-background = #141414
 format-foreground = #c6c6c6
+
 
 
 [module/dwm2]
@@ -1140,24 +1097,23 @@ secondary-layout-symbol = 󰕰
 
 label-floating = 
 label-floating-padding = 2
-label-floating-background = #212121
-label-floating-foreground = #CC6666
+label-floating-background = #CC6666
+label-floating-foreground = #282828
 
-;label-title = %title%
-label-title =
+label-title = %title%
 label-title-maxlen = 35
 label-title-padding = 4
 label-title-foreground = #c6c6c6
-label-title-background = #212121
+label-title-background = #141414
 
 label-layout = %symbol%
 label-layout-padding = 4
 label-layout-foreground = #c6c6c6
-label-layout-background = #212121
+label-layout-background = #141414
 
 ; focused = Active tag on focused monitor
 label-focused = %name%
-label-focused-background = #212121
+label-focused-background = #141414
 label-focused-foreground = #c6c6c6
 label-focused-padding = 4
 label-focused-font = 7
@@ -1166,14 +1122,14 @@ label-focused-underline = #c6c6c6
 
 ; unfocused = Inactive tag on any monitor
 label-unfocused = %name%
-label-unfocused-background = #212121
+label-unfocused-background = #141414
 label-unfocused-foreground = #444444
 label-unfocused-padding = 4
 label-unfocused-font = 7
 
 ; visible = Active tag on unfocused monitor
 label-visible = %name%
-label-visible-background = #212121
+label-visible-background = #141414
 label-visible-foreground = #7e9cb9
 label-visible-padding = 4
 label-visible-font = 7
@@ -1207,7 +1163,7 @@ format-prefix-foreground = ${xrdb:color3}
 format-underline = #f90000
 label = %percentage%%
 label-padding = 2
-format-background = #303030
+format-background = #212121
 
 [module/memory]
 type = internal/memory
@@ -1218,7 +1174,7 @@ format-prefix-foreground = ${xrdb:color4}
 format-underline = #4bffdc
 label = %percentage_used%%
 label-padding = 2
-format-background = #303030
+format-background = #1f1f1f
 
 [module/temperature]
 type = internal/temperature
@@ -1228,8 +1184,9 @@ warn-temperature = 60
 format = <ramp> <label>
 format-underline = #f50a4d
 format-warn = <ramp> <label-warn>
+format-warn-underline = ${self.format-underline}
 format-padding = 2
-format-background = #303030
+format-background = #3c3c3c
 
 
 label = %temperature%
@@ -1439,32 +1396,32 @@ layout-scroll-wrap = true
 layout-scroll-reverse = true
 
 
-#secondary-layout-symbol = 󰕰
+secondary-layout-symbol = 󰕰
 
 label-floating = 
 label-layout = %symbol%
 label-layout-padding = 2
 label-layout-foreground = #8abeb7
-label-layout-background = #212121
+label-layout-background = #141414
 
 label-focused = %name%
 label-focused-foreground = #B294BB
-label-focused-background = #212121
+label-focused-background = #141414
 label-focused-padding = 2
 label-focused-font = 1
 label-unfocused = %name%
 label-unfocused-foreground = #81a2be
-label-unfocused-background = #212121
+label-unfocused-background = #141414
 label-unfocused-padding = 2
 label-unfocused-font = 1
 label-visible = %name%
 label-visible-foreground = #b5bd68
-label-visible-background = #212121
+label-visible-background = #141414
 label-visible-padding = 2
 label-visible-font = 1
 label-urgent = %name%
 label-urgent-foreground = #CC6666
-label-urgent-background = #212121
+label-urgent-background = #141414
 label-urgent-padding = 2
 label-urgent-font = 2
 label-empty =
