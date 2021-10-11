@@ -35,7 +35,7 @@ Patches:
 
 ## dwm
 
-An epic dwm setup originally forked from the very talented and knowledgeable Bakkeby.
+An epic dwm setup originally forked from the very talented and knowledgeable [bakkeby](https://github.com/bakkeby).
 
 Not all patches are listed.
 
