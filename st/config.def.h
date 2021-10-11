@@ -6,7 +6,7 @@
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
 static char *font = "FantasqueSansMono Nerd font:pixelsize=15:antialias=true:autohint=true";
-static char *font2[] = { "fontawesome:pixelsize=10:antialias=true:autohint=true" };
+static char *font2[] = { "fontawesome:pixelsize=9:antialias=true:autohint=true" };
 static int borderpx = 50;
 
 /*

@@ -1,4 +1,4 @@
-/* See LICENSE file for copyright and license details. */
+/*See LICENSE file for copyright and license details. */
 
 #include <X11/XF86keysym.h> // media keys
 
@@ -143,21 +143,23 @@ static const char *muprev[]     = { "/usr/bin/mpc", "prev", NULL };
 static const char *mupause[]    = { "/usr/bin/mpc", "toggle", NULL };
 static const char *filecmd[]    = { "thunar", NULL };
 static const char *editcmd[]    = { "subl", NULL };
-static const char *vimcmd[]     = { "gvim", NULL };
+/*static const char *vimcmd[]     = { "gvim", NULL };*/
 /*static const char *mutecmd[]    = { "amixer", "-q", "set", "Master", "toggle", NULL };
 static const char *volupcmd[]   = { "amixer", "-q", "set", "Master", "2%+", "unmute", NULL };
 static const char *voldowncmd[] = { "amixer", "-q", "set", "Master", "2%-", "unmute", NULL };*/
 static const char scratchpadname[] = "scratchpad";
 static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "120x34", NULL };
 
-#define APP_BROWSER             "librewolf"
-#define APP_BROWSER_            "librewolf --private-window"
+#define APP_BROWSER             "firefox"
+#define APP_BROWSER_            "firefox --private-window"
+#define APP_EDITOR              "emacs"
 
 #include <X11/XF86keysym.h>
 static Key keys[] = {
     /* modifier                   key                     function             argument */
   { MODKEY,                       XK_F2,                  spawn,               SHCMD("qutebrowser") },
   { MODKEY,                       XK_F3,                  spawn,               SHCMD("surf") },
+  { MODKEY,                       XK_F4,                  spawn,               SHCMD(APP_EDITOR)},
   { MODKEY,                       XK_l,                   spawn,               SHCMD("slock") },
   { MODKEY,                       XK_m,                   spawn,               SHCMD("st -c ncmpcpp -e ncmpcpp") },
   /*{ MODKEY,                       XK_m,                   spawn,               SHCMD("alacritty --class ncmpcpp,ncmpcpp -e ncmpcpp") },*/
@@ -183,7 +185,7 @@ static Key keys[] = {
   /*{ MODKEY|ControlMask,           XK_w,                   spawn,               {.v = browsercmd } },*/
   { MODKEY,                       XK_x,                   spawn,               {.v = exitcmd } },
   { MODKEY,                       XK_e,                   spawn,               {.v = editcmd } },
-  { MODKEY|ControlMask,           XK_e,                   spawn,               {.v = vimcmd } },
+/*{ MODKEY|ControlMask,           XK_e,                   spawn,               {.v = vimcmd } },*/
   { MODKEY|ShiftMask,             XK_p,                   spawn,               {.v = clipcmd } },
   { MODKEY,                       XK_f,                   spawn,               {.v = filecmd } },
   { MODKEY,                       XK_space,               spawn,               {.v = dmenucmd } },
