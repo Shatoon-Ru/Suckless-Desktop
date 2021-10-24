@@ -60,8 +60,8 @@ static const Rule rules[] = {
    { "Google-chrome",               NULL,       NULL,       1,            1,             0,           0 },
    { "LibreWolf",                   NULL,       NULL,       1,            1,             0,           0 },
    { "Surf",                        NULL,       NULL,       1,            1,             0,           0 },
-   { "ncmpcpp",                     NULL,       NULL,       1 << 3,       1,             0,           1 },
-   { "Sonata",                      NULL,       NULL,       1 << 3,       1,             0,           1 },
+   { "ncmpcpp",                     NULL,       NULL,       1 << 3,       1,             1,           0 },
+   { "Sonata",                      NULL,       NULL,       1 << 3,       1,             0,           0 },
    { "St",                          NULL,       NULL,       1 << 1,       1,             0,           0 },
    { "Alacritty",                   NULL,       NULL,       1 << 1,       1,             0,           0 },
    { "st",                          NULL,       NULL,       1 << 1,       1,             0,           0 },
@@ -77,21 +77,21 @@ static const Rule rules[] = {
    { "code-oss",                    NULL,       NULL,       1 << 6,       1,             0,           0 },
    { "Code",                        NULL,       NULL,       1 << 6,       1,             0,           0 },
    { "Steam",                       NULL,       NULL,       1 << 9,       1,             0,           0 },
-   { "Slack",                       NULL,       NULL,       1 << 7,       1,             0,           1 },
+   { "Slack",                       NULL,       NULL,       1 << 7,       1,             0,           0 },
    { "Easytag",                     NULL,       NULL,       1 << 8,       1,             0,           0 },
-   { "Xfce4-taskmanager",           NULL,       NULL,       1 << 9,       1,             0,           1 },
-   { "Nitrogen",                    NULL,       NULL,       1 << 9,       1,             1,           1 },
-   { "Xfce4-appearance-settings",   NULL,       NULL,       1 << 9,       1,             1,           1 },
-   { "Xfce4-mouse-settings",        NULL,       NULL,       1 << 9,       1,             1,           1 },
+   { "Xfce4-taskmanager",           NULL,       NULL,       1 << 9,       1,             0,           0 },
+   { "Nitrogen",                    NULL,       NULL,       1 << 9,       1,             1,           0 },
+   { "Xfce4-appearance-settings",   NULL,       NULL,       1 << 9,       1,             1,           0 },
+   { "Xfce4-mouse-settings",        NULL,       NULL,       1 << 9,       1,             1,           0 },
    { "Gpick",                       NULL,       NULL,       0,            1,             1,           0 },
    { "Sxiv",                        NULL,       NULL,       0,            1,             1,           0 },
    { "MuPDF",                       NULL,       NULL,       0,            1,             1,           0 },
-   { "Lxappearance",                NULL,       NULL,       1 << 9,       1,             1,           1 },
-   { "Blueman-manager",             NULL,       NULL,       1 << 9,       1,             1,           1 },
-   { "Pavucontrol",                 NULL,       NULL,       1 << 9,       1,             1,           1 },
+   { "Lxappearance",                NULL,       NULL,       1 << 9,       1,             1,           0 },
+   { "Blueman-manager",             NULL,       NULL,       1 << 9,       1,             1,           0 },
+   { "Pavucontrol",                 NULL,       NULL,       1 << 9,       1,             1,           0 },
    { "Gnome-builder",               NULL,       NULL,       1 << 6,       1,             0,           0 },
-   { "Solaar",                      NULL,       NULL,       1 << 9,       1,             1,           1 },
-   { "Piper",                       NULL,       NULL,       1 << 9,       1,             1,           1 },
+   { "Solaar",                      NULL,       NULL,       1 << 9,       1,             1,           0 },
+   { "Piper",                       NULL,       NULL,       1 << 9,       1,             1,           0 },
    { "Gucharmap",                   NULL,       NULL,       1 << 6,       1,             1,           0 },
    { "Gimp",                        NULL,       NULL,       1 << 9,       1,             1,           0 },
    { "firefox",   "GtkFileChooserDialog",   "Save File",    0,            1,             1,           0 },
@@ -153,6 +153,10 @@ static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "120x34
 #define APP_BROWSER             "firefox"
 #define APP_BROWSER_            "firefox --private-window"
 #define APP_EDITOR              "emacs"
+#define APP_MUSIC               "alacritty --class ncmpcpp,ncmpcpp -e ncmpcpp"
+#define APP_MUSIC_              "st -g 200x80 -c ncmpcpp -e ncmpcpp"
+#define APP_DUNSTHIST           "dunstctl history-pop"
+#define APP_DUNSTCLOSE          "dunstctl close"
 
 #include <X11/XF86keysym.h>
 static Key keys[] = {
@@ -161,7 +165,10 @@ static Key keys[] = {
   { MODKEY,                       XK_F3,                  spawn,               SHCMD("surf") },
   { MODKEY,                       XK_F4,                  spawn,               SHCMD(APP_EDITOR)},
   { MODKEY,                       XK_l,                   spawn,               SHCMD("slock") },
-  { MODKEY,                       XK_m,                   spawn,               SHCMD("st -c ncmpcpp -e ncmpcpp") },
+  { MODKEY,                       XK_m,                   spawn,               SHCMD(APP_MUSIC_) },
+  { ControlMask,                  XK_grave,               spawn,               SHCMD(APP_DUNSTHIST) },
+  { ControlMask,                  XK_space,               spawn,               SHCMD(APP_DUNSTCLOSE) },
+  /*{ MODKEY,                       XK_m,                   spawn,               SHCMD("st -c ncmpcpp -e ncmpcpp") },*/
   /*{ MODKEY,                       XK_m,                   spawn,               SHCMD("alacritty --class ncmpcpp,ncmpcpp -e ncmpcpp") },*/
   { MODKEY|ShiftMask,             XK_e,                   spawn,               SHCMD("st -c nvim -e nvim") },
   { 0,                            XK_Print,               spawn,               SHCMD("/usr/bin/scr") },
