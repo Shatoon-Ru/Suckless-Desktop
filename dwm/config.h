@@ -87,16 +87,17 @@ static const Rule rules[] = {
   { "Ghostery Dawn",  				      NULL,               NULL,      NULL,   1,	        1,         	0,           0,            0 },
   { "Vivaldi-snapshot",				      NULL,               NULL,      NULL,   1,	        1,         	0,           0,            0 },
   { "Surf",           				      NULL,               NULL,      NULL,   1,	        1,         	0,           0,            0 },
-  { "ncmpcpp",   						  NULL,  			  NULL,      NULL,   1 << 3,    1,         	0,			 0,		       1 },
+  { "ncmpcpp",   						  NULL,  			  NULL,      NULL,   1 << 3,    1,         	1,			 1,		       1 },
   { "URxvt",          				      NULL,               NULL,      NULL,   1 << 1,    1,         	0,           0,            0 },
   { "Transmission-gtk",				      NULL,               NULL,      NULL,   1 << 2,    1,         	0,           0,            0 },
   { "SoulseekQt",						  NULL,               NULL,      NULL,   1 << 2,    1,         	0,           0,            0 },
   { "Thunar",		    				  NULL,               NULL,      NULL,   1 << 4,    1,         	0,           0,            0 },
   { "Sxiv",		    				      NULL,               NULL,      NULL,   1 << 4,    1,         	1,           1,            0 },
   { "File-roller",    				      NULL,               NULL,      NULL,   1 << 4,    1,         	1,           1,            0 },
-  { "mpv",          					  NULL,               NULL,      NULL,   1 << 4,    1,         	0,           1,            0 },
+  { "mpv",          					  NULL,               NULL,      NULL,   1 << 4,    1,         	1,           1,            0 },
   { "Subl",		    				      NULL,               NULL,      NULL,   1 << 6,    1,         	0,           0,            0 },
   { "code-oss",	    				      NULL,               NULL,      NULL,   1 << 6,    1,         	0,           0,            0 },
+  { "Emacs",	    				      NULL,               NULL,      NULL,   1 << 6,    1,         	0,           0,            0 },
   { "Code",		    				      NULL,               NULL,      NULL,   1 << 6,    1,         	0,           0,            0 },
   { "steam",          				      NULL,		       	  NULL,      NULL,   1 << 7,    1,         	0,           0,            0 },
   { "Slack",          				      NULL,               NULL,      NULL,   1 << 7,    1,         	0,           0,            1 },
@@ -183,21 +184,27 @@ static const Layout layouts[] = {
 	
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
+#define APP_BROWSER             "firefox"
+#define APP_BROWSER_            "firefox --private-window"
+#define APP_FILE				"thunar"
+#define APP_EDITOR              "emacs"
+#define APP_EDIT 	            "subl"
+#define APP_NVIM 	            "st -c nvim -e nvim"
+#define APP_MUSIC               "alacritty --class ncmpcpp,ncmpcpp -e ncmpcpp"
+#define APP_MUSIC_              "st -g 200x80 -c ncmpcpp -e ncmpcpp"
+#define APP_DUNSTHIST           "dunstctl history-pop"
+#define APP_DUNSTCLOSE          "dunstctl close"
+#define APP_CLIP          		"/usr/bin/clip"
+#define APP_EXIT				"/usr/bin/stop.sh"
+#define APP_DMENU				"/usr/bin/dmenu.sh"
+
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *clipcmd[] 	= {"/usr/bin/clip", NULL};
 static const char *dmenucmd[] 	= {"/usr/bin/dmenu.sh", NULL};
 static const char *termcmd[]  	= { "st", NULL };
-static const char *browsercmd[] = { "vivaldi-snapshot", NULL };
-static const char *surfcmd[] 	= { "surf", NULL };
-static const char *ffcmd[] 		= { "firefox", NULL };
-static const char *qutecmd[] 	= { "qutebrowser", NULL };
-static const char *exitcmd[] 	= { "/usr/bin/stop.sh", NULL };
 static const char *munext[]  	= { "/usr/bin/mpc", "next", NULL };
 static const char *muprev[]  	= { "/usr/bin/mpc", "prev", NULL };
 static const char *mupause[]  	= { "/usr/bin/mpc", "toggle", NULL };
-static const char *filecmd[] 	= { "thunar", NULL };
-static const char *editcmd[] 	= { "subl", NULL };
 /*static const char *vimcmd[] 	= { "gvim", NULL };*/
 static const char *mutecmd[] 	= { "amixer", "-q", "set", "Master", "toggle", NULL };
 static const char *volupcmd[] 	= { "amixer", "-q", "set", "Master", "1%+", "unmute", NULL };
@@ -208,6 +215,12 @@ static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "120x34
 #include <X11/XF86keysym.h>
 static Key keys[] = {
 	/* modifier                     key        function             argument */
+	{ MODKEY,                     	XK_F2,     spawn,               SHCMD("qutebrowser") },
+  	{ MODKEY,                       XK_F3,     spawn,               SHCMD("surf") },
+  	{ MODKEY,                       XK_F4,     spawn,               SHCMD(APP_EDITOR)},
+    { MODKEY,                       XK_m,      spawn,               SHCMD(APP_MUSIC_) },
+  	{ ControlMask,                  XK_grave,  spawn,               SHCMD(APP_DUNSTHIST) },
+  	{ ControlMask,                  XK_space,  spawn,               SHCMD(APP_DUNSTCLOSE) },
 	{ MODKEY,                       XK_space,  spawn,               {.v = dmenucmd } },
 	{ MODKEY,                       XK_t, 	   spawn,               {.v = termcmd } },
 	{ MODKEY,                       XK_grave,  togglescratch,  	    {.v = scratchpadcmd } },
@@ -288,16 +301,6 @@ static Key keys[] = {
 	TAGKEYS(                        XK_8,                           7)
 	TAGKEYS(                        XK_9,                           8)
 	TAGKEYS(                        XK_0,                           9)
-	TAGKEYS(                        XK_F1,                          0)
-	TAGKEYS(                        XK_F2,                          1)
-	TAGKEYS(                        XK_F3,                          2)
-	TAGKEYS(                        XK_F4,                          3)
-	TAGKEYS(                        XK_F5,                          4)
-	TAGKEYS(                        XK_F6,                          5)
-	TAGKEYS(                        XK_F7,                          6)
-	TAGKEYS(                        XK_F8,                          7)
-	TAGKEYS(                        XK_F9,                          8)
-	TAGKEYS(                        XK_F10,                         9)
 	{ MODKEY|ShiftMask,             XK_q,       quit,               {0} },
 	{ MODKEY|ControlMask,           XK_t,       rotatelayoutaxis,   {.i = 0} },    /* flextile, 0 = layout axis */
 	{ MODKEY|ControlMask,           XK_Tab,     rotatelayoutaxis,   {.i = 1} },    /* flextile, 1 = master axis */
@@ -307,7 +310,7 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask|ControlMask,	XK_w,		spawn,				SHCMD("google-chrome-stable") },
 	{ MODKEY,						XK_l,       spawn,		    	SHCMD("slock") },
 	/*{ MODKEY,						XK_m,		spawn,				SHCMD("st -c ncmpcpp -e ncmpcpp") },*/
-	{ MODKEY,                       XK_m,       spawn,              SHCMD("alacritty --class ncmpcpp,ncmpcpp -e ncmpcpp") },
+	/*{ MODKEY,                       XK_m,       spawn,              SHCMD("alacritty --class ncmpcpp,ncmpcpp -e ncmpcpp") },*/
 	{ 0,							XK_Print,   spawn,		    	SHCMD("/usr/bin/scr") },
 	{ ShiftMask,					XK_Print,   spawn,		    	SHCMD("teiler") },
 	{ 0, XF86XK_AudioMute,			            spawn,				SHCMD("amixer sset Master toggle") },
@@ -323,15 +326,13 @@ static Key keys[] = {
 	{ 0, XF86XK_AudioStop,			spawn,							{.v = mupause } },
 	{ 0, XF86XK_AudioRewind,		spawn,							SHCMD("mpc seek -10") },
 	{ 0, XF86XK_AudioForward,		spawn,							SHCMD("mpc seek +10") },
-	{ MODKEY,						XK_w,		spawn,				{.v = ffcmd } },
-	{ MODKEY|ControlMask,			XK_u,		spawn,				{.v = qutecmd   }	},
-	{ MODKEY|ControlMask,			XK_w,		spawn,				{.v = surfcmd } },
-	{ MODKEY|ControlMask,			XK_v,		spawn,				{.v = browsercmd } },
-	{ MODKEY,						XK_x,		spawn,				{.v = exitcmd } },
-	{ MODKEY,						XK_e,		spawn,				{.v = editcmd } },
-	{ MODKEY|ShiftMask,             XK_e,       spawn,              SHCMD("st -c nvim -e nvim") },
-	{ MODKEY|ShiftMask,				XK_p,		spawn,				{.v = clipcmd } },
-	{ MODKEY,						XK_f,		spawn,				{.v = filecmd } },
+	{ MODKEY,                       XK_w,       spawn,              SHCMD(APP_BROWSER)  },
+  	{ MODKEY|ShiftMask,             XK_w,       spawn,              SHCMD(APP_BROWSER_) },
+	{ MODKEY,						XK_x,		spawn,				SHCMD(APP_EXIT) },
+	{ MODKEY|ShiftMask,             XK_e,       spawn,              SHCMD(APP_NVIM) },
+	{ MODKEY|ShiftMask,             XK_p,	    spawn,              SHCMD(APP_CLIP)},
+	{ MODKEY,						XK_f,		spawn,				SHCMD(APP_FILE) },
+	{ MODKEY,                       XK_e,       spawn,              SHCMD(APP_EDIT)  },
 };
  
 /* button definitions */
