@@ -91,6 +91,7 @@ static const Rule rules[] = {
   { "URxvt",          				      NULL,               NULL,      NULL,   1 << 1,    1,         	0,           0,            0 },
   { "Transmission-gtk",				      NULL,               NULL,      NULL,   1 << 2,    1,         	0,           0,            0 },
   { "SoulseekQt",						  NULL,               NULL,      NULL,   1 << 2,    1,         	0,           0,            0 },
+  { "Nicotine",							  NULL,               NULL,      NULL,   1 << 2,    1,         	0,           0,            0 },
   { "Thunar",		    				  NULL,               NULL,      NULL,   1 << 4,    1,         	0,           0,            0 },
   { "Sxiv",		    				      NULL,               NULL,      NULL,   1 << 4,    1,         	1,           1,            0 },
   { "File-roller",    				      NULL,               NULL,      NULL,   1 << 4,    1,         	1,           1,            0 },
@@ -194,13 +195,13 @@ static const Layout layouts[] = {
 #define APP_MUSIC_              "st -g 200x80 -c ncmpcpp -e ncmpcpp"
 #define APP_DUNSTHIST           "dunstctl history-pop"
 #define APP_DUNSTCLOSE          "dunstctl close"
-#define APP_CLIP          		"/usr/bin/clip"
+#define APP_CLIP          		"greenclip print | sed '/^$/d' | dmenu -l 10 -p clipboard | xargs -r -d'\n' -I '{}' greenclip print '{}'"
 #define APP_EXIT				"/usr/bin/stop.sh"
 #define APP_DMENU				"/usr/bin/dmenu.sh"
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] 	= {"/usr/bin/dmenu.sh", NULL};
+static const char *dmenucmd[] 	= {"dmenu_run_history", NULL};
 static const char *termcmd[]  	= { "st", NULL };
 static const char *munext[]  	= { "/usr/bin/mpc", "next", NULL };
 static const char *muprev[]  	= { "/usr/bin/mpc", "prev", NULL };
