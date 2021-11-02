@@ -225,15 +225,15 @@ static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "120x34
 #include <X11/XF86keysym.h>
 static Key keys[] = {
 	/* modifier                     key        function             argument */
-	{ MODKEY|ShiftMask,            	XK_F2,     spawn,               SHCMD(APP_QUTE) },
+	{ MODKEY,		            	XK_F2,     spawn,               SHCMD(APP_QUTE) },
   	{ MODKEY,                       XK_F3,     spawn,               SHCMD(APP_SURF) },
   	{ MODKEY,                       XK_F4,     spawn,               SHCMD(APP_EDITOR)},
     { MODKEY,                       XK_m,      spawn,               SHCMD(APP_MUSIC_) },
   	{ ControlMask,                  XK_grave,  spawn,               SHCMD(APP_DUNSTHIST) },
   	{ ControlMask,                  XK_space,  spawn,               SHCMD(APP_DUNSTCLOSE) },
-  	{ MODKEY,                       XK_F1,     mpdchange,           {.i = -1} },
-	{ MODKEY,                       XK_F2,     mpdchange,           {.i = +1} },
-	{ MODKEY,                       XK_Escape, mpdcontrol,          {0} },
+  	{ MODKEY,                       XK_F1,     mpdchange,           {.i = -1} }, // PREVIOUS SONG
+	{ MODKEY|ShiftMask,             XK_F1,     mpdchange,           {.i = +1} }, // NEXT SONG
+	{ MODKEY,                       XK_Escape, mpdcontrol,          {0} },		 // TOGGLE PLAY/PAUSE	
 	{ MODKEY,                       XK_space,  spawn,               {.v = dmenucmd } },
 	{ MODKEY,                       XK_t, 	   spawn,               {.v = termcmd } },
 	{ MODKEY,                       XK_grave,  togglescratch,  	    {.v = scratchpadcmd } },
