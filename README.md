@@ -20,6 +20,7 @@ Patches:
 - fullscreen
 - hidevacanttags
 - ipc
+- mpdcontrol
 - ~~noborder~~ removeborder
 - restartsig
 - rotatestack

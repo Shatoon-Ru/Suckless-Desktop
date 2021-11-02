@@ -36,7 +36,8 @@ static const char col_gray4[]              = "#c6c6c6";
 static const char col_gray5[]              = "#fffefe";
 static const char col_gray6[]              = "#292929";
 static const char col_gray7[]              = "#282828";
-static const char col_cyan[]               = "#7e9cb9";
+static const char col_gray8[]              = "#202020";
+static const char col_cyan[]               = "#808fa0";
 static const char col_blue[]			   = "#6699cc";
 static const char col1[]                   = "#98971a";
 static const char col2[]                   = "#d79921";
@@ -52,9 +53,9 @@ static const unsigned int borderalpha      = 255;
 
 static const char *colors[][3] = {
 	/*               fg         bg         border   */
-	[SchemeNorm] = { col_gray4, col_gray7, col_gray7 },
+	[SchemeNorm] = { col_gray4, col_gray8, col_gray8 },
 	/*[SchemeSel]  = { col_cyan, col_gray6,  col_gray7  },*/
-	[SchemeSel]  = { col_cyan, col_gray7,  col_cyan  },
+	[SchemeSel]  = { col_cyan, col_gray8,  col_gray2  },
 };
 
 
@@ -187,6 +188,8 @@ static const Layout layouts[] = {
 
 #define APP_BROWSER             "firefox"
 #define APP_BROWSER_            "firefox --private-window"
+#define APP_QUTE				"qutebrowser"
+#define APP_SURF				"surf"
 #define APP_FILE				"thunar"
 #define APP_EDITOR              "emacs"
 #define APP_EDIT 	            "subl"
@@ -198,30 +201,39 @@ static const Layout layouts[] = {
 #define APP_CLIP          		"greenclip print | sed '/^$/d' | dmenu -l 10 -p clipboard | xargs -r -d'\n' -I '{}' greenclip print '{}'"
 #define APP_EXIT				"/usr/bin/stop.sh"
 #define APP_DMENU				"/usr/bin/dmenu.sh"
+#define APP_VOLU				"/usr/bin/volume up"
+#define APP_VOLD				"/usr/bin/volume down"
+#define APP_MUTE				"amixer -q set Master toggle"
+#define APP_MPDTOG				"mpc toggle"
+#define APP_MPDSTOP				"mpc stop"
+#define APP_MPDNEXT				"mpc next"
+#define APP_MPDPREV				"mpc prev"
+#define APP_MPDREW				"mpc seek -10"
+#define APP_MPDFAST				"mpc seek +10"
+#define APP_SCROT				"/usr/bin/scr"
+#define APP_SCROT_				"teiler"
+#define APP_LOCK				"slock"
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] 	= {"dmenu_run_history", NULL};
 static const char *termcmd[]  	= { "st", NULL };
-static const char *munext[]  	= { "/usr/bin/mpc", "next", NULL };
-static const char *muprev[]  	= { "/usr/bin/mpc", "prev", NULL };
-static const char *mupause[]  	= { "/usr/bin/mpc", "toggle", NULL };
-/*static const char *vimcmd[] 	= { "gvim", NULL };*/
-static const char *mutecmd[] 	= { "amixer", "-q", "set", "Master", "toggle", NULL };
-static const char *volupcmd[] 	= { "amixer", "-q", "set", "Master", "1%+", "unmute", NULL };
-static const char *voldowncmd[] = { "amixer", "-q", "set", "Master", "1%-", "unmute", NULL };
 static const char scratchpadname[] = "scratchpad";
 static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "120x34", NULL };
 
+#include "mpdcontrol.c"
 #include <X11/XF86keysym.h>
 static Key keys[] = {
 	/* modifier                     key        function             argument */
-	{ MODKEY,                     	XK_F2,     spawn,               SHCMD("qutebrowser") },
-  	{ MODKEY,                       XK_F3,     spawn,               SHCMD("surf") },
+	{ MODKEY|ShiftMask,            	XK_F2,     spawn,               SHCMD(APP_QUTE) },
+  	{ MODKEY,                       XK_F3,     spawn,               SHCMD(APP_SURF) },
   	{ MODKEY,                       XK_F4,     spawn,               SHCMD(APP_EDITOR)},
     { MODKEY,                       XK_m,      spawn,               SHCMD(APP_MUSIC_) },
   	{ ControlMask,                  XK_grave,  spawn,               SHCMD(APP_DUNSTHIST) },
   	{ ControlMask,                  XK_space,  spawn,               SHCMD(APP_DUNSTCLOSE) },
+  	{ MODKEY,                       XK_F1,     mpdchange,           {.i = -1} },
+	{ MODKEY,                       XK_F2,     mpdchange,           {.i = +1} },
+	{ MODKEY,                       XK_Escape, mpdcontrol,          {0} },
 	{ MODKEY,                       XK_space,  spawn,               {.v = dmenucmd } },
 	{ MODKEY,                       XK_t, 	   spawn,               {.v = termcmd } },
 	{ MODKEY,                       XK_grave,  togglescratch,  	    {.v = scratchpadcmd } },
@@ -303,30 +315,24 @@ static Key keys[] = {
 	TAGKEYS(                        XK_9,                           8)
 	TAGKEYS(                        XK_0,                           9)
 	{ MODKEY|ShiftMask,             XK_q,       quit,               {0} },
+	{ MODKEY|ControlMask|ShiftMask, XK_q,      	quit,           	{1} }, 
 	{ MODKEY|ControlMask,           XK_t,       rotatelayoutaxis,   {.i = 0} },    /* flextile, 0 = layout axis */
 	{ MODKEY|ControlMask,           XK_Tab,     rotatelayoutaxis,   {.i = 1} },    /* flextile, 1 = master axis */
 	{ MODKEY|ControlMask|ShiftMask, XK_Tab,     rotatelayoutaxis,   {.i = 2} },    /* flextile, 2 = stack axis */
 	{ MODKEY|ControlMask,           XK_Return,  mirrorlayout,       {0} },         /* flextile, flip master and stack areas */
-	{ MODKEY|ShiftMask,				XK_w,		spawn,				SHCMD("qutebrowser") },
-	{ MODKEY|ShiftMask|ControlMask,	XK_w,		spawn,				SHCMD("google-chrome-stable") },
-	{ MODKEY,						XK_l,       spawn,		    	SHCMD("slock") },
-	/*{ MODKEY,						XK_m,		spawn,				SHCMD("st -c ncmpcpp -e ncmpcpp") },*/
-	/*{ MODKEY,                       XK_m,       spawn,              SHCMD("alacritty --class ncmpcpp,ncmpcpp -e ncmpcpp") },*/
-	{ 0,							XK_Print,   spawn,		    	SHCMD("/usr/bin/scr") },
-	{ ShiftMask,					XK_Print,   spawn,		    	SHCMD("teiler") },
-	{ 0, XF86XK_AudioMute,			            spawn,				SHCMD("amixer sset Master toggle") },
-	/*{ 0, XF86XK_AudioRaiseVolume,	            spawn,         		SHCMD("/usr/bin/volume up") },
-	{ 0, XF86XK_AudioLowerVolume,             	spawn,          	SHCMD("/usr/bin/volume down") },*/
-	{ 0, XF86XK_AudioLowerVolume, 				spawn, 				{.v = voldowncmd } },
-	{ 0, XF86XK_AudioRaiseVolume, 				spawn, 				{.v = volupcmd } },
-	{ 0, XF86XK_AudioMute, 						spawn, 				{.v = mutecmd } },
-	{ 0, XF86XK_AudioPrev,			spawn,		 					{.v = muprev } },
-	{ 0, XF86XK_AudioNext,			spawn,							{.v = munext } },
-	{ 0, XF86XK_AudioPause,			spawn,							{.v = mupause } },
-	{ 0, XF86XK_AudioPlay,			spawn,							{.v = mupause } },
-	{ 0, XF86XK_AudioStop,			spawn,							{.v = mupause } },
-	{ 0, XF86XK_AudioRewind,		spawn,							SHCMD("mpc seek -10") },
-	{ 0, XF86XK_AudioForward,		spawn,							SHCMD("mpc seek +10") },
+	{ MODKEY,						XK_l,       spawn,		    	SHCMD(APP_LOCK) },
+	{ 0,							XK_Print,   spawn,		    	SHCMD(APP_SCROT) },
+	{ ShiftMask,					XK_Print,   spawn,		    	SHCMD(APP_SCROT_) },
+	{ 0, XF86XK_AudioMute,			            spawn,				SHCMD(APP_MUTE) },
+	{ 0, XF86XK_AudioRaiseVolume,	            spawn,         		SHCMD(APP_VOLU) },
+	{ 0, XF86XK_AudioLowerVolume,             	spawn,          	SHCMD(APP_VOLD) },
+	{ 0, XF86XK_AudioPrev,			spawn,		 					SHCMD(APP_MPDPREV) },
+	{ 0, XF86XK_AudioNext,			spawn,							SHCMD(APP_MPDNEXT) },
+	{ 0, XF86XK_AudioPause,			spawn,							SHCMD(APP_MPDTOG) },
+	{ 0, XF86XK_AudioPlay,			spawn,							SHCMD(APP_MPDTOG) },
+	{ 0, XF86XK_AudioStop,			spawn,							SHCMD(APP_MPDSTOP) },
+	{ 0, XF86XK_AudioRewind,		spawn,							SHCMD(APP_MPDREW) },
+	{ 0, XF86XK_AudioForward,		spawn,							SHCMD(APP_MPDFAST) },
 	{ MODKEY,                       XK_w,       spawn,              SHCMD(APP_BROWSER)  },
   	{ MODKEY|ShiftMask,             XK_w,       spawn,              SHCMD(APP_BROWSER_) },
 	{ MODKEY,						XK_x,		spawn,				SHCMD(APP_EXIT) },
