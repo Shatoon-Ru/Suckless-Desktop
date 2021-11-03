@@ -43,7 +43,7 @@ static const char *colors[][3]      = {
 };
 
 /* tagging */
-static const char *tags[] = { "", "", "", "", "", "", "", "", "", "" };
+static const char *tags[] = { "", "", "", "", "", "", "", "", "", "" };
 
 static const Rule rules[] = {
     /* xprop(1):
@@ -76,7 +76,6 @@ static const Rule rules[] = {
    { "nvim",                        NULL,       NULL,       1 << 6,       1,             0,           0 },
    { "code-oss",                    NULL,       NULL,       1 << 6,       1,             0,           0 },
    { "Code",                        NULL,       NULL,       1 << 6,       1,             0,           0 },
-   { "Steam",                       NULL,       NULL,       1 << 9,       1,             0,           0 },
    { "Slack",                       NULL,       NULL,       1 << 7,       1,             0,           0 },
    { "Easytag",                     NULL,       NULL,       1 << 8,       1,             0,           0 },
    { "Xfce4-taskmanager",           NULL,       NULL,       1 << 9,       1,             0,           0 },
@@ -128,73 +127,72 @@ static const Layout layouts[] = {
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
+#define APP_BROWSER     "firefox"
+#define APP_BROWSER_    "firefox --private-window"
+#define APP_QUTE        "qutebrowser"
+#define APP_SURF        "surf"
+#define APP_FILE        "thunar"
+#define APP_EDITOR      "emacs"
+#define APP_EDIT        "subl"
+#define APP_NVIM        "st -c nvim -e nvim"
+#define APP_MUSIC       "alacritty --class ncmpcpp,ncmpcpp -e ncmpcpp"
+#define APP_MUSIC_      "st -g 200x80 -c ncmpcpp -e ncmpcpp"
+#define APP_DUNSTHIST   "dunstctl history-pop"
+#define APP_DUNSTCLOSE  "dunstctl close"
+#define APP_CLIP        "greenclip print | sed '/^$/d' | dmenu -l 10 -p clipboard | xargs -r -d'\n' -I '{}' greenclip print '{}'"
+#define APP_EXIT        "/usr/bin/stop.sh"
+#define APP_DMENU       "/usr/bin/dmenu.sh"
+#define APP_VOLU        "/usr/bin/volume up"
+#define APP_VOLD        "/usr/bin/volume down"
+#define APP_MUTE        "amixer -q set Master toggle"
+#define APP_MPDTOG      "mpc toggle"
+#define APP_MPDSTOP     "mpc stop"
+#define APP_MPDNEXT     "mpc next"
+#define APP_MPDPREV     "mpc prev"
+#define APP_MPDREW      "mpc seek -10"
+#define APP_MPDFAST     "mpc seek +10"
+#define APP_SCROT       "/usr/bin/scr"
+#define APP_SCROT_      "teiler"
+#define APP_LOCK        "slock"
+
 /* commands */
-static char dmenumon[2]         = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *clipcmd[]    = {"/usr/bin/clip", NULL};
-static const char *dmenucmd[]   = {"/usr/bin/dmenu.sh", NULL};
-static const char *termcmd[]    = { "st", NULL };
-/*static const char *termcmd[]    = { "alacritty", NULL };*/
-/*static const char *browsercmd[] = { "vivaldi-snapshot", NULL };*/
-/*  static const char *surfcmd[]    = { "surf", NULL };*/
-/*static const char *ffcmd[]      = { "librewolf", NULL };*/
-static const char *exitcmd[]    = { "/usr/bin/stop.sh", NULL };
-static const char *munext[]     = { "/usr/bin/mpc", "next", NULL };
-static const char *muprev[]     = { "/usr/bin/mpc", "prev", NULL };
-static const char *mupause[]    = { "/usr/bin/mpc", "toggle", NULL };
-static const char *filecmd[]    = { "thunar", NULL };
-static const char *editcmd[]    = { "subl", NULL };
-/*static const char *vimcmd[]     = { "gvim", NULL };*/
-/*static const char *mutecmd[]    = { "amixer", "-q", "set", "Master", "toggle", NULL };
-static const char *volupcmd[]   = { "amixer", "-q", "set", "Master", "2%+", "unmute", NULL };
-static const char *voldowncmd[] = { "amixer", "-q", "set", "Master", "2%-", "unmute", NULL };*/
+static char dmenumon[2]            = "0"; /* component of dmenucmd, manipulated in spawn() */
+static const char *dmenucmd[]      = {"dmenu_run_history", NULL};
+static const char *termcmd[]       = { "st", NULL };
 static const char scratchpadname[] = "scratchpad";
 static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "120x34", NULL };
 
-#define APP_BROWSER             "firefox"
-#define APP_BROWSER_            "firefox --private-window"
-#define APP_EDITOR              "emacs"
-#define APP_MUSIC               "alacritty --class ncmpcpp,ncmpcpp -e ncmpcpp"
-#define APP_MUSIC_              "st -g 200x80 -c ncmpcpp -e ncmpcpp"
-#define APP_DUNSTHIST           "dunstctl history-pop"
-#define APP_DUNSTCLOSE          "dunstctl close"
-
+#include "mpdcontrol.c"
 #include <X11/XF86keysym.h>
 static Key keys[] = {
     /* modifier                   key                     function             argument */
-  { MODKEY,                       XK_F2,                  spawn,               SHCMD("qutebrowser") },
-  { MODKEY,                       XK_F3,                  spawn,               SHCMD("surf") },
+  { MODKEY,                       XK_F2,                  spawn,               SHCMD(APP_QUTE) },
+  { MODKEY,                       XK_F3,                  spawn,               SHCMD(APP_SURF) },
   { MODKEY,                       XK_F4,                  spawn,               SHCMD(APP_EDITOR)},
-  { MODKEY,                       XK_l,                   spawn,               SHCMD("slock") },
   { MODKEY,                       XK_m,                   spawn,               SHCMD(APP_MUSIC_) },
   { ControlMask,                  XK_grave,               spawn,               SHCMD(APP_DUNSTHIST) },
   { ControlMask,                  XK_space,               spawn,               SHCMD(APP_DUNSTCLOSE) },
-  /*{ MODKEY,                       XK_m,                   spawn,               SHCMD("st -c ncmpcpp -e ncmpcpp") },*/
-  /*{ MODKEY,                       XK_m,                   spawn,               SHCMD("alacritty --class ncmpcpp,ncmpcpp -e ncmpcpp") },*/
-  { MODKEY|ShiftMask,             XK_e,                   spawn,               SHCMD("st -c nvim -e nvim") },
-  { 0,                            XK_Print,               spawn,               SHCMD("/usr/bin/scr") },
-  { 0, XF86XK_AudioMute,                                  spawn,               SHCMD("amixer sset Master toggle") },
-  { 0, XF86XK_AudioRaiseVolume,                           spawn,               SHCMD("/usr/bin/vol up") },
-  { 0, XF86XK_AudioLowerVolume,                           spawn,               SHCMD("/usr/bin/vol down") },
-  /*{ 0, XF86XK_AudioLowerVolume,                           spawn,               {.v = voldowncmd } },*/
-  /*{ 0, XF86XK_AudioRaiseVolume,                           spawn,               {.v = volupcmd } },*/
-  /*{ 0, XF86XK_AudioMute,                                  spawn,               {.v = mutecmd } },*/
-  { 0, XF86XK_AudioPrev,                                  spawn,               {.v = muprev } },
-  { 0, XF86XK_AudioNext,                                  spawn,               {.v = munext } },
-  { 0, XF86XK_AudioPause,                                 spawn,               {.v = mupause } },
-  { 0, XF86XK_AudioPlay,                                  spawn,               {.v = mupause } },
-  { 0, XF86XK_AudioStop,                                  spawn,               {.v = mupause } },
-  { 0, XF86XK_AudioRewind,                                spawn,               SHCMD("mpc seek -10") },
-  { 0, XF86XK_AudioForward,                               spawn,               SHCMD("mpc seek +10") },
-  /*{ MODKEY,                       XK_w,                   spawn,               {.v = ffcmd } },*/
-  /*{ MODKEY|ControlMask|ShiftMask, XK_w,                   spawn,               {.v = surfcmd } },*/
+  { MODKEY,                       XK_l,                   spawn,               SHCMD(APP_LOCK) },
+  { 0,                            XK_Print,               spawn,               SHCMD(APP_SCROT) },
+  { ShiftMask,                    XK_Print,               spawn,               SHCMD(APP_SCROT_) },
+  { 0, XF86XK_AudioMute,                                  spawn,               SHCMD(APP_MUTE) },
+  { 0, XF86XK_AudioRaiseVolume,                           spawn,               SHCMD(APP_VOLU) },
+  { 0, XF86XK_AudioLowerVolume,                           spawn,               SHCMD(APP_VOLD) },
+  { 0, XF86XK_AudioPrev,                                  spawn,               SHCMD(APP_MPDPREV) },
+  { 0, XF86XK_AudioNext,                                  spawn,               SHCMD(APP_MPDNEXT) },
+  { 0, XF86XK_AudioPause,                                 spawn,               SHCMD(APP_MPDTOG) },
+  { 0, XF86XK_AudioPlay,                                  spawn,               SHCMD(APP_MPDTOG) },
+  { 0, XF86XK_AudioStop,                                  spawn,               SHCMD(APP_MPDSTOP) },
+  { 0, XF86XK_AudioRewind,                                spawn,               SHCMD(APP_MPDREW) },
+  { 0, XF86XK_AudioForward,                               spawn,               SHCMD(APP_MPDFAST) },
   { MODKEY,                       XK_w,                   spawn,               SHCMD(APP_BROWSER)  },
   { MODKEY|ShiftMask,             XK_w,                   spawn,               SHCMD(APP_BROWSER_) },
-  /*{ MODKEY|ControlMask,           XK_w,                   spawn,               {.v = browsercmd } },*/
-  { MODKEY,                       XK_x,                   spawn,               {.v = exitcmd } },
-  { MODKEY,                       XK_e,                   spawn,               {.v = editcmd } },
-/*{ MODKEY|ControlMask,           XK_e,                   spawn,               {.v = vimcmd } },*/
-  { MODKEY|ShiftMask,             XK_p,                   spawn,               {.v = clipcmd } },
-  { MODKEY,                       XK_f,                   spawn,               {.v = filecmd } },
+  { MODKEY,                       XK_x,                   spawn,               SHCMD(APP_EXIT) },
+  { MODKEY|ShiftMask,             XK_e,                   spawn,               SHCMD(APP_NVIM) },
+  { MODKEY|ShiftMask,             XK_p,                   spawn,               SHCMD(APP_CLIP)},
+  { MODKEY,                       XK_f,                   spawn,               SHCMD(APP_FILE) },
+  { MODKEY,                       XK_e,                   spawn,               SHCMD(APP_EDIT)  },
+/*{ MODKEY,                       XK_m,                   spawn,               SHCMD("alacritty --class ncmpcpp,ncmpcpp -e ncmpcpp") },*/
   { MODKEY,                       XK_space,               spawn,               {.v = dmenucmd } },
   { MODKEY,                       XK_t,                   spawn,               {.v = termcmd } },
   { MODKEY,                       XK_grave,               togglescratch,       {.v = scratchpadcmd } },
@@ -249,18 +247,11 @@ static Key keys[] = {
   TAGKEYS(                        XK_8,                                        7)
   TAGKEYS(                        XK_9,                                        8)
   TAGKEYS(                        XK_0,                                        9)
-  /*TAGKEYS(                        XK_F1,                                       0)
-  TAGKEYS(                        XK_F2,                                       1)
-  TAGKEYS(                        XK_F3,                                       2)
-  TAGKEYS(                        XK_F4,                                       3)
-  TAGKEYS(                        XK_F5,                                       4)
-  TAGKEYS(                        XK_F6,                                       5)
-  TAGKEYS(                        XK_F7,                                       6)
-  TAGKEYS(                        XK_F8,                                       7)
-  TAGKEYS(                        XK_F9,                                       8)
-  TAGKEYS(                        XK_F10,                                      9)*/
   { MODKEY|ShiftMask,             XK_q,                   quit,                {0} },
   { MODKEY|ControlMask|ShiftMask, XK_q,                   quit,                {1} },
+  { MODKEY,                       XK_F1,                  mpdchange,           {.i = -1} }, // Previous Song
+  { MODKEY|ShiftMask,             XK_F1,                  mpdchange,           {.i = +1} }, // Next Song
+  { MODKEY,                       XK_Escape,              mpdcontrol,          {0} },       // Toggle Play/Pause
 };
 
 /* button definitions */
