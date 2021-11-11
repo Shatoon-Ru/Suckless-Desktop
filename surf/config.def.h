@@ -1,11 +1,18 @@
-/* modifier 0 means no modifier */
 static int surfuseragent    = 1;  /* Append Surf version to default WebKit user agent */
-static char *fulluseragent  = ""; /* Or override the whole user agent string */
-static char *scriptfile     = "~/.surf/script.js";
+static char *fulluseragent  = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:83.0) Gecko/20100101 Firefox/83.0"; /* Default: Mozilla/5.0 (X11; FreeBSD amd64) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/11.0 Safari/605.1.15 Surf/2.0 */
 static char *styledir       = "~/.surf/styles/";
 static char *certdir        = "~/.surf/certificates/";
 static char *cachedir       = "~/.surf/cache/";
 static char *cookiefile     = "~/.surf/cookies.txt";
+static char *searchurl      = "google.com/search?q=%s";
+static char *dldir          = "~/dl/";
+static char *dlstatus       = "~/.surf/dlstatus/";
+static char *scriptfiles[] = {
+"~/.surf/scripts/script.js",
+"~/.surf/scripts/focus.js",
+/*"~/.surf/scripts/block_fonts.js",*/
+"~/.surf/scripts/youtube_circumvent_sign_in.user.js",
+};
 
 /* Webkit default features */
 /* Highest priority value will be used.
@@ -16,10 +23,10 @@ static char *cookiefile     = "~/.surf/cookies.txt";
 static Parameter defconfig[ParameterLast] = {
 	/* parameter                    Arg value       priority */
 	[AcceleratedCanvas]   =       { { .i = 1 },     },
-	[AccessMicrophone]    =       { { .i = 0 },     },
-	[AccessWebcam]        =       { { .i = 0 },     },
-	[Certificate]         =       { { .i = 0 },     },
-	[CaretBrowsing]       =       { { .i = 0 },     },
+	[AccessMicrophone]    =       { { .i = 1 },     },
+	[AccessWebcam]        =       { { .i = 1 },     },
+	[Certificate]         =       { { .i = 1 },     },
+	[CaretBrowsing]       =       { { .i = 1 },     },
 	[CookiePolicies]      =       { { .v = "@Aa" }, },
 	[DefaultCharset]      =       { { .v = "UTF-8" }, },
 	[DiskCache]           =       { { .i = 1 },     },
@@ -41,19 +48,19 @@ static Parameter defconfig[ParameterLast] = {
 	[ScrollBars]          =       { { .i = 1 },     },
 	[ShowIndicators]      =       { { .i = 1 },     },
 	[SiteQuirks]          =       { { .i = 1 },     },
-	[SmoothScrolling]     =       { { .i = 0 },     },
-	[SpellChecking]       =       { { .i = 0 },     },
-	[SpellLanguages]      =       { { .v = ((char *[]){ "en_US", NULL }) }, },
-	[StrictTLS]           =       { { .i = 1 },     },
+	[SmoothScrolling]     =       { { .i = 1 },     },
+	[SpellChecking]       =       { { .i = 1 },     },
+	[SpellLanguages]      =       { { .v = ((char *[]){ "en_AU", NULL }) }, },
+	[StrictTLS]           =       { { .i = 0 },     },
 	[Style]               =       { { .i = 1 },     },
-	[WebGL]               =       { { .i = 0 },     },
-	[ZoomLevel]           =       { { .f = 1.25 },   },
+	[WebGL]               =       { { .i = 1 },     },
+	[ZoomLevel]           =       { { .f = 1.0 },   },
 };
 
 static UriParameters uriparams[] = {
 	{ "(://|\\.)suckless\\.org(/|$)", {
-	  [JavaScript] = { { .i = 0 }, 1 },
-	  [Plugins]    = { { .i = 0 }, 1 },
+	  [JavaScript] = { { .i = 1 }, 1 },
+	  [Plugins]    = { { .i = 1 }, 1 },
 	}, },
 };
 
@@ -63,8 +70,8 @@ static int winsize[] = { 800, 600 };
 static WebKitFindOptions findopts = WEBKIT_FIND_OPTIONS_CASE_INSENSITIVE |
                                     WEBKIT_FIND_OPTIONS_WRAP_AROUND;
 
-#define PROMPT_GO   "Go:"
-#define PROMPT_FIND "Find:"
+#define PROMPT_GO   " Go:"
+#define PROMPT_FIND " Find:"
 
 /* SETPROP(readprop, setprop, prompt)*/
 #define SETPROP(r, s, p) { \
@@ -72,18 +79,25 @@ static WebKitFindOptions findopts = WEBKIT_FIND_OPTIONS_CASE_INSENSITIVE |
              "prop=\"$(printf '%b' \"$(xprop -id $1 $2 " \
              "| sed \"s/^$2(STRING) = //;s/^\\\"\\(.*\\)\\\"$/\\1/\" && cat ~/.surf/bookmarks)\" " \
              "| dmenu -l 10 -p \"$4\" -w $1)\" && " \
-             "xprop -id $1 -f $3 8s -set $3 \"$prop\"", \
+             "xprop -id $1 -f $3 8u -set $3 \"$prop\"", \
              "surf-setprop", winid, r, s, p, NULL \
         } \
 }
 
-/* DOWNLOAD(URI, referer) */
-#define DOWNLOAD(u, r) { \
-        .v = (const char *[]){ "st", "-e", "/bin/sh", "-c",\
-             "curl -g -L -J -O -A \"$1\" -b \"$2\" -c \"$2\"" \
-             " -e \"$3\" \"$4\"; read", \
-             "surf-download", useragent, cookiefile, r, u, NULL \
+#define SEARCH() { \
+        .v = (const char *[]){ "/bin/sh", "-c", \
+             "xprop -id $1 -f $2 8s -set $2 \"" \
+             "$(dmenu -c -p ' Search:' -w $1 < /dev/null)\"", \
+             "surf-search", winid, "_SURF_SEARCH", NULL \
         } \
+}
+
+#define DLSTATUS { \
+        .v = (const char *[]){ "st", "-e", "/bin/sh", "-c",\
+             "while true; do cat $1/* 2>/dev/null || echo \"List clear!\";"\
+            "A=; read A; "\
+            "if [ $A = \"clear\" ]; then rm $1/*; fi; clear; done",\
+            "surf-dlstatus", dlstatus, NULL } \
 }
 
 /* PLUMB(URI) */
@@ -103,6 +117,17 @@ static WebKitFindOptions findopts = WEBKIT_FIND_OPTIONS_CASE_INSENSITIVE |
         } \
 }
 
+/* BM_ADD(readprop) */
+#define BM_ADD(r) {\
+        .v = (const char *[]){ "/bin/sh", "-c", \
+             "(echo $(xprop -id $0 $1) | cut -d '\"' -f2 " \
+             "| sed 's/.*https*:\\/\\/\\(www\\.\\)\\?//' && cat ~/.surf/bookmarks) " \
+             "| awk '!seen[$0]++' > ~/.surf/bookmarks.tmp && " \
+             "mv ~/.surf/bookmarks.tmp ~/.surf/bookmarks", \
+             winid, r, NULL \
+        } \
+}
+
 /* styles */
 /*
  * The iteration will stop at the first match, beginning at the beginning of
@@ -111,6 +136,8 @@ static WebKitFindOptions findopts = WEBKIT_FIND_OPTIONS_CASE_INSENSITIVE |
 static SiteSpecific styles[] = {
 	/* regexp               file in $styledir */
 	{ ".*",                 "default.css" },
+	{ ".wikipedia.org",   "wikipedia.css" },
+	{ "192.168.1.1",    "192.168.1.1.css" },
 };
 
 /* certificates */
@@ -133,8 +160,9 @@ static Key keys[] = {
 	/* modifier              keyval          function    arg */
 	{ MODKEY,                GDK_KEY_g,      spawn,      SETPROP("_SURF_URI", "_SURF_GO", PROMPT_GO) },
 	{ MODKEY,                GDK_KEY_f,      spawn,      SETPROP("_SURF_FIND", "_SURF_FIND", PROMPT_FIND) },
-	{ MODKEY,                GDK_KEY_slash,  spawn,      SETPROP("_SURF_FIND", "_SURF_FIND", PROMPT_FIND) },
-
+	{ MODKEY,                GDK_KEY_s,      spawn,      SEARCH() },
+	{ MODKEY,                GDK_KEY_b,      spawn,      BM_ADD("_SURF_URI") }, /* surf bookmarks */
+	{ MODKEY,                GDK_KEY_w,      playexternal, { 0 } },
 	{ 0,                     GDK_KEY_Escape, stop,       { 0 } },
 	{ MODKEY,                GDK_KEY_c,      stop,       { 0 } },
 
@@ -157,7 +185,7 @@ static Key keys[] = {
 	{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_k,      zoom,       { .i = +1 } },
 	{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_q,      zoom,       { .i = 0  } },
 	{ MODKEY,                GDK_KEY_minus,  zoom,       { .i = -1 } },
-	{ MODKEY,                GDK_KEY_plus,   zoom,       { .i = +1 } },
+	{ MODKEY,                GDK_KEY_equal,  zoom,       { .i = +1 } },
 
 	{ MODKEY,                GDK_KEY_p,      clipboard,  { .i = 1 } },
 	{ MODKEY,                GDK_KEY_y,      clipboard,  { .i = 0 } },
@@ -181,7 +209,10 @@ static Key keys[] = {
 	{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_b,      toggle,     { .i = ScrollBars } },
 	{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_t,      toggle,     { .i = StrictTLS } },
 	{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_m,      toggle,     { .i = Style } },
+	{ MODKEY,                GDK_KEY_d,      spawndls,   { 0 } },
 };
+
+static char *searchengine   = "https://google.com/";
 
 /* button definitions */
 /* target can be OnDoc, OnLink, OnImg, OnMedia, OnEdit, OnBar, OnSel, OnAny */
@@ -195,5 +226,4 @@ static Button buttons[] = {
 	{ OnMedia,      MODKEY,         1,      clickexternplayer, { 0 },       1 },
 };
 
-#define HOMEPAGE "https://google.com/"
-
+#define HOMEPAGE "https://start.duckduckgo.com/"

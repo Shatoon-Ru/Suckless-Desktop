@@ -5,8 +5,8 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "MesloLGS NF:pixelsize=13:antialias=true:autohint=true";
-static char *font2[] = { "MesloLGS NF:pixelsize=9:antialias=true:autohint=true" };
+static char *font = "Hack Nerd Font Mono:pixelsize=13:antialias=true:autohint=true";
+static char *font2[] = { "MesloLGS NF:pixelsize=10:antialias=true:autohint=true" };
 static int borderpx = 50;
 
 /*

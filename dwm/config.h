@@ -27,8 +27,8 @@ static const int systraypinningfailfirst   = 0;   /* 1: if pinning fails, displa
 static const int showsystray               = 1;   /* 0 means no systray */
 static const unsigned int systrayiconsize  = 18; /* systray icon size in px */
 /*static const char *fonts[]         		 = {"Hack Nerd Font:style=Regular:size=10", "Font Awesome 5 Pro:style=Solid:pixelsize=12:antialias=true", "Font Awesome 5 Brands:style=Solid:pixelsize=12:antialias=true", "Material Design Icons:Regular:pixelsize=21:antialias=true"};*/
-static const char *fonts[]          	   = { "Inter:size=10.5", "Font Awesome 5 Pro:style=Solid:pixelsize=15:antialias=true", "Font Awesome 5 Brands:style=Solid:pixelsize=15:antialias=true", "Material Design Icons:Regular:pixelsize=20:antialias=true", "JoyPixels:size=15:antialias=true:autohint=true" };
-static const char dmenufont[]              = "monospace:size=10";
+static const char *fonts[]          	   = { "Terminus:size=10", "Font Awesome 5 Pro:style=Solid:pixelsize=15:antialias=true", "Font Awesome 5 Brands:style=Solid:pixelsize=15:antialias=true", "Material Design Icons:Regular:pixelsize=20:antialias=true", "JoyPixels:size=15:antialias=true:autohint=true" };
+static const char dmenufont[]              = "Terminus:size=9";
 static const char col_gray1[]              = "#141414";
 static const char col_gray2[]              = "#505050";
 static const char col_gray3[]              = "#353535";
@@ -70,7 +70,7 @@ static const int statmonval = 0;
 
 /* tagging */
 /*static const char *tags[] = { "󰲠", "󰲢", "󰲤", "󰲦", "󰲨", "󰲪", "󰲬", "󰲮", "󰲰", "󰲞" };*/
-static const char *tags[] = { "", "", "", "", "", "", "", "", "", "" };
+static const char *tags[] = { "", "", "", "", "", "", "", "", "", ""  };
 /*static const char *tags[] = { "", "", "", "", "", "", "", "", "", "" };*/
 
 static const Rule rules[] = {
@@ -81,12 +81,7 @@ static const Rule rules[] = {
 	 */
 	/* class            				  role             instance     title   tags mask  switchtotag  iscentered   isfloating   monitor */
   { "qutebrowser",    				      NULL,               NULL,      NULL,   1,	        1,         	0,           0,            0 },
-  { "Brave-browser",  				      NULL,               NULL,      NULL,   1,	        1,         	0,           0,            0 },
   { "firefox",        				      NULL,               NULL,      NULL,   1,	        1,         	0,           0,            0 },
-  { "Nightly",        				      NULL,               NULL,      NULL,   1,	        1,         	0,           0,            0 },
-  { "Google-chrome",  				      NULL,               NULL,      NULL,   1,	        1,         	0,           0,            0 },
-  { "Ghostery Dawn",  				      NULL,               NULL,      NULL,   1,	        1,         	0,           0,            0 },
-  { "Vivaldi-snapshot",				      NULL,               NULL,      NULL,   1,	        1,         	0,           0,            0 },
   { "Surf",           				      NULL,               NULL,      NULL,   1,	        1,         	0,           0,            0 },
   { "ncmpcpp",   						  NULL,  			  NULL,      NULL,   1 << 3,    1,         	1,			 1,		       1 },
   { "URxvt",          				      NULL,               NULL,      NULL,   1 << 1,    1,         	0,           0,            0 },
@@ -115,13 +110,13 @@ static const Rule rules[] = {
   { "Blueman-manager", 				      NULL, 		  	  NULL, 	 NULL,   1 << 9,    1,         	1,    		 1,            1 },
   { "Pavucontrol",                 		  NULL,		          NULL,      NULL,	 1 << 9,    1,          1,   		 1,            1 },
   { "Gnome-builder",  				      NULL, 		  	  NULL, 	 NULL,   1 << 6,    1,         	1,    		 0,            0 },
-  { "Solaar", 						      NULL, 			  NULL, 	 NULL,   1 << 9,    1,         	1,    		 1,            1 },
+  { "razerCommander",				      NULL, 			  NULL, 	 NULL,   1 << 9,    1,         	1,    		 1,            1 },
   { "Piper", 							  NULL, 			  NULL, 	 NULL,   1 << 9,    1,         	1,    		 1,            1 },
   { "Gucharmap", 						  NULL, 			  NULL, 	 NULL,   1 << 6,    1,         	1,    		 1,            0 },
   { "Gimp", 							  NULL, 			  NULL, 	 NULL,   1 << 9,    1,         	1,    		 1,            0 },
   { "St",	            				  NULL,               NULL,      NULL,   1 << 1,    1,         	0,           0,            0 },
   { "firefox",					"GtkFileChooserDialog",    "Save File",  NULL,   0,	 	    0,          1,           1,			   0 },
-  { "firefox",                		"Toolkit", "Picture-in-Picture",     NULL,   0,   		1,          1,           1,			   0 },
+  { "firefox",                		     NULL, "Toolkit", "Picture-in-Picture",  0,   		1,          1,           1,			   0 },
   { "nvim", NULL, NULL, NULL, 1 << 6, 1, 1, 0, 0,},
 };	
 
@@ -266,8 +261,9 @@ static Key keys[] = {
 	{ MODKEY|Mod4Mask|ShiftMask,    XK_9,      incrovgaps,          {.i = -1 } },
 	{ MODKEY|Mod4Mask,              XK_0,      togglegaps,          {0} },
 	{ MODKEY|Mod4Mask|ShiftMask,    XK_0,      defaultgaps,         {0} },
-	{ MODKEY,                       XK_Tab,    view,                {0} },
-	{ Mod1Mask,                     XK_Tab,    view,                {0} },
+	//{ MODKEY,                       XK_Tab,    view,                {0} },
+	{ MODKEY,                       XK_Tab,    togglescratch,  	    {.v = scratchpadcmd } },
+	//{ Mod1Mask,                     XK_Tab,    view,                {0} },
 	{ Mod1Mask|ControlMask,         XK_Tab,    view,                {0} },
 	{ MODKEY,                       XK_q,      killclient,          {0} },
 	{ MODKEY|Mod4Mask|ControlMask,  XK_1,      setlayout,           {.v = &layouts[0]} },

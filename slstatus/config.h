@@ -1,7 +1,7 @@
 /* See LICENSE file for copyright and license details. */
 
 /* interval between updates (in ms) */
-const unsigned int interval = 1000;
+const unsigned int interval = 5000;
 
 /* text to show if no value can be retrieved */
 static const char unknown_str[] = "n/a";
@@ -45,7 +45,6 @@ static const char unknown_str[] = "n/a";
  * ram_total           total memory size in GB         NULL
  * ram_used            used memory in GB               NULL
  * run_command         custom shell command            command (echo foo)
- * separator           string to echo                  NULL
  * swap_free           free swap in GB                 NULL
  * swap_perc           swap usage in percent           NULL
  * swap_total          total swap size in GB           NULL
@@ -59,19 +58,13 @@ static const char unknown_str[] = "n/a";
  * uptime              system uptime                   NULL
  * username            username of current user        NULL
  * vol_perc            OSS/ALSA volume in percent      mixer file (/dev/mixer)
- *                                                     NULL on OpenBSD
  * wifi_perc           WiFi signal in percent          interface name (wlan0)
  * wifi_essid          WiFi ESSID                      interface name (wlan0)
  */
 static const struct arg args[] = {
-	/* function	format          	argument */
-    { run_command, "  %3s   ",           "echo `mpc | sed -n '1,1p' | cut -c -70`" },
-	{ cpu_perc,	"  %3s%%   ",	NULL },
-	{ ram_perc,	" %3s%%   ",	NULL },
-	{ run_command,	" %4s   ",		"amixer sget Master | awk -F\"[][]\" '/%/ { print $2 }' | head -n1" },
-	/*{ run_command,  "%s"    , "~/.scripts/network.sh" },*/
-	{ netspeed_rx,    "🔻 %s ",     "eno1" },
-    { netspeed_tx,    "🔺 %s ",     "eno1" },
- 	{ datetime,	"%s   ",           	"%F %H:%M" },
-	{ username,	"%s ",			NULL },
+	/* function format          argument */
+	{ run_command, "   %s   |  ",	 "mpc current"		   }, 
+/*	{ disk_free, "  %sB  |  ",      "/" 			   }, */
+	{ datetime, "  %s",           	 "%b %d %l:%M %p " 	   },
+
 };

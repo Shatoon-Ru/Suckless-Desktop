@@ -1,28 +1,17 @@
-#ifndef CONFIG_H
-#define CONFIG_H
-
-/* modifier 0 means no modifier */
 static int surfuseragent    = 1;  /* Append Surf version to default WebKit user agent */
-static char *fulluseragent  = ""; /* Or override the whole user agent string */
-static char *scriptfile     = "~/.surf/script.js";
+static char *fulluseragent  = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:83.0) Gecko/20100101 Firefox/83.0"; /* Default: Mozilla/5.0 (X11; FreeBSD amd64) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/11.0 Safari/605.1.15 Surf/2.0 */
 static char *styledir       = "~/.surf/styles/";
 static char *certdir        = "~/.surf/certificates/";
 static char *cachedir       = "~/.surf/cache/";
 static char *cookiefile     = "~/.surf/cookies.txt";
-
-#ifndef HOMEPAGE
-#define HOMEPAGE "https://start.duckduckgo.com/"
-#endif
-
-static char *searchengine = "https://duckduckgo.com/?q=";
-
-static SearchEngine searchengines[] = {
-	{ "g", "https://google.com/search?q=%s" },
-	{ "w", "https://www.wikipedia.org/search-redirect.php?family=wikipedia&language=en&search=%s&language=en&go=Go" },
-	{ "y", "https://www.youtube.com/results?search_query=%s" },
-	{ "gh", "https://github.com/search?q=%s" },
-	{ "v", "https://wiki.voidlinux.org/index.php?search=%s&title=Special%3ASearch&go=Go" },
-	{ "mc", "https://minecraft.gamepedia.com/index.php?search=%s&title=Special%3ASearch&go=Go" },
+static char *searchurl      = "google.com/search?q=%s";
+static char *dldir          = "~/dl/";
+static char *dlstatus       = "~/.surf/dlstatus/";
+static char *scriptfiles[] = {
+"~/.surf/scripts/script.js",
+"~/.surf/scripts/focus.js",
+/*"~/.surf/scripts/block_fonts.js",*/
+"~/.surf/scripts/youtube_circumvent_sign_in.user.js",
 };
 
 /* Webkit default features */
@@ -34,98 +23,44 @@ static SearchEngine searchengines[] = {
 static Parameter defconfig[ParameterLast] = {
 	/* parameter                    Arg value       priority */
 	[AcceleratedCanvas]   =       { { .i = 1 },     },
-	[AccessMicrophone]    =       { { .i = 0 },     },
-	[AccessWebcam]        =       { { .i = 0 },     },
-	[Certificate]         =       { { .i = 0 },     },
-	[CaretBrowsing]       =       { { .i = 0 },     },
-	[CookiePolicies]      =       { { .v = "@" }, },
+	[AccessMicrophone]    =       { { .i = 1 },     },
+	[AccessWebcam]        =       { { .i = 1 },     },
+	[Certificate]         =       { { .i = 1 },     },
+	[CaretBrowsing]       =       { { .i = 1 },     },
+	[CookiePolicies]      =       { { .v = "@Aa" }, },
 	[DefaultCharset]      =       { { .v = "UTF-8" }, },
 	[DiskCache]           =       { { .i = 1 },     },
-	[DNSPrefetch]         =       { { .i = 1 },     },
+	[DNSPrefetch]         =       { { .i = 0 },     },
 	[FileURLsCrossAccess] =       { { .i = 0 },     },
-	[FontSize]            =       { { .i = 17 },    },
+	[FontSize]            =       { { .i = 15 },    },
 	[FrameFlattening]     =       { { .i = 0 },     },
 	[Geolocation]         =       { { .i = 0 },     },
-	[HideBackground]      =       { { .i = 1 },     },
+	[HideBackground]      =       { { .i = 0 },     },
 	[Inspector]           =       { { .i = 0 },     },
-	[Java]                =       { { .i = 0 },     },
+	[Java]                =       { { .i = 1 },     },
 	[JavaScript]          =       { { .i = 1 },     },
 	[KioskMode]           =       { { .i = 0 },     },
 	[LoadImages]          =       { { .i = 1 },     },
 	[MediaManualPlay]     =       { { .i = 1 },     },
-	[Plugins]             =       { { .i = 0 },     },
+	[Plugins]             =       { { .i = 1 },     },
 	[PreferredLanguages]  =       { { .v = (char *[]){ NULL } }, },
 	[RunInFullscreen]     =       { { .i = 0 },     },
 	[ScrollBars]          =       { { .i = 1 },     },
-	[ShowIndicators]      =       { { .i = 0 },     },
+	[ShowIndicators]      =       { { .i = 1 },     },
 	[SiteQuirks]          =       { { .i = 1 },     },
 	[SmoothScrolling]     =       { { .i = 1 },     },
-	[SpellChecking]       =       { { .i = 0 },     },
-	[SpellLanguages]      =       { { .v = ((char *[]){ "en_US", NULL }) }, },
-	[StrictTLS]           =       { { .i = 1 },     },
+	[SpellChecking]       =       { { .i = 1 },     },
+	[SpellLanguages]      =       { { .v = ((char *[]){ "en_AU", NULL }) }, },
+	[StrictTLS]           =       { { .i = 0 },     },
 	[Style]               =       { { .i = 1 },     },
-	[WebGL]               =       { { .i = 0 },     },
+	[WebGL]               =       { { .i = 1 },     },
 	[ZoomLevel]           =       { { .f = 1.0 },   },
 };
 
 static UriParameters uriparams[] = {
 	{ "(://|\\.)suckless\\.org(/|$)", {
-	  [JavaScript] = { { .i = 0 }, 1 },
-	  [Plugins]    = { { .i = 0 }, 1 },
-	}, },
-	{ "(://|\\.)google\\.com(/|$)", {         // The big bad Google
-	  [JavaScript] = { { .i = 0 }, 1 },       // no JavaScript
-	  [CookiePolicies] = { { .v = "@" }, 1 }, // Don't accept third party
-	  [Geolocation] = { { .i = 0 }, 1 },      // No Geolocation! Google knows anyway
-	}, },
-	{ "(://|\\.)gmail\\.com(/|$)", {
 	  [JavaScript] = { { .i = 1 }, 1 },
-	  [CookiePolicies] = { { .v = "@" }, 1 },
-	  [Geolocation] = { { .i = 0 }, 1 },
-	}, },
-	{ "(://|\\.)youtube\\.com(/|$)", {
-	  [JavaScript] = { { .i = 1 }, 1 },
-	  [CookiePolicies] = { { .v = "@" }, 1 },
-	  [Geolocation] = { { .i = 0 }, 1 },
-	}, },
-	{ "(://|\\.)tannerbabcock\\.com(/|$)", {
-	  [JavaScript] = { { .i = 1 }, 1 },
-      [ZoomLevel] = { { .f = 1.00 }, 1 },
-	  [FontSize] = { { .i = 14 }, 1 },
-	  [Plugins] = { { .i = 0 }, 1 },
-	}, },
-	{ "(://|\\.)messenger\\.com(/|$)", {
-	  [CookiePolicies] = { { .v = "@" }, 1 },
-	  [Geolocation] = { { .i = 0 }, 1 },
-	  [JavaScript] = { { .i = 1 }, 1 },
-      [Plugins] = { { .i = 0 }, 1 },
-	}, },
-	{ "(://|\\.)instagram\\.com(/|$)", {
-      [CookiePolicies] = { { .v = "@" }, 1 },
-	  [Geolocation] = { { .i = 0 }, 1 },
-	  [JavaScript] = { { .i = 1 }, 1 },
-	  [Plugins] = { { .i = 0 }, 1 },
-	}, },
-	{ "(://|\\.)dmacc\\.edu(/|$)", {
-	  [CookiePolicies] = { { .v = "A" }, 1 },
-	  [JavaScript] = { { .i = 1 }, 1 },
-	}, },
-	{ "(://|\\.)dmacc\\.blackboard\\.com(/|$)", {
-	  [CookiePolicies] = { { .v = "A" }, 1 },
-	  [JavaScript] = { { .i = 1 }, 1 },
-	}, },
-	{ "(://|\\.)tumblr\\.com(/|$)", {
-      [CookiePolicies] = { { .v = "@" }, 1 },
-	  [Geolocation] = { { .i = 0 }, 1 },
-	  [JavaScript] = { { .i = 1 }, 1 },
-	  [Plugins] = { { .i = 0 }, 1 },
-	  [StrictTLS] = { { .i = 1 }, 1 },
-	  [ZoomLevel] = { { .f = 1.00 }, 1 },
-	}, },
-	{ "(://|\\.)wikipedia\\.org(/|$)", {
-	  [JavaScript] = { { .i = 1 }, 1 },
-	  [ZoomLevel] = { { .f = 1.20 }, 1 },
-	  [FontSize] = { { .i = 14 }, 1 },
+	  [Plugins]    = { { .i = 1 }, 1 },
 	}, },
 };
 
@@ -135,38 +70,34 @@ static int winsize[] = { 800, 600 };
 static WebKitFindOptions findopts = WEBKIT_FIND_OPTIONS_CASE_INSENSITIVE |
                                     WEBKIT_FIND_OPTIONS_WRAP_AROUND;
 
-#define PROMPT_GO   "Go:"
-#define PROMPT_FIND "Find:"
+#define PROMPT_GO   " Go:"
+#define PROMPT_FIND " Find:"
 
 /* SETPROP(readprop, setprop, prompt)*/
 #define SETPROP(r, s, p) { \
         .v = (const char *[]){ "/bin/sh", "-c", \
              "prop=\"$(printf '%b' \"$(xprop -id $1 $2 " \
              "| sed \"s/^$2(STRING) = //;s/^\\\"\\(.*\\)\\\"$/\\1/\" && cat ~/.surf/bookmarks)\" " \
-             "| dmenu -l 10 -fn 'Inter-11' -p \"$4\" -w $1)\" && " \
+             "| dmenu -l 10 -p \"$4\" -w $1)\" && " \
              "xprop -id $1 -f $3 8u -set $3 \"$prop\"", \
              "surf-setprop", winid, r, s, p, NULL \
         } \
 }
 
-/* BM_ADD(readprop) */
-#define BM_ADD(r) {\
+#define SEARCH() { \
         .v = (const char *[]){ "/bin/sh", "-c", \
-             "(echo $(xprop -id $0 $1) | cut -d '\"' -f2 " \
-             "| sed 's/.*https*:\\/\\/\\(www\\.\\)\\?//' && cat ~/.surf/bookmarks) " \
-             "| awk '!seen[$0]++' > ~/.surf/bookmarks.tmp && " \
-             "mv ~/.surf/bookmarks.tmp ~/.surf/bookmarks", \
-             winid, r, NULL \
+             "xprop -id $1 -f $2 8s -set $2 \"" \
+             "$(dmenu -c -p ' Search:' -w $1 < /dev/null)\"", \
+             "surf-search", winid, "_SURF_SEARCH", NULL \
         } \
 }
 
-/* DOWNLOAD(URI, referer) */
-#define DOWNLOAD(u, r) { \
+#define DLSTATUS { \
         .v = (const char *[]){ "st", "-e", "/bin/sh", "-c",\
-             "curl -g -L -J -O -A \"$1\" -b \"$2\" -c \"$2\"" \
-             " -e \"$3\" \"$4\"; read", \
-             "surf-download", useragent, cookiefile, r, u, NULL \
-        } \
+             "while true; do cat $1/* 2>/dev/null || echo \"List clear!\";"\
+            "A=; read A; "\
+            "if [ $A = \"clear\" ]; then rm $1/*; fi; clear; done",\
+            "surf-dlstatus", dlstatus, NULL } \
 }
 
 /* PLUMB(URI) */
@@ -182,7 +113,18 @@ static WebKitFindOptions findopts = WEBKIT_FIND_OPTIONS_CASE_INSENSITIVE |
 /* VIDEOPLAY(URI) */
 #define VIDEOPLAY(u) {\
         .v = (const char *[]){ "/bin/sh", "-c", \
-             "mpv --volume 50 --x11-name \"mpv via surf\" \"$0\"", u, NULL \
+             "mpv --really-quiet \"$0\"", u, NULL \
+        } \
+}
+
+/* BM_ADD(readprop) */
+#define BM_ADD(r) {\
+        .v = (const char *[]){ "/bin/sh", "-c", \
+             "(echo $(xprop -id $0 $1) | cut -d '\"' -f2 " \
+             "| sed 's/.*https*:\\/\\/\\(www\\.\\)\\?//' && cat ~/.surf/bookmarks) " \
+             "| awk '!seen[$0]++' > ~/.surf/bookmarks.tmp && " \
+             "mv ~/.surf/bookmarks.tmp ~/.surf/bookmarks", \
+             winid, r, NULL \
         } \
 }
 
@@ -194,6 +136,8 @@ static WebKitFindOptions findopts = WEBKIT_FIND_OPTIONS_CASE_INSENSITIVE |
 static SiteSpecific styles[] = {
 	/* regexp               file in $styledir */
 	{ ".*",                 "default.css" },
+	{ ".wikipedia.org",   "wikipedia.css" },
+	{ "192.168.1.1",    "192.168.1.1.css" },
 };
 
 /* certificates */
@@ -214,35 +158,34 @@ static SiteSpecific certs[] = {
  */
 static Key keys[] = {
 	/* modifier              keyval          function    arg */
-	{ MODKEY,                GDK_KEY_l,      spawn,      SETPROP("_SURF_URI", "_SURF_GO", PROMPT_GO) },
+	{ MODKEY,                GDK_KEY_g,      spawn,      SETPROP("_SURF_URI", "_SURF_GO", PROMPT_GO) },
 	{ MODKEY,                GDK_KEY_f,      spawn,      SETPROP("_SURF_FIND", "_SURF_FIND", PROMPT_FIND) },
-	{ MODKEY,                GDK_KEY_slash,  spawn,      SETPROP("_SURF_FIND", "_SURF_FIND", PROMPT_FIND) },
-
+	{ MODKEY,                GDK_KEY_s,      spawn,      SEARCH() },
+	{ MODKEY,                GDK_KEY_b,      spawn,      BM_ADD("_SURF_URI") }, /* surf bookmarks */
+	{ MODKEY,                GDK_KEY_w,      playexternal, { 0 } },
 	{ 0,                     GDK_KEY_Escape, stop,       { 0 } },
 	{ MODKEY,                GDK_KEY_c,      stop,       { 0 } },
 
-	{ MODKEY,                GDK_KEY_r,      reload,     { .i = 0 } },
 	{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_r,      reload,     { .i = 1 } },
+	{ MODKEY,                GDK_KEY_r,      reload,     { .i = 0 } },
 
-	{ MODKEY,                GDK_KEY_g,      navigate,   { .i = +1 } },
+	{ MODKEY,                GDK_KEY_l,      navigate,   { .i = +1 } },
 	{ MODKEY,                GDK_KEY_h,      navigate,   { .i = -1 } },
 
-	{ MODKEY,                GDK_KEY_m,      spawn,      BM_ADD("_SURF_URI") },
-
-	/* vertical and horizontal scrolling, in viewport percentage
+	/* vertical and horizontal scrolling, in viewport percentage */
 	{ MODKEY,                GDK_KEY_j,      scrollv,    { .i = +10 } },
 	{ MODKEY,                GDK_KEY_k,      scrollv,    { .i = -10 } },
 	{ MODKEY,                GDK_KEY_space,  scrollv,    { .i = +50 } },
 	{ MODKEY,                GDK_KEY_b,      scrollv,    { .i = -50 } },
 	{ MODKEY,                GDK_KEY_i,      scrollh,    { .i = +10 } },
-	{ MODKEY,                GDK_KEY_u,      scrollh,    { .i = -10 } }, */
+	{ MODKEY,                GDK_KEY_u,      scrollh,    { .i = -10 } },
 
 
 	{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_j,      zoom,       { .i = -1 } },
 	{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_k,      zoom,       { .i = +1 } },
 	{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_q,      zoom,       { .i = 0  } },
 	{ MODKEY,                GDK_KEY_minus,  zoom,       { .i = -1 } },
-	{ MODKEY,                GDK_KEY_plus,   zoom,       { .i = +1 } },
+	{ MODKEY,                GDK_KEY_equal,  zoom,       { .i = +1 } },
 
 	{ MODKEY,                GDK_KEY_p,      clipboard,  { .i = 1 } },
 	{ MODKEY,                GDK_KEY_y,      clipboard,  { .i = 0 } },
@@ -253,19 +196,23 @@ static Key keys[] = {
 	{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_p,      print,      { 0 } },
 	{ MODKEY,                GDK_KEY_t,      showcert,   { 0 } },
 
+	{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_a,      togglecookiepolicy, { 0 } },
 	{ 0,                     GDK_KEY_F11,    togglefullscreen, { 0 } },
 	{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_o,      toggleinspector, { 0 } },
 
 	{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_c,      toggle,     { .i = CaretBrowsing } },
 	{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_f,      toggle,     { .i = FrameFlattening } },
+	{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_g,      toggle,     { .i = Geolocation } },
 	{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_s,      toggle,     { .i = JavaScript } },
 	{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_i,      toggle,     { .i = LoadImages } },
 	{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_v,      toggle,     { .i = Plugins } },
 	{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_b,      toggle,     { .i = ScrollBars } },
 	{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_t,      toggle,     { .i = StrictTLS } },
 	{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_m,      toggle,     { .i = Style } },
-	{ MODKEY,                GDK_KEY_w,      playexternal, { 0 } },
+	{ MODKEY,                GDK_KEY_d,      spawndls,   { 0 } },
 };
+
+static char *searchengine   = "https://google.com/";
 
 /* button definitions */
 /* target can be OnDoc, OnLink, OnImg, OnMedia, OnEdit, OnBar, OnSel, OnAny */
@@ -279,5 +226,4 @@ static Button buttons[] = {
 	{ OnMedia,      MODKEY,         1,      clickexternplayer, { 0 },       1 },
 };
 
-#endif
-
+#define HOMEPAGE "https://start.duckduckgo.com/"
