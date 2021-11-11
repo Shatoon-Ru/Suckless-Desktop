@@ -47,8 +47,12 @@ Not all patches are listed.
 
 ## dwm-test
 
-My testing folder so I don't mess up my main versions
+My testing folder so I don't mess up my main versions.
 
+
+## dwm-void
+
+Tweaks to my standard Arch build of dwm for Void Linux.
 
 ## Thank You
 
