@@ -63,8 +63,8 @@ static const char unknown_str[] = "n/a";
  */
 static const struct arg args[] = {
 	/* function format          argument */
-	{ run_command, "   %s   |  ",	 "mpc current"		   }, 
+	{ run_command, "   %s   | ",	 "mpc current"		   }, 
 /*	{ disk_free, "  %sB  |  ",      "/" 			   }, */
-	{ datetime, "  %s",           	 "%b %d %l:%M %p " 	   },
+	{ datetime, "  %s",  "%b %d %l:%M %p " 	   },
 
 };

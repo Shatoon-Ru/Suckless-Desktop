@@ -34,15 +34,18 @@ enum glyph_attribute {
 	ATTR_WRAP       = 1 << 8,
 	ATTR_WIDE       = 1 << 9,
 	ATTR_WDUMMY     = 1 << 10,
- 	ATTR_BOXDRAW    = 1 << 11,
+	ATTR_BOXDRAW    = 1 << 11,
 	ATTR_LIGA       = 1 << 12,
+	ATTR_SELECTED   = 1 << 13,
 	ATTR_BOLD_FAINT = ATTR_BOLD | ATTR_FAINT,
+	ATTR_DIRTYUNDERLINE = 1 << 15,
 };
 
-enum drawing_mode {
-	DRAW_NONE = 0,
-	DRAW_BG   = 1 << 0,
-	DRAW_FG   = 1 << 1,
+enum glyph_state {
+	GLYPH_EMPTY,
+	GLYPH_SET,
+	GLYPH_TAB,
+	GLYPH_TDUMMY
 };
 
 enum selection_mode {
@@ -72,8 +75,11 @@ typedef uint_least32_t Rune;
 typedef struct {
 	Rune u;           /* character code */
 	ushort mode;      /* attribute flags */
+  ushort state;     /* state flags */
 	uint32_t fg;      /* foreground  */
 	uint32_t bg;      /* background  */
+	int ustyle;	  /* underline style */
+	int ucolor[3];    /* underline color */
 } Glyph;
 
 typedef Glyph *Line;
@@ -83,21 +89,19 @@ typedef union {
 	uint ui;
 	float f;
 	const void *v;
+	const char *s;
 } Arg;
 
-typedef struct {
-	uint b;
-	uint mask;
-	void (*func)(const Arg *);
-	const Arg arg;
-} MouseKey;
+/*typedef struct {
+	const int histlines;
+	char *const *cmd;
+} ExternalPipe;*/
 
 void die(const char *, ...);
 void redraw(void);
+//void tfulldirt(void);
 void draw(void);
 
-void externalpipe(const Arg *);
-void iso14755(const Arg *);
 void kscrolldown(const Arg *);
 void kscrollup(const Arg *);
 void newterm(const Arg *);
@@ -107,8 +111,8 @@ void sendbreak(const Arg *);
 void toggleprinter(const Arg *);
 
 int tattrset(int);
-int tisaltscr(void);
-void tnew(int, int);
+void tinit(int, int);
+int tisaltscreen(void);
 void tresize(int, int);
 void tsetdirtattr(int);
 void ttyhangup(void);
@@ -140,18 +144,20 @@ void boxdraw_xinit(Display *, Colormap, XftDraw *, Visual *);
 void drawboxes(int, int, int, int, XftColor *, XftColor *, const XftGlyphFontSpec *, int);
 #endif
 
+
 /* config.h globals */
 extern char *utmp;
+extern char *scroll;
 extern char *stty_args;
 extern char *vtiden;
 extern wchar_t *worddelimiters;
 extern int allowaltscreen;
+extern int allowwindowops;
+extern char *float_terminal;
 extern char *termname;
 extern unsigned int tabspaces;
 extern unsigned int defaultfg;
 extern unsigned int defaultbg;
-extern unsigned int defaultcs;
-extern const int boxdraw, boxdraw_bold, boxdraw_braille;
 extern float alpha;
-extern MouseKey mkeys[];
-extern int ximspot_update_interval;
+extern const int boxdraw, boxdraw_bold, boxdraw_braille;
+//extern float alpha, alphaUnfocused;

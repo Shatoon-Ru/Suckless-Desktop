@@ -16,7 +16,7 @@ static const int topbar             = 1;        /* 0 means bottom bar */
 static const int savefloats         = 1;        /* 0 means default behaviour, 1 = savefloats patch */
 static const int attachmode         = 2;        /* 0 master (default), 1 = above, 2 = aside, 3 = below, 4 = bottom */
 static const int usealtbar          = 1;        /* 1 means use non-dwm status bar */
-static const char *altbarclass      = "Polybar"; /* Alternate bar class name */
+static const char *altbarclass      = "Bar"; /* Alternate bar class name */
 static const char *alttrayname      = "tray";    /* Polybar tray instance name */
 static const char *altbarcmd        = "$HOME/.config/polybar/launch.sh"; /* Alternate bar launch command */
 static const char *fonts[]          = { "Inter:size=10.5", "Font Awesome 5 Pro:style=Solid:pixelsize=12:antialias=true", "Font Awesome 5 Brands:style=Solid:pixelsize=12:antialias=true", "Material Design Icons:Regular:pixelsize=19:antialias=true" };
@@ -137,7 +137,7 @@ static const Layout layouts[] = {
 #define APP_DUNSTHIST   "dunstctl history-pop"
 #define APP_DUNSTCLOSE  "dunstctl close"
 #define APP_CLIP        "greenclip print | sed '/^$/d' | dmenu -l 10 -p clipboard | xargs -r -d'\n' -I '{}' greenclip print '{}'"
-#define APP_EXIT        "/usr/bin/stop.sh"
+#define APP_EXIT        "/usr/bin/dmenu_logout"
 #define APP_DMENU       "/usr/bin/dmenu.sh"
 #define APP_VOLU        "/usr/bin/volume up"
 #define APP_VOLD        "/usr/bin/volume down"

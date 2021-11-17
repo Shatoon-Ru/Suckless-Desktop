@@ -1,116 +1,119 @@
-# st (Simple Terminal)
+<h1 align="center">st - simple terminal</h1>
 
-This is a custom suckless st build (credits to lukesmith's build for ligatures patch) and I've added some additional patches like newterm , rightclick paste , desktop entry ,sixel, live-reload xresources , dynamic cursor etc!.
+<img align="center" src="/.github/preview.png">
 
-## Patches:
+<p align="center">st is a simple terminal emulator for X which sucks less.</p>
 
-- alpha 
-- Ligatures
-- sixel 
-- scrollback
-- Clipboard
-- Alpha(Transparency)
-- Boxdraw
-- w3m
-- font2
-- right click paste
-- st desktop entry
-- newterm
-- anysize
-- anygeometry
-- xresources
-- sync patch ( Better draw timing to reduce flicker/tearing and improve animation smoothness )
-- live reload ( change colors/fonts on the fly )
-  and more...
-  <br>
+### Keybinds
 
-## How to apply Xresources and live-reload ?
++ **Normal** scroll with mouse and `Alt+Up` and `Alt+Down`;
++ Bigger scroll with `Alt+PageUp` and `Alt+PageDown`;
++ `Ctrl+Shift+V` to paste text;
++ `Ctrl+Shift+C` or `Middle Button of Mouse` copies the selected text;
++ `Shift+Enter` opens a new terminal in the same path;
++ `Shift+Backspace` opens a new floating terminal in the same path, you should change the variable path to the st with floating title.
+	- [Script that I'm using](https://github.com/BeyondMagic/scripts/blob/master/terminal/st_float);
++ `Shift + Middle Button of Mouse` pastes copied text
++ `CTRL+Backspace` returns `F36+F35` sequence, I use this on **nvim** and **zsh**. It's preferable compared to 
+	- `noremap! <F36><F35> <C-w>` nvim
+	- `inoremap <F36><F35> <C-w>` nvim
+	- `bindkey '^[[24;5~^[[23;5~' backward-kill-word` zsh
 
-```
- #make an alias for this command
+## Patches (as far as I remember)
 
-alias load="kill -USR1 $(pidof st)"
-alias  use="xrdb merge"
++ [alpha focus highlight](https://st.suckless.org/patches/alpha_focus_highlight/)
++ [scroll](https://st.suckless.org/patches/scrollback/)
++ rows and columns reflow (can resize the terminal and keep content) [custom](https://github.com/BeyondMagic/st/blob/master/patches/columns-rows-reflow-st-unpatched.patch)
++ [bold](https://st.suckless.org/patches/bold-is-not-bright/)
++ [boxdraw](https://st.suckless.org/patches/boxdraw)
++ [ligatures](https://st.suckless.org/patches/ligatures/)
++ [font2](https://st.suckless.org/patches/font2/)
++ [newterm](https://st.suckless.org/patches/newterm/) [custom](https://github.com/BeyondMagic/st/blob/master/patches/newterm_custom_argument.patch)
++ [any geometry](https://st.suckless.org/patches/anygeometry/)
++ [vertcenter](https://st.suckless.org/patches/vertcenter/)
++ [undercurl](https://st.suckless.org/patches/undercurl/)
++ [live-reload-xresources](https://github.com/gnotclub/xst/commit/c0ffcfbaf8af25468103dd92e0c7e83555e08c7a)
++ [blinking-cursor](https://st.suckless.org/patches/blinking_cursor/)
 
-command : use Xresourcesfile && load
+## XResources
 
-```
-## Xresources live-reload demo
+Example file:
 
-<img src="https://github.com/siduck76/dotfiles/blob/master/rice%20flex/live-reloadXresources.gif"> <br><br>
-
-<b>DON'T SKIP THE README, if you want to have a similar setup / know default keybinds.<br><br></b>
-
-## Dependencies : <br>
-
+`st.font_fallback` is used for font2, multiple ones are divided by `,`.
 
 ```
-
-#void (most of these are already installed on arch distros)
-xbps-install libXft-devel libX11-devel harfbuzz-devel libXext-devel libXrender-devel libXinerama-devel ttf-jetbrains-mono
- 
-
-#Debian (and ubuntu probably)
-apt install build-essential libxft-dev libharfbuzz-dev fonts-jetbrains-mono
-
+st.font           : Fira Code:pixelsize=12.25:antialias=true
+st.font_fallback  : Fira Code Nerd Font Mono:style=Regular:pixelsize=13:antialias=true,Material\\-Design\\-Iconic\\-Font:style=Design-Iconic-Font:pixelsize=12,JoyPixels:pixelsize=13
+st.termname       : st-256color
+st.blinktimeout   : 500
+st.bellvolume     : 0
+st.padding        : 17
+st.cursorshape    : 5
+st.cwscale        : 0.875
+st.chscale        : 0.875
+st.opacity        : 0.875
+st.ligatures      : 1
+st.color0         : #000020
+st.color1         : #EC5E66
+st.color2         : #009900
+st.color3         : #FAC863
+st.color4         : #6699CC
+st.color5         : #D75F86
+st.color6         : #357CD5
+st.color7         : #FDFCFD
+st.color8         : #424043
+st.color9         : #ED2E62
+st.color10        : #5CBF53
+st.color11        : #F3D353
+st.color12        : #65D9EF
+st.color13        : #FA74CE
+st.color14        : #519FD1
+st.color15        : #FFFFFF
+st.color255       : #000020
+st.color256       : #111111
+st.color257       : #ffffff
+st.color258       : #0A0C11
+st.foreground     : #FDFCFD
+st.background     : #0a0c11
+st.cursorfg       : #111111
+st.reverse-cursor : #ffffff
 ```
 
-## Install <br>
+Apply the changes to Xorg.
 
-`cd st (this repo) `<br>
-`sudo make install `<br>
+```bash
+xrdb ~/.config/xorg/XResources
+```
 
-## other ST builds <br>
+Apply the changes to St instances.
 
-1. Default ST (main branch)
-2. Sixel St (sixel branch , with sixel graphics support)
-3. St with vim-browse (vim-browse branch , navigate within like vim)
+```bash
+kill -USR1 $(pidof st)
+```
 
-- Use a different st build ( clone its branch)
+### Support
 
-`example: git clone https://github.com/siduck76/st --branch sixel`
++ coloured undercurl (apply the st.info for external programs)
+	- sequence is 4:3, 4:0 to reset
++ history (default: 2000 lines)
++ Emojis 
 
-## Ram comparison with other terminals and speed test
-<img src="https://raw.githubusercontent.com/siduck76/dotfiles/master/rice%20flex/terminal_ramUsage.jpg"> <br><br>
-<img src="https://raw.githubusercontent.com/siduck76/dotfiles/master/rice%20flex/speedTest.png"> <br><br>
-<img src="https://raw.githubusercontent.com/siduck76/dotfiles/master/rice%20flex/speedTest1.png"> <br><br>
+### Requirements
 
+In order to build st you need the Xlib header files.
 
-## Default Keybindings<br>
+### Fonts
 
-<pre>
-ctrl + shift + c        Copy  <br>
-ctrl + shift + v        Paste <br>
-alt  + comma            Zoom in <br>
-alt  + .                Zoom out <br>
-alt  + g                Reset Zoom<br>
-alt  + s                Increase Transparency<br>
-alt  + a                Decrease Transparency<br>
-alt  + m                Reset Transparency<br>
-copy anything and right click on the terminal ( will paste the copied thing ) 
-mod + shift + enter    open a new terminal with same cwd ( current working directory )
-alt + k                 scroll down 
-alt + j                 scroll up
-</pre>
+This was configured with Fira Code and Material Design Iconic 2 fonts.
 
-you can change all of these in config.h
-<br>
+### Installation<
 
-## Themes/Fonts used
+Edit config.mk to match your local setup (st is installed into
+the /usr/local namespace by default).
 
-ls-icons: https://github.com/Yash-Handa/logo-ls <br>
-Xresources: onedark ( just xrdb merge xresourcesfile , do this everytime you make any change to xresources file ) from this repo itself.<br>
-Font: <a href="https://www.jetbrains.com/lp/mono/"> Jetbrains Mono</a>
+Afterwards enter the following command to build and install st (if
+necessary as root):
 
-a lil<a href="https://share.vidyard.com/watch/sdFeoxaRr124U893WVEcxN?"> video </a>demo to show zoom/alpha changing via keybinds
+    make clean install
 
-## Screenshots:
-
-<img src="https://raw.githubusercontent.com/siduck76/personal-backup/master/misc/delete_this/bruh.png"> <br><br>
-<img src="https://raw.githubusercontent.com/siduck76/personal-backup/master/misc/delete_this/ithree0-36-43.png"> <br><br>
-<img src="https://raw.githubusercontent.com/siduck76/personal-backup/master/misc/delete_this/two7-00.png"> <br><br>
-<img src="https://raw.githubusercontent.com/siduck76/personal-backup/master/misc/delete_this/u.png"> <br><hr>
-
-# Credits
-
-- [live-reload](https://github.com/nimaipatel/st) 
+Then run `tic -x -o ~/.terminfo st.info` to have support in multiple terminal programs that use undercurls, ...

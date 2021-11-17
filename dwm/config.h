@@ -27,7 +27,7 @@ static const int systraypinningfailfirst   = 0;   /* 1: if pinning fails, displa
 static const int showsystray               = 1;   /* 0 means no systray */
 static const unsigned int systrayiconsize  = 18; /* systray icon size in px */
 /*static const char *fonts[]         		 = {"Hack Nerd Font:style=Regular:size=10", "Font Awesome 5 Pro:style=Solid:pixelsize=12:antialias=true", "Font Awesome 5 Brands:style=Solid:pixelsize=12:antialias=true", "Material Design Icons:Regular:pixelsize=21:antialias=true"};*/
-static const char *fonts[]          	   = { "Terminus:size=10", "Font Awesome 5 Pro:style=Solid:pixelsize=15:antialias=true", "Font Awesome 5 Brands:style=Solid:pixelsize=15:antialias=true", "Material Design Icons:Regular:pixelsize=20:antialias=true", "JoyPixels:size=15:antialias=true:autohint=true" };
+static const char *fonts[]          	   = { "Noto Sans:size=10", "Font Awesome 5 Pro:style=Solid:pixelsize=15:antialias=true", "Font Awesome 5 Brands:style=Solid:pixelsize=15:antialias=true", "Material Design Icons:Regular:pixelsize=20:antialias=true", "JoyPixels:size=15:antialias=true:autohint=true" };
 static const char dmenufont[]              = "Terminus:size=9";
 static const char col_gray1[]              = "#141414";
 static const char col_gray2[]              = "#505050";
@@ -115,6 +115,7 @@ static const Rule rules[] = {
   { "Gucharmap", 						  NULL, 			  NULL, 	 NULL,   1 << 6,    1,         	1,    		 1,            0 },
   { "Gimp", 							  NULL, 			  NULL, 	 NULL,   1 << 9,    1,         	1,    		 1,            0 },
   { "St",	            				  NULL,               NULL,      NULL,   1 << 1,    1,         	0,           0,            0 },
+  { "st",	            				  NULL,               NULL,      NULL,   1 << 1,    1,         	0,           0,            0 },
   { "firefox",					"GtkFileChooserDialog",    "Save File",  NULL,   0,	 	    0,          1,           1,			   0 },
   { "firefox",                		     NULL, "Toolkit", "Picture-in-Picture",  0,   		1,          1,           1,			   0 },
   { "nvim", NULL, NULL, NULL, 1 << 6, 1, 1, 0, 0,},
@@ -194,7 +195,7 @@ static const Layout layouts[] = {
 #define APP_DUNSTHIST           "dunstctl history-pop"
 #define APP_DUNSTCLOSE          "dunstctl close"
 #define APP_CLIP          		"greenclip print | sed '/^$/d' | dmenu -l 10 -p clipboard | xargs -r -d'\n' -I '{}' greenclip print '{}'"
-#define APP_EXIT				"/usr/bin/stop.sh"
+#define APP_EXIT				"/usr/bin/dmenu_logout"
 #define APP_DMENU				"/usr/bin/dmenu.sh"
 #define APP_VOLU				"/usr/bin/volume up"
 #define APP_VOLD				"/usr/bin/volume down"

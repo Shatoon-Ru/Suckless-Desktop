@@ -1,6 +1,8 @@
+.ccls-cache
 st
-*.o
-pkg/
-*.pkg.tar.xz
-patches
-config.h
+st.o
+x.o
+boxdraw.o
+hb.o
+patches/st-unpatched-columns
+patches/st-unpatched-newfloat
