@@ -20,7 +20,7 @@ static const char *prompt      = NULL;      /* -p  option; prompt to the left of
 	[SchemeOut] = { "#ff0000", "#ff0000" },
 };
 /* -l option; if nonzero, dmenu uses vertical list with given number of lines */
-static unsigned int lines      = 3;
+static unsigned int lines      = 10;
 /* -h option; minimum height of a menu line */
 static unsigned int lineheight = 18;
 static unsigned int min_lineheight = 8;

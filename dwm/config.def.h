@@ -27,7 +27,7 @@ static const int systraypinningfailfirst   = 0;   /* 1: if pinning fails, displa
 static const int showsystray               = 1;   /* 0 means no systray */
 static const unsigned int systrayiconsize  = 18; /* systray icon size in px */
 /*static const char *fonts[]         		 = {"Hack Nerd Font:style=Regular:size=10", "Font Awesome 5 Pro:style=Solid:pixelsize=12:antialias=true", "Font Awesome 5 Brands:style=Solid:pixelsize=12:antialias=true", "Material Design Icons:Regular:pixelsize=21:antialias=true"};*/
-static const char *fonts[]          	   = { "Noto Sans:size=10", "Font Awesome 5 Pro:style=Solid:pixelsize=15:antialias=true", "Font Awesome 5 Brands:style=Solid:pixelsize=15:antialias=true", "Material Design Icons:Regular:pixelsize=20:antialias=true", "JoyPixels:size=15:antialias=true:autohint=true" };
+static const char *fonts[]          	   = { "Fira Sans:size=10", "Font Awesome 5 Pro:style=Solid:pixelsize=13.5:antialias=true", "Font Awesome 5 Brands:style=Solid:pixelsize=13.5:antialias=true", "Material Design Icons:Regular:pixelsize=18:antialias=true", "JoyPixels:size=13.5:antialias=true:autohint=true" };
 static const char dmenufont[]              = "Terminus:size=9";
 static const char col_gray1[]              = "#141414";
 static const char col_gray2[]              = "#505050";
@@ -183,6 +183,7 @@ static const Layout layouts[] = {
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 #define APP_BROWSER             "firefox"
+#define APP_BRAVE               "brave"
 #define APP_BROWSER_            "firefox --private-window"
 #define APP_QUTE				"qutebrowser"
 #define APP_SURF				"surf"
@@ -332,6 +333,7 @@ static Key keys[] = {
 	{ 0, XF86XK_AudioForward,		spawn,							SHCMD(APP_MPDFAST) },
 	{ MODKEY,                       XK_w,       spawn,              SHCMD(APP_BROWSER)  },
   	{ MODKEY|ShiftMask,             XK_w,       spawn,              SHCMD(APP_BROWSER_) },
+  	{ MODKEY|ControlMask,           XK_w,       spawn,              SHCMD(APP_BRAVE)  },
 	{ MODKEY,						XK_x,		spawn,				SHCMD(APP_EXIT) },
 	{ MODKEY|ShiftMask,             XK_e,       spawn,              SHCMD(APP_NVIM) },
 	{ MODKEY|ShiftMask,             XK_p,	    spawn,              SHCMD(APP_CLIP)},
