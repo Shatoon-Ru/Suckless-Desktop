@@ -1,52 +1,39 @@
-/**********************************************************************************
- * thinking in possible future patches:
- *   https://pastebin.com/KMcCNxXT
+/* See LICENSE file for copyright and license details. */
+
+/*
+ * appearance
  *
- **********************************************************************************/
+ * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
+ */
+static char *font = "Liberation Mono:pixelsize=12:antialias=true:autohint=true";
+static int borderpx = 2;
 
-static char *font    = "Hack Nerd Font:pixelsize=12.25:antialias=true:autohint=true";
-
-static char *font2[] = {"MesloLGS NF:pixelsize=10:antialias=true:autohint=true"
-
-};
-
-/**********************************************************************************
- * Appereance
- **********************************************************************************/
-
-static int borderpx  = 50;
-static float cwscale = 0.875;
-//static float chscale = 1.125;
-static float chscale = 0.875;
-float alpha          = 1.0;
-static int ligatures = 1;
-
-
-/**********************************************************************************
+/*
  * What program is execed by st depends of these precedence rules:
- *   1: program passed with -e
- *   2: scroll and/or utmp
- *   3: SHELL environment variable
- *   4: value of shell in /etc/passwd
- *   5: value of shell in config.h
- **********************************************************************************/
-
-
+ * 1: program passed with -e
+ * 2: scroll and/or utmp
+ * 3: SHELL environment variable
+ * 4: value of shell in /etc/passwd
+ * 5: value of shell in config.h
+ */
 static char *shell = "/bin/sh";
+char *utmp = NULL;
+/* scroll program: to enable use a string like "scroll" */
+char *scroll = NULL;
 char *stty_args = "stty raw pass8 nl -echo -iexten -cstopb 38400";
+
+/* identification sequence returned in DA and DECID */
 char *vtiden = "\033[?6c";
 
-char *utmp = NULL;
-char *scroll = NULL;
+/* Kerning / character bounding-box multipliers */
+static float cwscale = 1.0;
+static float chscale = 1.0;
 
-
-/**********************************************************************************
+/*
  * word delimiter string
  *
  * More advanced example: L" `'\"()[]{}"
- **********************************************************************************/
-
-
+ */
 wchar_t *worddelimiters = L" ";
 
 /* selection timeouts (in milliseconds) */
@@ -60,12 +47,6 @@ int allowaltscreen = 1;
    setting the clipboard text */
 int allowwindowops = 0;
 
-/**********************************************************************************
- * Appereance
- **********************************************************************************/
-
-
-
 /*
  * draw latency range in ms - from new content/keypress/etc until drawing.
  * within this range, st draws when content stops arriving (idle). mostly it's
@@ -75,58 +56,27 @@ int allowwindowops = 0;
 static double minlatency = 8;
 static double maxlatency = 33;
 
-/**********************************************************************************
- * Appereance
- **********************************************************************************/
-
 /*
  * blinking timeout (set to 0 to disable blinking) for the terminal blinking
  * attribute.
  */
-static unsigned int blinktimeout = 600;
+static unsigned int blinktimeout = 800;
 
 /*
  * thickness of underline and bar cursors
  */
-static unsigned int cursorthickness = 3;
+static unsigned int cursorthickness = 2;
 
-
-/**********************************************************************************
- * 1: render most of the lines/blocks characters without using the font for
- *    perfect alignment between cells (U2500 - U259F except dashes/diagonals).
- *    Bold affects lines thickness if boxdraw_bold is not 0. Italic is ignored.
- * 0: disable (render all U25XX glyphs normally from the font).
- **********************************************************************************/
-
-
-const int boxdraw         = 0;
-const int boxdraw_bold    = 0;
-
-/* braille (U28XX):  1: render as adjacent "pixels",  0: use font */
-const int boxdraw_braille = 0;
-
-
-/**********************************************************************************
+/*
  * bell volume. It must be a value between -100 and 100. Use 0 for disabling
  * it
- **********************************************************************************/
-
-
+ */
 static int bellvolume = 0;
 
+/* default TERM value */
+char *termname = "st-256color";
 
-/**********************************************************************************
- * TERM name
- **********************************************************************************/
-
-
-// lemme tell you that this is not useless and I find it lovely with a script that randomizes the geometry, ok
-char *float_terminal = "st_float";
-// default TERM value
-char *termname = "st";
-
-
-/**********************************************************************************
+/*
  * spaces per tab
  *
  * When you are changing this value, don't forget to adapt the »it« value in
@@ -140,102 +90,70 @@ char *termname = "st";
  *  running following command:
  *
  *	stty tabs
- **********************************************************************************/
-
-unsigned int tabspaces = 2;
-
-
-/**********************************************************************************
- * Appereance
- **********************************************************************************/
-
-
-
+ */
+unsigned int tabspaces = 8;
 
 /* Terminal colors (16 first used in escape sequence) */
 static const char *colorname[] = {
-  [0] = "#000020",
-  [1] = "#EC5E66",
-  [2] = "#009900",
-  [3] = "#FAC863",
-  [4] = "#6699CC",
-  [5] = "#D75F86",
-  [6] = "#357CD5",
-  [7] = "#FDFCFD",
+	/* 8 normal colors */
+	"black",
+	"red3",
+	"green3",
+	"yellow3",
+	"blue2",
+	"magenta3",
+	"cyan3",
+	"gray90",
 
-  /* 8 bright colors */
-  [8] = "#424043",
-  [9] = "#ED2E62",
-  [10] = "#5CBF53",
-  [11] = "#F3D353",
-  [12] = "#65D9EF",
-  [13] = "#FA74CE",
-  [14] = "#519FD1",
-  [15] = "#FFFFFF",
+	/* 8 bright colors */
+	"gray50",
+	"red",
+	"green",
+	"yellow",
+	"#5c5cff",
+	"magenta",
+	"cyan",
+	"white",
 
 	[255] = 0,
 
 	/* more colors can be added after 255 to use with DefaultXX */
-	[256] = "#111111",
-	[257] = "#ffffff",
-  [258] = "#0A0C11",
+	"#cccccc",
+	"#555555",
 };
 
-
-/**********************************************************************************
- * Appereance
- **********************************************************************************/
 
 /*
  * Default colors (colorname index)
  * foreground, background, cursor, reverse cursor
  */
 unsigned int defaultfg = 7;
-unsigned int defaultbg = 258;
-
+unsigned int defaultbg = 0;
 static unsigned int defaultcs = 256;
 static unsigned int defaultrcs = 257;
 
-//unsigned int bg = 256, bgUnfocused = 256;
+/*
+ * Default shape of cursor
+ * 2: Block ("█")
+ * 4: Underline ("_")
+ * 6: Bar ("|")
+ * 7: Snowman ("☃")
+ */
+static unsigned int cursorshape = 2;
 
+/*
+ * Default columns and rows numbers
+ */
 
-/**********************************************************************************
- * Appereance
- *  Default shape of cursor
-+ * https://invisible-island.net/xterm/ctlseqs/ctlseqs.html#h4-Functions-using-CSI-_-ordered-by-the-final-character-lparen-s-rparen:CSI-Ps-SP-q.1D81
-+ * Default style of cursor
-+ * 0: Blinking block
-+ * 1: Blinking block (default)
-+ * 2: Steady block ("â–ˆ")
-+ * 3: Blinking underline
-+ * 4: Steady underline ("_")
-+ * 5: Blinking bar
-+ * 6: Steady bar ("|")
-+ * 7: Blinking st cursor
-+ * 8: Steady st cursor
+static unsigned int cols = 80;
+static unsigned int rows = 24;
 
- *
- *  Default colour and shape of the mouse cursor
- **********************************************************************************/
-
-
-static unsigned int cursorshape = 5;
-static Rune stcursor = 0x2603; /* snowman (U+2603) */
-
+/*
+ * Default colour and shape of the mouse cursor
+ */
 static unsigned int mouseshape = XC_xterm;
 static unsigned int mousefg = 7;
 static unsigned int mousebg = 0;
-
-
-/**********************************************************************************
- * Default columns and rows numbers
- **********************************************************************************/
-
-
-static unsigned int cols = 192;
-static unsigned int rows = 43;
-//unsigned int const buffSize = 255;
-
 
 /*
  * Color used to display font attributes when fontconfig selected a font which
@@ -250,40 +168,22 @@ static unsigned int defaultattr = 11;
  */
 static uint forcemousemod = ShiftMask;
 
-/**********************************************************************************
- * Appereance
- **********************************************************************************/
-
 /*
  * Internal mouse shortcuts.
  * Beware that overloading Button1 will disable the selection.
  */
 static MouseShortcut mshortcuts[] = {
 	/* mask                 button   function        argument       release */
-	{ ShiftMask,           Button2, clippaste,       {.i = 0},         0},
-	{ XK_ANY_MOD,          Button2, clipcopy,       {.i = 0},          0},
-
+	{ XK_ANY_MOD,           Button2, selpaste,       {.i = 0},      1 },
 	{ ShiftMask,            Button4, ttysend,        {.s = "\033[5;2~"} },
-//	{ XK_ANY_MOD,           Button4, ttysend,        {.s = "\031"} },
+	{ XK_ANY_MOD,           Button4, ttysend,        {.s = "\031"} },
 	{ ShiftMask,            Button5, ttysend,        {.s = "\033[6;2~"} },
-
-//	{ XK_ANY_MOD,           Button3, clipcopy,       {.i =  0} },
-
-	{ XK_ANY_MOD,           Button4, kscrollup,      {.i = +1} },
-	{ XK_ANY_MOD,           Button5, kscrolldown,    {.i = +1} },
+	{ XK_ANY_MOD,           Button5, ttysend,        {.s = "\005"} },
 };
 
-/**********************************************************************************
- * Appereance
- **********************************************************************************/
-
 /* Internal keyboard shortcuts. */
-#define MODKEY  Mod1Mask
+#define MODKEY Mod1Mask
 #define TERMMOD (ControlMask|ShiftMask)
-
-/**********************************************************************************
- * Appereance
- **********************************************************************************/
 
 static Shortcut shortcuts[] = {
 	/* mask                 keysym          function        argument */
@@ -291,54 +191,15 @@ static Shortcut shortcuts[] = {
 	{ ControlMask,          XK_Print,       toggleprinter,  {.i =  0} },
 	{ ShiftMask,            XK_Print,       printscreen,    {.i =  0} },
 	{ XK_ANY_MOD,           XK_Print,       printsel,       {.i =  0} },
-
+	{ TERMMOD,              XK_Prior,       zoom,           {.f = +1} },
+	{ TERMMOD,              XK_Next,        zoom,           {.f = -1} },
+	{ TERMMOD,              XK_Home,        zoomreset,      {.f =  0} },
 	{ TERMMOD,              XK_C,           clipcopy,       {.i =  0} },
 	{ TERMMOD,              XK_V,           clippaste,      {.i =  0} },
 	{ TERMMOD,              XK_Y,           selpaste,       {.i =  0} },
 	{ ShiftMask,            XK_Insert,      selpaste,       {.i =  0} },
 	{ TERMMOD,              XK_Num_Lock,    numlock,        {.i =  0} },
-
-
-
-   /*******************************************************************************
-   * Delete words normally, change a different sequence
-   * This has to be used in a nvim & zsh with those mapped sequences
-   ********************************************************************************/
-
-
-//	{ ShiftMask,            XK_BackSpace, ttysend,        {.s = "\033[24;5~\033[23;5~"} },
-	{ ControlMask,          XK_BackSpace, ttysend,        {.s = "\033[24;5~\033[23;5~"} },
-
-// Select a full word on nvim
-//	{ ControlMask|ShiftMask,          XK_Left, ttysend,   {.s = "\033[21;5~\033[23;5~\033[24;5~"} },
-//	{ ControlMask|ShiftMask,          XK_Right, ttysend,  {.s = "\033[24;5~\033[23;5~"} },
-
-  { ShiftMask,            XK_BackSpace,   newterm,        {.v = "st_float"} },
-  { ShiftMask,            XK_Return,      newterm,        {.v ="st"} },
-
-
-   /*******************************************************************************
-   * Zoom Terminal
-   ********************************************************************************/
-
-	{ TERMMOD,              XK_Prior,       zoom,           {.f = +1} },
-	{ TERMMOD,              XK_Next,        zoom,           {.f = -1} },
-	{ TERMMOD,              XK_Home,        zoomreset,      {.f =  0} },
-
-   /*******************************************************************************
-   i* Scroll
-   ********************************************************************************/
-
-  { MODKEY,               XK_Up,          kscrollup,      {.i = +1} },
-	{ MODKEY,               XK_Down,        kscrolldown,    {.i = +1} },
-  { MODKEY,               XK_Page_Up,     kscrollup,      {.i = +10} },
-	{ MODKEY,               XK_Page_Down,   kscrolldown,    {.i = +10} },
-
 };
-
-/**********************************************************************************
- * Appereance
- **********************************************************************************/
 
 /*
  * Special keys (change & recompile st.info accordingly)
@@ -373,16 +234,12 @@ static KeySym mappedkeys[] = { -1 };
  */
 static uint ignoremod = Mod2Mask|XK_SWITCH_MOD;
 
-/**********************************************************************************
- * Appereance
- **********************************************************************************/
-
 /*
  * This is the huge key array which defines all compatibility to the Linux
  * world. Please decide about changes wisely.
  */
 static Key key[] = {
-  /* keysym           mask            string      appkey appcursor */
+	/* keysym           mask            string      appkey appcursor */
 	{ XK_KP_Home,       ShiftMask,      "\033[2J",       0,   -1},
 	{ XK_KP_Home,       ShiftMask,      "\033[1;2H",     0,   +1},
 	{ XK_KP_Home,       XK_ANY_MOD,     "\033[H",        0,   -1},
@@ -490,6 +347,7 @@ static Key key[] = {
 	{ XK_Delete,        XK_ANY_MOD,     "\033[P",       -1,    0},
 	{ XK_Delete,        XK_ANY_MOD,     "\033[3~",      +1,    0},
 	{ XK_BackSpace,     XK_NO_MOD,      "\177",          0,    0},
+	{ XK_BackSpace,     Mod1Mask,       "\033\177",      0,    0},
 	{ XK_Home,          ShiftMask,      "\033[2J",       0,   -1},
 	{ XK_Home,          ShiftMask,      "\033[1;2H",     0,   +1},
 	{ XK_Home,          XK_ANY_MOD,     "\033[H",        0,   -1},
@@ -612,27 +470,3 @@ static char ascii_printable[] =
 	" !\"#$%&'()*+,-./0123456789:;<=>?"
 	"@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_"
 	"`abcdefghijklmnopqrstuvwxyz{|}~";
-
-/**
- * Undercurl style. Set UNDERCURL_STYLE to one of the available styles.
- *
- * Curly: Dunno how to draw it *shrug*
- *  _   _   _   _
- * ( ) ( ) ( ) ( )
- *	 (_) (_) (_) (_)
- *
- * Spiky:
- * /\  /\   /\	/\
- *   \/  \/	  \/
- *
- * Capped:
- *	_     _     _
- * / \   / \   / \
- *    \_/   \_/
- */
-// Available styles
-#define UNDERCURL_CURLY 0
-#define UNDERCURL_SPIKY 1
-#define UNDERCURL_CAPPED 2
-// Active style
-#define UNDERCURL_STYLE UNDERCURL_SPIKY

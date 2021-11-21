@@ -1,11 +1,37 @@
+# ![](dwm.png)
+
+An epic dwm setup originally forked from the very talented and knowledgeable [bakkeby](https://github.com/bakkeby).
+
+- [alwayscenter](https://dwm.suckless.org/patches/alwayscenter/)
+- [anybar (polybar tray fix)](https://dwm.suckless.org/patches/anybar/)
+- [attachx](https://github.com/bakkeby/patches/blob/master/dwm/dwm-attachx-6.2.diff)
+- [clientindicators](https://dwm.suckless.org/patches/clientindicators/)
+- [cyclelayouts](https://dwm.suckless.org/patches/cyclelayouts/)
+- [fadeinactive](https://dwm.suckless.org/patches/fadeinactive/)
+- [fibonacci](https://dwm.suckless.org/patches/fibonacci/)
+- [alpha - fixborders](https://dwm.suckless.org/patches/alpha/)
+- [focusonurgent](https://dwm.suckless.org/patches/focusurgent/)
+- [focusonactive](https://dwm.suckless.org/patches/focusonnetactive/)
+- [fullscreen](https://dwm.suckless.org/patches/fullscreen/)
+- [hidevacanttags](https://dwm.suckless.org/patches/hide_vacant_tags/)
+- [ipc[(https://dwm.suckless.org/patches/ipc/)
+- [mpdcontrol](https://dwm.suckless.org/patches/mpdcontrol/)
+- [~~noborder~~ removeborder](https://dwm.suckless.org/patches/removeborder/)
+- [pertag](https://dwm.suckless.org/patches/pertag/)
+- [restartsig](https://dwm.suckless.org/patches/restartsig/)
+- [rotatestack](https://dwm.suckless.org/patches/rotatestack/)
+- [save floats](https://dwm.suckless.org/patches/save_floats/)
+- [staticstatus](https://dwm.suckless.org/patches/staticstatus/)
+- [scratchpad](https://dwm.suckless.org/patches/scratchpad/)
+- [swaptags](https://dwm.suckless.org/patches/swaptags/)
+- [switchtag](https://github.com/bakkeby/patches/blob/master/dwm/dwm-switchtag-6.2.diff)
+- [systraysize](https://old.reddit.com/r/suckless/comments/ptqocp/is_there_a_way_to_change_systray_size/herfba5/)
+- [vanitygaps](https://dwm.suckless.org/patches/vanitygaps/)
+- [zoomswap](https://dwm.suckless.org/patches/zoomswap/)
+
+Plus the extra patches already added from the original build by bakkeby.  See below:
+
 Forked from [bakkeby](https://github.com/bakkeby/dwm-vanitygaps).  Thank you for your original work.
-
-Patches added to this already in depth build of dwm:
-   -  [scratchpad](https://dwm.suckless.org/patches/scratchpad/)
-      - The scratchpad patch allows you to spawn or restore a floating terminal window. It is usually useful to have one to do some short typing.
-
-   - [clientindicators](https://dwm.suckless.org/patches/clientindicators/)
-      - This patch draws a dot indicator overlayed on each tag icon for each client. The selected client is drawn as a larger horizontal line. This may help the user get a quick overview of how many open clients they have on which tags.
 
 ---
 
