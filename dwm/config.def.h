@@ -11,7 +11,7 @@ static const int smartgaps                 = 1;   /* 1 means no outer gap when t
 static const int showbar                   = 1;   /* 0 means no bar */
 static const int topbar                    = 1;   /* 0 means bottom bar */
 static const double activeopacity   	   = 1.0f;     /* Window opacity when it's focused (0 <= opacity <= 1) */
-static const double inactiveopacity 	   = 0.95f;   /* Window opacity when it's inactive (0 <= opacity <= 1) */
+static const double inactiveopacity 	   = 1.0f;   /* Window opacity when it's inactive (0 <= opacity <= 1) */
 static       Bool bUseOpacity       	   = True;     /* Starts with opacity on any unfocused windows */
 static const int horizpadbar               = 10;   /* horizontal padding for statusbar */
 static const int vertpadbar                = 20;   /* vertical padding for statusbar */

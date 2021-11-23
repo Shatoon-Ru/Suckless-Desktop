@@ -16,10 +16,10 @@ static const int topbar             = 1;        /* 0 means bottom bar */
 static const int savefloats         = 1;        /* 0 means default behaviour, 1 = savefloats patch */
 static const int attachmode         = 2;        /* 0 master (default), 1 = above, 2 = aside, 3 = below, 4 = bottom */
 static const int usealtbar          = 1;        /* 1 means use non-dwm status bar */
-static const char *altbarclass      = "Bar"; /* Alternate bar class name */
+static const char *altbarclass      = "Polybar"; /* Alternate bar class name */
 static const char *alttrayname      = "tray";    /* Polybar tray instance name */
 static const char *altbarcmd        = "$HOME/.config/polybar/launch.sh"; /* Alternate bar launch command */
-static const char *fonts[]          = { "Inter:size=10.5", "Font Awesome 5 Pro:style=Solid:pixelsize=12:antialias=true", "Font Awesome 5 Brands:style=Solid:pixelsize=12:antialias=true", "Material Design Icons:Regular:pixelsize=19:antialias=true" };
+static const char *fonts[]          = { "Fira Sans:size=10", "Font Awesome 5 Pro:style=Solid:pixelsize=12:antialias=true", "Font Awesome 5 Brands:style=Solid:pixelsize=12:antialias=true", "Material Design Icons:Regular:pixelsize=19:antialias=true" };
 static const char dmenufont[]       = "noto:size=14";
 static const char col_gray1[]       = "#141414";
 static const char col_gray2[]       = "#282828";
@@ -28,6 +28,7 @@ static const char col_gray4[]       = "#c6c6c6";
 static const char col_gray5[]       = "#fffefe";
 static const char col_gray6[]       = "#282828";
 static const char col_gray7[]       = "#212121";
+static const char col_gray8[]       = "#454545";
 static const char col_cyan[]        = "#7e9cb9";
 static const char col_blue[]        = "#6699cc";
 static const char col1[]            = "#98971a";
@@ -39,7 +40,7 @@ static const char col6[]            = "#a89984";
 static const char *colors[][3]      = {
     /*               fg         bg         border   */
     [SchemeNorm] = { col_gray4, col_gray7, col_gray2 },
-    [SchemeSel]  = { col_cyan, col_gray7,  col_cyan  },
+    [SchemeSel]  = { col_cyan, col_gray7,  col_gray8  },
 };
 
 /* tagging */
