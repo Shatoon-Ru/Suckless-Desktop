@@ -292,7 +292,6 @@ static void updatetitle(Client *c);
 static void updatewindowtype(Client *c);
 static void updatewmhints(Client *c);
 static void view(const Arg *arg);
-static void warp(const Client *c);
 static Client *wintoclient(Window w);
 static Monitor *wintomon(Window w);
 static Client *wintosystrayicon(Window w);
@@ -364,6 +363,8 @@ static unsigned int scratchtag = 1 << LENGTH(tags);
 
 /* compile-time check if all tags fit into an unsigned int bit array. */
 struct NumTags { char limitexceeded[LENGTH(tags) > 31 ? -1 : 1]; };
+
+static ClrScheme tagscheme[LENGTH(tags)];
 
 /* function implementations */
 void
@@ -590,8 +591,6 @@ buttonpress(XEvent *e)
 		unfocus(selmon->sel, 1);
 		selmon = m;
 		focus(NULL);
-	if (m == selmon && (m->tagset[m->seltags] & m->sel->tags) && m->lt[m->sellt]->arrange != &monocle)
-		warp(m->sel);
 	}
 	if (ev->window == selmon->barwin) {
 		i = x = 0;
@@ -754,7 +753,7 @@ clientmessage(XEvent *e)
 			view(&a);
 			focus(c);
 			restack(selmon);
-			}
+		}
 		} else {
 			if (c != selmon->sel && !c->isurgent)
 				seturgent(c, 1);
@@ -1022,7 +1021,7 @@ drawbar(Monitor *m)
 
 		indn = 0;
 		w = TEXTW(tags[i]);
-		drw_setscheme(drw, scheme[m->tagset[m->seltags] & 1 << i ? SchemeSel : SchemeNorm]);
+		drw_setscheme(drw, m->tagset[m->seltags] & 1 << i ? &tagscheme[i] : &scheme[SchemeNorm]);
 		drw_text(drw, x, 0, w, bh, lrpad / 2, tags[i], urg & 1 << i);	
 		
 		for (c = m->clients; c; c = c->next) {
@@ -2320,6 +2319,13 @@ setup(void)
 	/* init system tray */
 	if (showsystray)
 		updatesystray();
+	+
+	for (unsigned int i = 0; i < LENGTH(tags); i++) {
+		tagscheme[i].bg = drw_clr_create(drw, tagselbg[i]);
+		tagscheme[i].fg = drw_clr_create(drw, tagselfg[i]);
+		tagscheme[i].border = drw_clr_create(drw, selbordercolor);
+	}
+
 	/* init bars */
 	updatebars();
 	updatestatus();
@@ -3151,28 +3157,6 @@ view(const Arg *arg)
 
 	focus(NULL);
 	arrange(selmon);
-}
-
-void
-warp(const Client *c)
-{
-	int x, y;
-
-	if (!c) {
-		XWarpPointer(dpy, None, root, 0, 0, 0, 0, selmon->wx + selmon->ww / 2, selmon->wy + selmon->wh / 2);
-		return;
-	}
-
-	if (!getrootptr(&x, &y) ||
-		(x > c->x - c->bw &&
-		 y > c->y - c->bw &&
-		 x < c->x + c->w + c->bw*2 &&
-		 y < c->y + c->h + c->bw*2) ||
-		(y > c->mon->by && y < c->mon->by + bh) ||
-		(c->mon->topbar && !y))
-		return;
-
-	XWarpPointer(dpy, None, c->win, 0, 0, 0, 0, c->w / 2, c->h / 2);
 }
 
 Client *

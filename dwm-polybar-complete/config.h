@@ -164,7 +164,7 @@ static Key keys[] = {
     /* modifier                   key                     function             argument */
   { MODKEY,                       XK_F2,                  spawn,               SHCMD(APP_QUTE) },
   { MODKEY,                       XK_F3,                  spawn,               SHCMD(APP_SURF) },
-  { MODKEY,                       XK_F4,                  spawn,               SHCMD(APP_EDITOR)},
+  { MODKEY,                       XK_F4,                  spawn,               SHCMD(APP_EDIT)},
   { MODKEY,                       XK_m,                   spawn,               SHCMD(APP_MUSIC_) },
   { ControlMask,                  XK_grave,               spawn,               SHCMD(APP_DUNSTHIST) },
   { ControlMask,                  XK_space,               spawn,               SHCMD(APP_DUNSTCLOSE) },

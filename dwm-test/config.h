@@ -30,7 +30,7 @@ static const int systraypinningfailfirst   = 0;   /* 1: if pinning fails, displa
 static const int showsystray               = 1;   /* 0 means no systray */
 static const unsigned int systrayiconsize  = 18; /* systray icon size in px */
 /*static const char *fonts[]         		 = {"Hack Nerd Font:style=Regular:size=10", "Font Awesome 5 Pro:style=Solid:pixelsize=12:antialias=true", "Font Awesome 5 Brands:style=Solid:pixelsize=12:antialias=true", "Material Design Icons:Regular:pixelsize=21:antialias=true"};*/
-static const char *fonts[]          	   = { "Fira Sans:size=`11", "Font Awesome 5 Pro:style=Solid:pixelsize=15:antialias=true", "Font Awesome 5 Brands:style=Solid:pixelsize=15:antialias=true", "Material Design Icons:Regular:pixelsize=20:antialias=true", "JoyPixels:size=14:antialias=true:autohint=true" };
+static const char *fonts[]          	   = { "Fira Sans:style=Regular:size=12:antialias=true", "Font Awesome 5 Pro:style=Solid:pixelsize=15:antialias=true", "Font Awesome 5 Brands:style=Solid:pixelsize=15:antialias=true", "Material Design Icons:Regular:pixelsize=20:antialias=true", "JoyPixels:size=14:antialias=true:autohint=true" };
 static const char dmenufont[]              = "Terminus:size=11";
 static const char col_gray1[]              = "#141414";
 static const char col_gray2[]              = "#505050";
@@ -74,6 +74,10 @@ static const int statmonval = 0;
 /* tagging */
 static const char *tags[] = { "", "", "", "", "", "", "", "", "", ""  };
 
++static const char *tagselfg[] = { "#ffffff", "#ffffff", "#000000", "#000000", "#ffffff", "#ffffff", "#ffffff", "#000000", "#ffffff" };
++static const char *tagselbg[] = { "#ff0000", "#ff7f00", "#ffff00", "#00ff00", "#0000ff", "#4b0082", "#9400d3", "#ffffff", "#000000" };
++
+
 static const Rule rules[] = {
 	/* xprop(1):
 	 *	WM_CLASS(STRING) = instance, class
@@ -89,7 +93,7 @@ static const Rule rules[] = {
   { "Transmission-gtk",				      NULL,               NULL,      NULL,   1 << 2,    1,         	0,           0,            0 },
   { "SoulseekQt",						  NULL,               NULL,      NULL,   1 << 2,    1,         	0,           0,            0 },
   { "Nicotine",							  NULL,               NULL,      NULL,   1 << 2,    1,         	0,           0,            0 },
-  { "Thunar",		    				  NULL,               NULL,      NULL,   1 << 4,    1,         	0,           0,            1 },
+  { "Thunar",		    				  NULL,               NULL,      NULL,   1 << 4,    1,         	0,           0,            0 },
   { "Sxiv",		    				      NULL,               NULL,      NULL,   1 << 4,    1,         	1,           1,            0 },
   { "File-roller",    				      NULL,               NULL,      NULL,   1 << 4,    1,         	1,           1,            0 },
   { "mpv",          					  NULL,               NULL,      NULL,   1 << 4,    1,         	1,           1,            0 },
@@ -99,6 +103,7 @@ static const Rule rules[] = {
   { "Code",		    				      NULL,               NULL,      NULL,   1 << 6,    1,         	0,           0,            0 },
   { "steam",          				      NULL,		       	  NULL,      NULL,   1 << 7,    1,         	0,           0,            0 },
   { "Slack",          				      NULL,               NULL,      NULL,   1 << 7,    1,         	0,           0,            0 },
+  { "TelegramDesktop",                    NULL,               NULL,      NULL,   1 << 7,     1,              1,           1,            0 },
   { "Easytag",	    				      NULL,               NULL,      NULL,   1 << 8,    1,         	1,           0,            0 },
   { "Xfce4-taskmanager",				  NULL,               NULL,      NULL,   1 << 9,    1,         	1,           0,            0 },
   { "Nitrogen",						      NULL,               NULL,      NULL,   1 << 9,    1,         	1,           1,            0 },

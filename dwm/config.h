@@ -84,7 +84,7 @@ static const Rule rules[] = {
   { "qutebrowser",    				      NULL,               NULL,      NULL,   1,	        1,         	0,           0,            0 },
   { "firefox",        				      NULL,               NULL,      NULL,   1,	        1,         	0,           0,            0 },
   { "Surf",           				      NULL,               NULL,      NULL,   1,	        1,         	0,           0,            0 },
-  { "ncmpcpp",   						  NULL,  			  NULL,      NULL,   1 << 3,    1,         	1,			 1,		       0 },
+  { "ncmpcpp",   						  NULL,  			  NULL,      NULL,   1 << 3,    1,         	1,			 0,		       0 },
   { "URxvt",          				      NULL,               NULL,      NULL,   1 << 1,    1,         	0,           0,            0 },
   { "Transmission-gtk",				      NULL,               NULL,      NULL,   1 << 2,    1,         	0,           0,            0 },
   { "SoulseekQt",						  NULL,               NULL,      NULL,   1 << 2,    1,         	0,           0,            0 },
@@ -99,7 +99,7 @@ static const Rule rules[] = {
   { "Code",		    				      NULL,               NULL,      NULL,   1 << 6,    1,         	0,           0,            0 },
   { "steam",          				      NULL,		       	  NULL,      NULL,   1 << 7,    1,         	0,           0,            0 },
   { "Slack",          				      NULL,               NULL,      NULL,   1 << 7,    1,         	0,           0,            0 },
-  { "TelegramDesktop",                    NULL,               NULL,      NULL,   1 << 7,     1,              1,           1,            0 },
+  { "TelegramDesktop",                    NULL,               NULL,      NULL,   1 << 7,    1,          1,           1,            0 },
   { "Easytag",	    				      NULL,               NULL,      NULL,   1 << 8,    1,         	1,           0,            0 },
   { "Xfce4-taskmanager",				  NULL,               NULL,      NULL,   1 << 9,    1,         	1,           0,            0 },
   { "Nitrogen",						      NULL,               NULL,      NULL,   1 << 9,    1,         	1,           1,            0 },
@@ -117,6 +117,8 @@ static const Rule rules[] = {
   { "Gucharmap", 						  NULL, 			  NULL, 	 NULL,   1 << 6,    1,         	1,    		 1,            0 },
   { "Gimp", 							  NULL, 			  NULL, 	 NULL,   1 << 9,    1,         	1,    		 1,            0 },
   { "St",	            				  NULL,               NULL,      NULL,   1 << 1,    1,         	0,           0,            0 },
+  { "Alacritty",           				  NULL,               NULL,      NULL,   1 << 1,    1,         	0,           0,            0 },
+  { "kitty",            				  NULL,               NULL,      NULL,   1 << 1,    1,         	0,           0,            0 },
   { "st",	            				  NULL,               NULL,      NULL,   1 << 1,    1,         	0,           0,            0 },
   { "firefox",					"GtkFileChooserDialog",    "Save File",  NULL,   0,	 	    0,          1,           1,			   0 },
   { "firefox",                		     NULL, "Toolkit", "Picture-in-Picture",  0,   		1,          1,           1,			   0 },
@@ -194,6 +196,7 @@ static const Layout layouts[] = {
 #define APP_EDIT 	            "subl"
 #define APP_NVIM 	            "st -c nvim -e nvim"
 #define APP_MUSIC               "alacritty --class ncmpcpp,ncmpcpp -e ncmpcpp"
+#define APP_NCMPCPP             "kitty --class ncmpcpp -e ncmpcpp"
 #define APP_MUSIC_              "st -g 200x80 -c ncmpcpp -e ncmpcpp"
 #define APP_DUNSTHIST           "dunstctl history-pop"
 #define APP_DUNSTCLOSE          "dunstctl close"
@@ -216,7 +219,8 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] 	= {"dmenu_run_history", NULL};
-static const char *termcmd[]  	= { "st", NULL };
+/*static const char *termcmd[]  	= { "st", NULL };*/
+static const char *termcmd[]  	= { "kitty", NULL };
 static const char scratchpadname[] = "scratchpad";
 static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "120x34", NULL };
 
@@ -227,7 +231,7 @@ static Key keys[] = {
 	{ MODKEY,		            	XK_F2,     spawn,               SHCMD(APP_QUTE) },
   	{ MODKEY,                       XK_F3,     spawn,               SHCMD(APP_SURF) },
   	{ MODKEY,                       XK_F4,     spawn,               SHCMD(APP_EDITOR)},
-    { MODKEY,                       XK_m,      spawn,               SHCMD(APP_MUSIC_) },
+    { MODKEY,                       XK_m,      spawn,               SHCMD(APP_NCMPCPP) },
   	{ ControlMask,                  XK_grave,  spawn,               SHCMD(APP_DUNSTHIST) },
   	{ ControlMask,                  XK_space,  spawn,               SHCMD(APP_DUNSTCLOSE) },
   	{ MODKEY,                       XK_F1,     mpdchange,           {.i = -1} }, // PREVIOUS SONG
@@ -340,7 +344,7 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_e,       spawn,              SHCMD(APP_NVIM) },
 	{ MODKEY|ShiftMask,             XK_p,	    spawn,              SHCMD(APP_CLIP)},
 	{ MODKEY,						XK_f,		spawn,				SHCMD(APP_FILE) },
-	{ MODKEY,                       XK_e,       spawn,              SHCMD(APP_EDITOR)  },
+	{ MODKEY,                       XK_e,       spawn,              SHCMD(APP_EDIT)  },
 	{ MODKEY,                       XK_a,      						toggleopacity,  {0} },
 };
  
