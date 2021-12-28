@@ -72,7 +72,7 @@ static const unsigned int alphas[][3] = {
 static const int statmonval = 0;
 
 /* tagging */
-static const char *tags[] = { "", "", "", "", "", "", "", "", "", ""  };
+static const char *tags[] = { "", "", "", "", "", "", "", "", "", "" };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -84,45 +84,39 @@ static const Rule rules[] = {
   { "qutebrowser",    				      NULL,               NULL,      NULL,   1,	        1,         	0,           0,            0 },
   { "firefox",        				      NULL,               NULL,      NULL,   1,	        1,         	0,           0,            0 },
   { "Surf",           				      NULL,               NULL,      NULL,   1,	        1,         	0,           0,            0 },
-  { "ncmpcpp",   						  NULL,  			  NULL,      NULL,   1 << 3,    1,         	1,			 0,		       0 },
+  { "ncmpcpp",   						  NULL,  			  NULL,      NULL,   1 << 3,    1,         	1,			 0,		       1 },
   { "URxvt",          				      NULL,               NULL,      NULL,   1 << 1,    1,         	0,           0,            0 },
   { "Transmission-gtk",				      NULL,               NULL,      NULL,   1 << 2,    1,         	0,           0,            0 },
   { "SoulseekQt",						  NULL,               NULL,      NULL,   1 << 2,    1,         	0,           0,            0 },
   { "Nicotine",							  NULL,               NULL,      NULL,   1 << 2,    1,         	0,           0,            0 },
-  { "Thunar",		    				  NULL,               NULL,      NULL,   1 << 4,    1,         	0,           0,            0 },
-  { "Sxiv",		    				      NULL,               NULL,      NULL,   1 << 4,    1,         	1,           1,            0 },
+  { "Thunar",		    				  NULL,               NULL,      NULL,   1 << 4,    1,         	0,           0,            1 },
+  { "Gpicview",		    				  NULL,               NULL,      NULL,   1 << 4,    1,         	0,           0,            1 },
+  { "Sxiv",		    				      NULL,               NULL,      NULL,   1 << 4,    1,         	1,           1,            1 },
   { "File-roller",    				      NULL,               NULL,      NULL,   1 << 4,    1,         	1,           1,            0 },
   { "mpv",          					  NULL,               NULL,      NULL,   1 << 4,    1,         	1,           1,            0 },
-  { "Subl",		    				      NULL,               NULL,      NULL,   1 << 6,    1,         	0,           0,            0 },
-  { "code-oss",	    				      NULL,               NULL,      NULL,   1 << 6,    1,         	0,           0,            0 },
+  { "Subl",		    				      NULL,               NULL,      NULL,   1 << 6,    1,         	0,           0,            1 },
   { "Emacs",	    				      NULL,               NULL,      NULL,   1 << 6,    1,         	0,           0,            0 },
   { "Code",		    				      NULL,               NULL,      NULL,   1 << 6,    1,         	0,           0,            0 },
   { "steam",          				      NULL,		       	  NULL,      NULL,   1 << 7,    1,         	0,           0,            0 },
   { "Slack",          				      NULL,               NULL,      NULL,   1 << 7,    1,         	0,           0,            0 },
-  { "TelegramDesktop",                    NULL,               NULL,      NULL,   1 << 7,    1,          1,           1,            0 },
-  { "Easytag",	    				      NULL,               NULL,      NULL,   1 << 8,    1,         	1,           0,            0 },
+  { "Easytag",	    				      NULL,               NULL,      NULL,   1 << 8,    1,         	1,           0,            1 },
   { "Xfce4-taskmanager",				  NULL,               NULL,      NULL,   1 << 9,    1,         	1,           0,            0 },
   { "Nitrogen",						      NULL,               NULL,      NULL,   1 << 9,    1,         	1,           1,            0 },
   { "Xfce4-appearance-settings", 		  NULL,     		  NULL, 	 NULL,   1 << 9,    1,         	1,    		 1,            0 },
   { "Xfce4-mouse-settings", 			  NULL, 			  NULL, 	 NULL,   1 << 9,    1,         	1,    		 1,            0 },
   { "Gpick", 							  NULL, 			  NULL, 	 NULL,   0,    	    1,         	1,    		 1,            0 },
-  { "Sxiv", 							  NULL, 			  NULL, 	 NULL,   0,    	    1,         	1,    		 1,            0 },
   { "MuPDF", 							  NULL, 			  NULL, 	 NULL,   0,    	    1,         	1,    		 1,            0 },
   { "Lxappearance",   				      NULL, 			  NULL, 	 NULL,   1 << 9,    1,         	1,    		 1,            0 },
   { "Blueman-manager", 				      NULL, 		  	  NULL, 	 NULL,   1 << 9,    1,         	1,    		 1,            0 },
   { "Pavucontrol",                 		  NULL,		          NULL,      NULL,	 1 << 9,    1,          1,   		 1,            0 },
-  { "Gnome-builder",  				      NULL, 		  	  NULL, 	 NULL,   1 << 6,    1,         	1,    		 0,            0 },
-  { "razerCommander",				      NULL, 			  NULL, 	 NULL,   1 << 9,    1,         	1,    		 1,            0 },
   { "Piper", 							  NULL, 			  NULL, 	 NULL,   1 << 9,    1,         	1,    		 1,            0 },
   { "Gucharmap", 						  NULL, 			  NULL, 	 NULL,   1 << 6,    1,         	1,    		 1,            0 },
   { "Gimp", 							  NULL, 			  NULL, 	 NULL,   1 << 9,    1,         	1,    		 1,            0 },
-  { "St",	            				  NULL,               NULL,      NULL,   1 << 1,    1,         	0,           0,            0 },
   { "Alacritty",           				  NULL,               NULL,      NULL,   1 << 1,    1,         	0,           0,            0 },
   { "kitty",            				  NULL,               NULL,      NULL,   1 << 1,    1,         	0,           0,            0 },
-  { "st",	            				  NULL,               NULL,      NULL,   1 << 1,    1,         	0,           0,            0 },
+  { "st",	            				  NULL,               NULL,      NULL,   0,		    1,         	0,           0,            0 },
   { "firefox",					"GtkFileChooserDialog",    "Save File",  NULL,   0,	 	    0,          1,           1,			   0 },
   { "firefox",                		     NULL, "Toolkit", "Picture-in-Picture",  0,   		1,          1,           1,			   0 },
-  { "nvim", NULL, NULL, NULL, 1 << 6, 1, 1, 0, 0,},
 };	
 
 /* layout(s) */

@@ -51,7 +51,7 @@ An epic dwm setup originally forked from the very talented and knowledgeable [ba
 - [focusonactive](https://dwm.suckless.org/patches/focusonnetactive/)
 - [fullscreen](https://dwm.suckless.org/patches/fullscreen/)
 - [hidevacanttags](https://dwm.suckless.org/patches/hide_vacant_tags/)
-- [ipc](https://dwm.suckless.org/patches/ipc/)
+- [ipc[(https://dwm.suckless.org/patches/ipc/)
 - [mpdcontrol](https://dwm.suckless.org/patches/mpdcontrol/)
 - [~~noborder~~ removeborder](https://dwm.suckless.org/patches/removeborder/)
 - [pertag](https://dwm.suckless.org/patches/pertag/)

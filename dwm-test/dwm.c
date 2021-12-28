@@ -364,8 +364,6 @@ static unsigned int scratchtag = 1 << LENGTH(tags);
 /* compile-time check if all tags fit into an unsigned int bit array. */
 struct NumTags { char limitexceeded[LENGTH(tags) > 31 ? -1 : 1]; };
 
-static ClrScheme tagscheme[LENGTH(tags)];
-
 /* function implementations */
 void
 applyrules(Client *c)
@@ -1021,7 +1019,7 @@ drawbar(Monitor *m)
 
 		indn = 0;
 		w = TEXTW(tags[i]);
-		drw_setscheme(drw, m->tagset[m->seltags] & 1 << i ? &tagscheme[i] : &scheme[SchemeNorm]);
+		drw_setscheme(drw, scheme[m->tagset[m->seltags] & 1 << i ? SchemeSel : SchemeNorm]);
 		drw_text(drw, x, 0, w, bh, lrpad / 2, tags[i], urg & 1 << i);	
 		
 		for (c = m->clients; c; c = c->next) {
@@ -2319,13 +2317,6 @@ setup(void)
 	/* init system tray */
 	if (showsystray)
 		updatesystray();
-	+
-	for (unsigned int i = 0; i < LENGTH(tags); i++) {
-		tagscheme[i].bg = drw_clr_create(drw, tagselbg[i]);
-		tagscheme[i].fg = drw_clr_create(drw, tagselfg[i]);
-		tagscheme[i].border = drw_clr_create(drw, selbordercolor);
-	}
-
 	/* init bars */
 	updatebars();
 	updatestatus();
