@@ -29,7 +29,6 @@ static const unsigned int systrayspacing   = 8;   /* systray spacing */
 static const int systraypinningfailfirst   = 0;   /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
 static const int showsystray               = 1;   /* 0 means no systray */
 static const unsigned int systrayiconsize  = 18; /* systray icon size in px */
-/*static const char *fonts[]         		 = {"Hack Nerd Font:style=Regular:size=10", "Font Awesome 5 Pro:style=Solid:pixelsize=12:antialias=true", "Font Awesome 5 Brands:style=Solid:pixelsize=12:antialias=true", "Material Design Icons:Regular:pixelsize=21:antialias=true"};*/
 static const char *fonts[]          	   = { "Fira Sans:style=Regular:size=12:antialias=true", "Font Awesome 5 Pro:style=Solid:pixelsize=15:antialias=true", "Font Awesome 5 Brands:style=Solid:pixelsize=15:antialias=true", "Material Design Icons:Regular:pixelsize=20:antialias=true", "JoyPixels:size=14:antialias=true:autohint=true" };
 static const char dmenufont[]              = "Terminus:size=11";
 static const char col_gray1[]              = "#141414";
@@ -57,7 +56,6 @@ static const unsigned int borderalpha      = 255;
 static const char *colors[][3] = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray4, col_gray8, col_gray8 },
-	/*[SchemeSel]  = { col_cyan, col_gray6,  col_gray7  },*/
 	[SchemeSel]  = { col_cyan, col_gray8,  col_gray2  },
 };
 
@@ -92,10 +90,10 @@ static const Rule rules[] = {
   { "Thunar",		    				  NULL,               NULL,      NULL,   1 << 4,    1,         	0,           0,            1 },
   { "Gpicview",		    				  NULL,               NULL,      NULL,   1 << 4,    1,         	0,           0,            1 },
   { "Sxiv",		    				      NULL,               NULL,      NULL,   1 << 4,    1,         	1,           1,            1 },
-  { "File-roller",    				      NULL,               NULL,      NULL,   1 << 4,    1,         	1,           1,            0 },
+  { "File-roller",    				      NULL,               NULL,      NULL,   1 << 4,    1,         	1,           1,            1 },
   { "mpv",          					  NULL,               NULL,      NULL,   1 << 4,    1,         	1,           1,            0 },
   { "Subl",		    				      NULL,               NULL,      NULL,   1 << 6,    1,         	0,           0,            1 },
-  { "Emacs",	    				      NULL,               NULL,      NULL,   1 << 6,    1,         	0,           0,            0 },
+  { "Emacs",	    				      NULL,               NULL,      NULL,   1 << 6,    1,         	0,           0,            1 },
   { "Code",		    				      NULL,               NULL,      NULL,   1 << 6,    1,         	0,           0,            0 },
   { "steam",          				      NULL,		       	  NULL,      NULL,   1 << 7,    1,         	0,           0,            0 },
   { "Slack",          				      NULL,               NULL,      NULL,   1 << 7,    1,         	0,           0,            0 },
@@ -111,7 +109,7 @@ static const Rule rules[] = {
   { "Pavucontrol",                 		  NULL,		          NULL,      NULL,	 1 << 9,    1,          1,   		 1,            0 },
   { "Piper", 							  NULL, 			  NULL, 	 NULL,   1 << 9,    1,         	1,    		 1,            0 },
   { "Gucharmap", 						  NULL, 			  NULL, 	 NULL,   1 << 6,    1,         	1,    		 1,            0 },
-  { "Gimp", 							  NULL, 			  NULL, 	 NULL,   1 << 9,    1,         	1,    		 1,            0 },
+  { "Gimp", 							  NULL, 			  NULL, 	 NULL,   1 << 9,    1,         	1,    		 0,            0 },
   { "Alacritty",           				  NULL,               NULL,      NULL,   1 << 1,    1,         	0,           0,            0 },
   { "kitty",            				  NULL,               NULL,      NULL,   1 << 1,    1,         	0,           0,            0 },
   { "st",	            				  NULL,               NULL,      NULL,   0,		    1,         	0,           0,            0 },
@@ -131,25 +129,6 @@ static const int layoutaxis[] = {
 	TOP_TO_BOTTOM,    /* master axis: 1 = x (from left to right), 2 = y (from top to bottom), 3 = z (monocle), 4 = grid */
 	TOP_TO_BOTTOM,    /* stack axis:  1 = x (from left to right), 2 = y (from top to bottom), 3 = z (monocle), 4 = grid */
 };
-
-/*static const Layout layouts[] = {*/
-	/* symbol	arrange function */
-	/*{ "󰕴",	dwindle }, first entry is default */
-	/*{ "󰙀",	tile },
-	{ "󰕰", grid },
-	{ "󰕫", centeredmaster },
-	{ "󰕬", centeredfloatingmaster },
-	{ "󰕯",	NULL },    no layout function means floating behavior */
-	/*{ "󰾍",	bstack },
-	{ "󱇚",	bstackhoriz },
-	{ "󱒈",	gaplessgrid },
-	{ "󰕭",	horizgrid },
-	{ "󱒇",	nrowgrid },
-	{ "󰡃",	spiral },
-	{ "󰃚",	monocle },
-	{ "󱒉",	deck },
-	{ NULL,	NULL },
-};*/
 
 static const Layout layouts[] = {
 	/* symbol	arrange function */
@@ -263,9 +242,7 @@ static Key keys[] = {
 	{ MODKEY|Mod4Mask|ShiftMask,    XK_9,      incrovgaps,          {.i = -1 } },
 	{ MODKEY|Mod4Mask,              XK_0,      togglegaps,          {0} },
 	{ MODKEY|Mod4Mask|ShiftMask,    XK_0,      defaultgaps,         {0} },
-	//{ MODKEY,                       XK_Tab,    view,                {0} },
 	{ MODKEY,                       XK_Tab,    togglescratch,  	    {.v = scratchpadcmd } },
-	//{ Mod1Mask,                     XK_Tab,    view,                {0} },
 	{ Mod1Mask|ControlMask,         XK_Tab,    view,                {0} },
 	{ MODKEY,                       XK_q,      killclient,          {0} },
 	{ MODKEY|Mod4Mask|ControlMask,  XK_1,      setlayout,           {.v = &layouts[0]} },
@@ -338,7 +315,7 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_e,       spawn,              SHCMD(APP_NVIM) },
 	{ MODKEY|ShiftMask,             XK_p,	    spawn,              SHCMD(APP_CLIP)},
 	{ MODKEY,						XK_f,		spawn,				SHCMD(APP_FILE) },
-	{ MODKEY,                       XK_e,       spawn,              SHCMD(APP_EDIT)  },
+	{ MODKEY,                       XK_e,       spawn,              SHCMD(APP_EDITOR)  },
 	{ MODKEY,                       XK_a,      						toggleopacity,  {0} },
 };
  
