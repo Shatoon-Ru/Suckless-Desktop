@@ -10,6 +10,7 @@ static const unsigned int gappov           = 10;   /* vert outer gap between win
 static const int smartgaps                 = 1;   /* 1 means no outer gap when there is only one window */
 static const int showbar                   = 1;   /* 0 means no bar */
 static const int topbar                    = 1;   /* 0 means bottom bar */
+static const int user_bh            	   = 30;        /* 0 means that dwm will calculate bar height, >= 1 means dwm will user_bh as bar height */
 static const double activeopacity   	   = 1.0f;     /* Window opacity when it's focused (0 <= opacity <= 1) */
 static const double inactiveopacity 	   = 1.0f;   /* Window opacity when it's inactive (0 <= opacity <= 1) */
 static       Bool bUseOpacity       	   = True;     /* Starts with opacity on any unfocused windows */
@@ -29,7 +30,6 @@ static const unsigned int systrayspacing   = 8;   /* systray spacing */
 static const int systraypinningfailfirst   = 0;   /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
 static const int showsystray               = 1;   /* 0 means no systray */
 static const unsigned int systrayiconsize  = 18; /* systray icon size in px */
-/*static const char *fonts[]         		 = {"Hack Nerd Font:style=Regular:size=10", "Font Awesome 5 Pro:style=Solid:pixelsize=12:antialias=true", "Font Awesome 5 Brands:style=Solid:pixelsize=12:antialias=true", "Material Design Icons:Regular:pixelsize=21:antialias=true"};*/
 static const char *fonts[]          	   = { "Fira Sans:style=Regular:size=12:antialias=true", "Font Awesome 5 Pro:style=Solid:pixelsize=15:antialias=true", "Font Awesome 5 Brands:style=Solid:pixelsize=15:antialias=true", "Material Design Icons:Regular:pixelsize=20:antialias=true", "JoyPixels:size=14:antialias=true:autohint=true" };
 static const char dmenufont[]              = "Terminus:size=11";
 static const char col_gray1[]              = "#141414";
@@ -57,7 +57,6 @@ static const unsigned int borderalpha      = 255;
 static const char *colors[][3] = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray4, col_gray8, col_gray8 },
-	/*[SchemeSel]  = { col_cyan, col_gray6,  col_gray7  },*/
 	[SchemeSel]  = { col_cyan, col_gray8,  col_gray2  },
 };
 
@@ -73,6 +72,8 @@ static const int statmonval = 0;
 
 /* tagging */
 static const char *tags[] = { "", "", "", "", "", "", "", "", "", "" };
+//static const char *tags[] = { "WEB", "TERMINAL", "TORRENT", "MUSIC", "FILES", "VIDEOS", "EDITOR", "CHAT", "TAGGING", "STEAM"};
+/*static const char *tags[] = { "WEB     |", "TERMINAL     |", "TORRENT     |", "MUSIC     |", "FILES     |", "VIDEOS     |", "EDITOR     |", "CHAT     |", "TAGGING     |", "STEAM     |"};*/
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -81,48 +82,42 @@ static const Rule rules[] = {
 	 *  WM_WINDOW_ROLE(STRING) = role
 	 */
 	/* class            				  role             instance     title   tags mask  switchtotag  iscentered   isfloating   monitor */
-  { "qutebrowser",    				      NULL,               NULL,      NULL,   1,	        1,         	0,           0,            0 },
-  { "firefox",        				      NULL,               NULL,      NULL,   1,	        1,         	0,           0,            0 },
-  { "Surf",           				      NULL,               NULL,      NULL,   1,	        1,         	0,           0,            0 },
-  { "ncmpcpp",   						  NULL,  			  NULL,      NULL,   1 << 3,    1,         	1,			 0,		       1 },
+  { "qutebrowser",    				      NULL,               NULL,      NULL,   1,	    1,         	0,           0,            0 },
+  { "firefox",        				      NULL,               NULL,      NULL,   1,	    1,         	0,           0,            0 },
+  { "Surf",           				      NULL,               NULL,      NULL,   1,	    1,         	0,           0,            0 },
+  { "ncmpcpp",   						  NULL,  			  NULL,      NULL,   1 << 3,    1,         	1,			 0,	       1 },
   { "URxvt",          				      NULL,               NULL,      NULL,   1 << 1,    1,         	0,           0,            0 },
-  { "Transmission-gtk",				      NULL,               NULL,      NULL,   1 << 2,    1,         	0,           0,            0 },
+  { "Transmission-gtk",				  NULL,               NULL,      NULL,   1 << 2,    1,         	0,           0,            0 },
   { "SoulseekQt",						  NULL,               NULL,      NULL,   1 << 2,    1,         	0,           0,            0 },
-  { "Nicotine",							  NULL,               NULL,      NULL,   1 << 2,    1,         	0,           0,            0 },
+  { "Nicotine",						  NULL,               NULL,      NULL,   1 << 2,    1,         	0,           0,            0 },
   { "Thunar",		    				  NULL,               NULL,      NULL,   1 << 4,    1,         	0,           0,            1 },
-  { "Sxiv",		    				      NULL,               NULL,      NULL,   1 << 4,    1,         	1,           1,            1 },
-  { "File-roller",    				      NULL,               NULL,      NULL,   1 << 4,    1,         	1,           1,            0 },
-  { "mpv",          					  NULL,               NULL,      NULL,   1 << 4,    1,         	1,           1,            0 },
-  { "Subl",		    				      NULL,               NULL,      NULL,   1 << 6,    1,         	0,           0,            1 },
-  { "code-oss",	    				      NULL,               NULL,      NULL,   1 << 6,    1,         	0,           0,            0 },
-  { "Emacs",	    				      NULL,               NULL,      NULL,   1 << 6,    1,         	0,           0,            0 },
-  { "Code",		    				      NULL,               NULL,      NULL,   1 << 6,    1,         	0,           0,            0 },
-  { "steam",          				      NULL,		       	  NULL,      NULL,   1 << 7,    1,         	0,           0,            0 },
+  { "Gpicview",		    			  NULL,               NULL,      NULL,   1 << 4,    1,         	0,           0,            1 },
+  { "Sxiv",		    				  NULL,               NULL,      NULL,   1 << 4,    1,         	1,           1,            1 },
+  { "File-roller",    				      NULL,               NULL,      NULL,   1 << 4,    1,         	1,           1,            1 },
+  { "mpv",          					  NULL,               NULL,      NULL,   1,         1,         	1,           1,            0 },
+  { "Subl",		    				  NULL,               NULL,      NULL,   1 << 6,    1,         	0,           0,            1 },
+  { "Emacs",	    				      NULL,               NULL,      NULL,   1 << 6,    1,         	0,           0,            1 },
+  { "Code",		    				  NULL,               NULL,      NULL,   1 << 6,    1,         	0,           0,            0 },
+  { "steam",          				      NULL,		      NULL,      NULL,   1 << 7,    1,         	0,           0,            0 },
   { "Slack",          				      NULL,               NULL,      NULL,   1 << 7,    1,         	0,           0,            0 },
-  { "TelegramDesktop",                    NULL,               NULL,      NULL,   1 << 7,    1,          1,           1,            0 },
   { "Easytag",	    				      NULL,               NULL,      NULL,   1 << 8,    1,         	1,           0,            1 },
   { "Xfce4-taskmanager",				  NULL,               NULL,      NULL,   1 << 9,    1,         	1,           0,            0 },
-  { "Nitrogen",						      NULL,               NULL,      NULL,   1 << 9,    1,         	1,           1,            0 },
+  { "Nitrogen",						  NULL,               NULL,      NULL,   1 << 9,    1,         	1,           1,            0 },
   { "Xfce4-appearance-settings", 		  NULL,     		  NULL, 	 NULL,   1 << 9,    1,         	1,    		 1,            0 },
   { "Xfce4-mouse-settings", 			  NULL, 			  NULL, 	 NULL,   1 << 9,    1,         	1,    		 1,            0 },
-  { "Gpick", 							  NULL, 			  NULL, 	 NULL,   0,    	    1,         	1,    		 1,            0 },
-  { "Sxiv", 							  NULL, 			  NULL, 	 NULL,   0,    	    1,         	1,    		 1,            0 },
-  { "MuPDF", 							  NULL, 			  NULL, 	 NULL,   0,    	    1,         	1,    		 1,            0 },
+  { "Gpick", 							  NULL, 			  NULL, 	 NULL,   0,    	1,         	1,    		 1,            0 },
+  { "MuPDF", 							  NULL, 			  NULL, 	 NULL,   0,    	1,         	1,    		 1,            0 },
   { "Lxappearance",   				      NULL, 			  NULL, 	 NULL,   1 << 9,    1,         	1,    		 1,            0 },
-  { "Blueman-manager", 				      NULL, 		  	  NULL, 	 NULL,   1 << 9,    1,         	1,    		 1,            0 },
-  { "Pavucontrol",                 		  NULL,		          NULL,      NULL,	 1 << 9,    1,          1,   		 1,            0 },
-  { "Gnome-builder",  				      NULL, 		  	  NULL, 	 NULL,   1 << 6,    1,         	1,    		 0,            0 },
-  { "razerCommander",				      NULL, 			  NULL, 	 NULL,   1 << 9,    1,         	1,    		 1,            0 },
+  { "Blueman-manager", 				  NULL, 		  	  NULL, 	 NULL,   1 << 9,    1,         	1,    		 1,            0 },
+  { "Pavucontrol",                 	  NULL,		      NULL,      NULL,	 1 << 9,    1,              1,   		 1,            0 },
   { "Piper", 							  NULL, 			  NULL, 	 NULL,   1 << 9,    1,         	1,    		 1,            0 },
   { "Gucharmap", 						  NULL, 			  NULL, 	 NULL,   1 << 6,    1,         	1,    		 1,            0 },
-  { "Gimp", 							  NULL, 			  NULL, 	 NULL,   1 << 9,    1,         	1,    		 1,            0 },
-  { "St",	            				  NULL,               NULL,      NULL,   1 << 1,    1,         	0,           0,            0 },
-  { "Alacritty",           				  NULL,               NULL,      NULL,   1 << 1,    1,         	0,           0,            0 },
+  { "Gimp", 							  NULL, 			  NULL, 	 NULL,   1 << 9,    1,         	1,    		 0,            0 },
+  { "Alacritty",           			  NULL,               NULL,      NULL,   1 << 1,    1,         	0,           0,            0 },
   { "kitty",            				  NULL,               NULL,      NULL,   1 << 1,    1,         	0,           0,            0 },
-  { "st",	            				  NULL,               NULL,      NULL,   1 << 1,    1,         	0,           0,            0 },
-  { "firefox",					"GtkFileChooserDialog",    "Save File",  NULL,   0,	 	    0,          1,           1,			   0 },
-  { "firefox",                		     NULL, "Toolkit", "Picture-in-Picture",  0,   		1,          1,           1,			   0 },
-  { "nvim", NULL, NULL, NULL, 1 << 6, 1, 1, 0, 0,},
+  { "st",	            				  NULL,               NULL,      NULL,   0,		1,         	0,           0,            0 },
+  { "firefox",					"GtkFileChooserDialog",    "Save File",  NULL,   0,	 	0,              1,           1,		   0 },
+  { "firefox",                		      NULL, "Toolkit", "Picture-in-Picture", 0,   		1,              1,           1,		   0 },
 };	
 
 /* layout(s) */
@@ -138,41 +133,22 @@ static const int layoutaxis[] = {
 	TOP_TO_BOTTOM,    /* stack axis:  1 = x (from left to right), 2 = y (from top to bottom), 3 = z (monocle), 4 = grid */
 };
 
-/*static const Layout layouts[] = {*/
-	/* symbol	arrange function */
-	/*{ "󰕴",	dwindle }, first entry is default */
-	/*{ "󰙀",	tile },
-	{ "󰕰", grid },
-	{ "󰕫", centeredmaster },
-	{ "󰕬", centeredfloatingmaster },
-	{ "󰕯",	NULL },    no layout function means floating behavior */
-	/*{ "󰾍",	bstack },
-	{ "󱇚",	bstackhoriz },
-	{ "󱒈",	gaplessgrid },
-	{ "󰕭",	horizgrid },
-	{ "󱒇",	nrowgrid },
-	{ "󰡃",	spiral },
-	{ "󰃚",	monocle },
-	{ "󱒉",	deck },
-	{ NULL,	NULL },
-};*/
-
 static const Layout layouts[] = {
 	/* symbol	arrange function */
-	{ "󰕴",	dwindle }, /* first entry is default */
-	{ "󰕰",	tile },
-	{ "󰡃", grid },
-	{ "󰕫", centeredmaster },
-	{ "󰕬", centeredfloatingmaster },
-	{ "󰕯",	NULL },    /* no layout function means floating behavior */
-	{ "󰾍",	bstack },
-	{ "󱇚",	bstackhoriz },
-	{ "󱒈",	gaplessgrid },
-	{ "󰕭",	horizgrid },
-	{ "󱒇",	nrowgrid },
-	{ "󰡃",	spiral },
-	{ "󰃚",	monocle },
-	{ "󱒉",	deck },
+	{ "󰕴     |", dwindle }, /* first entry is default */
+	{ "󰕰     |", tile },
+	{ "󰡃     |", grid },
+	{ "󰕫     |", centeredmaster },
+	{ "󰕬     |", centeredfloatingmaster },
+	{ "󰕯     |", NULL },    /* no layout function means floating behavior */
+	{ "󰾍     |", bstack },
+	{ "󱇚     |", bstackhoriz },
+	{ "󱒈     |", gaplessgrid },
+	{ "󰕭     |", horizgrid },
+	{ "󱒇     |", nrowgrid },
+	{ "󰡃     |", spiral },
+	{ "󰃚     |", monocle },
+	{ "󱒉     |", deck },
 	{ NULL,	NULL },
 };
 
@@ -207,11 +183,11 @@ static const Layout layouts[] = {
 #define APP_VOLD				"/usr/bin/volume down"
 #define APP_MUTE				"amixer -q set Master toggle"
 #define APP_MPDTOG				"mpc toggle"
-#define APP_MPDSTOP				"mpc stop"
-#define APP_MPDNEXT				"mpc next"
-#define APP_MPDPREV				"mpc prev"
+#define APP_MPDSTOP			"mpc stop"
+#define APP_MPDNEXT			"mpc next"
+#define APP_MPDPREV			"mpc prev"
 #define APP_MPDREW				"mpc seek -10"
-#define APP_MPDFAST				"mpc seek +10"
+#define APP_MPDFAST			"mpc seek +10"
 #define APP_SCROT				"/usr/bin/scr"
 #define APP_SCROT_				"teiler"
 #define APP_LOCK				"slock"
@@ -220,7 +196,7 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] 	= {"dmenu_run_history", NULL};
 /*static const char *termcmd[]  	= { "st", NULL };*/
-static const char *termcmd[]  	= { "kitty", NULL };
+static const char *termcmd[]  	= { "st", NULL };
 static const char scratchpadname[] = "scratchpad";
 static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "120x34", NULL };
 
@@ -228,10 +204,10 @@ static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "120x34
 #include <X11/XF86keysym.h>
 static Key keys[] = {
 	/* modifier                     key        function             argument */
-	{ MODKEY,		            	XK_F2,     spawn,               SHCMD(APP_QUTE) },
+	{ MODKEY,		            	XK_F2,     spawn,               SHCMD(APP_BROWSER) },
   	{ MODKEY,                       XK_F3,     spawn,               SHCMD(APP_SURF) },
-  	{ MODKEY,                       XK_F4,     spawn,               SHCMD(APP_EDITOR)},
-    { MODKEY,                       XK_m,      spawn,               SHCMD(APP_NCMPCPP) },
+  	{ MODKEY,                       XK_F4,     spawn,               SHCMD(APP_EDITOR) },
+    { MODKEY,                       XK_m,      spawn,               SHCMD(APP_MUSIC_) },
   	{ ControlMask,                  XK_grave,  spawn,               SHCMD(APP_DUNSTHIST) },
   	{ ControlMask,                  XK_space,  spawn,               SHCMD(APP_DUNSTCLOSE) },
   	{ MODKEY,                       XK_F1,     mpdchange,           {.i = -1} }, // PREVIOUS SONG
@@ -239,7 +215,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_Escape, mpdcontrol,          {0} },		 // TOGGLE PLAY/PAUSE	
 	{ MODKEY,                       XK_space,  spawn,               {.v = dmenucmd } },
 	{ MODKEY,                       XK_t, 	   spawn,               {.v = termcmd } },
-	{ MODKEY,                       XK_grave,  togglescratch,  	    {.v = scratchpadcmd } },
+	{ MODKEY,                       XK_grave,  togglescratch,  	{.v = scratchpadcmd } },
 	{ MODKEY,			            XK_b,      togglebar,           {0} },
 	{ MODKEY,                       XK_j,      focusstack,          {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,          {.i = -1 } },
@@ -269,9 +245,7 @@ static Key keys[] = {
 	{ MODKEY|Mod4Mask|ShiftMask,    XK_9,      incrovgaps,          {.i = -1 } },
 	{ MODKEY|Mod4Mask,              XK_0,      togglegaps,          {0} },
 	{ MODKEY|Mod4Mask|ShiftMask,    XK_0,      defaultgaps,         {0} },
-	//{ MODKEY,                       XK_Tab,    view,                {0} },
-	{ MODKEY,                       XK_Tab,    togglescratch,  	    {.v = scratchpadcmd } },
-	//{ Mod1Mask,                     XK_Tab,    view,                {0} },
+	{ MODKEY,                       XK_Tab,    togglescratch,  	{.v = scratchpadcmd } },
 	{ Mod1Mask|ControlMask,         XK_Tab,    view,                {0} },
 	{ MODKEY,                       XK_q,      killclient,          {0} },
 	{ MODKEY|Mod4Mask|ControlMask,  XK_1,      setlayout,           {.v = &layouts[0]} },
@@ -319,7 +293,7 @@ static Key keys[] = {
 	TAGKEYS(                        XK_9,                           8)
 	TAGKEYS(                        XK_0,                           9)
 	{ MODKEY|ShiftMask,             XK_q,       quit,               {0} },
-	{ MODKEY|ControlMask|ShiftMask, XK_q,      	quit,           	{1} }, 
+	{ MODKEY|ControlMask|ShiftMask, XK_q,       quit,               {1} },
 	{ MODKEY|ControlMask,           XK_t,       rotatelayoutaxis,   {.i = 0} },    /* flextile, 0 = layout axis */
 	{ MODKEY|ControlMask,           XK_Tab,     rotatelayoutaxis,   {.i = 1} },    /* flextile, 1 = master axis */
 	{ MODKEY|ControlMask|ShiftMask, XK_Tab,     rotatelayoutaxis,   {.i = 2} },    /* flextile, 2 = stack axis */
@@ -328,24 +302,24 @@ static Key keys[] = {
 	{ 0,							XK_Print,   spawn,		    	SHCMD(APP_SCROT) },
 	{ ShiftMask,					XK_Print,   spawn,		    	SHCMD(APP_SCROT_) },
 	{ 0, XF86XK_AudioMute,			            spawn,				SHCMD(APP_MUTE) },
-	{ 0, XF86XK_AudioRaiseVolume,	            spawn,         		SHCMD(APP_VOLU) },
+	{ 0, XF86XK_AudioRaiseVolume,	            spawn,         	SHCMD(APP_VOLU) },
 	{ 0, XF86XK_AudioLowerVolume,             	spawn,          	SHCMD(APP_VOLD) },
 	{ 0, XF86XK_AudioPrev,			spawn,		 					SHCMD(APP_MPDPREV) },
 	{ 0, XF86XK_AudioNext,			spawn,							SHCMD(APP_MPDNEXT) },
-	{ 0, XF86XK_AudioPause,			spawn,							SHCMD(APP_MPDTOG) },
+	{ 0, XF86XK_AudioPause,		spawn,						    SHCMD(APP_MPDTOG) },
 	{ 0, XF86XK_AudioPlay,			spawn,							SHCMD(APP_MPDTOG) },
 	{ 0, XF86XK_AudioStop,			spawn,							SHCMD(APP_MPDSTOP) },
 	{ 0, XF86XK_AudioRewind,		spawn,							SHCMD(APP_MPDREW) },
 	{ 0, XF86XK_AudioForward,		spawn,							SHCMD(APP_MPDFAST) },
-	{ MODKEY,                       XK_w,       spawn,              SHCMD(APP_BROWSER)  },
+	{ MODKEY,                       XK_w,       spawn,              SHCMD(APP_QUTE)  },
   	{ MODKEY|ShiftMask,             XK_w,       spawn,              SHCMD(APP_BROWSER_) },
   	{ MODKEY|ControlMask,           XK_w,       spawn,              SHCMD(APP_BRAVE)  },
 	{ MODKEY,						XK_x,		spawn,				SHCMD(APP_EXIT) },
 	{ MODKEY|ShiftMask,             XK_e,       spawn,              SHCMD(APP_NVIM) },
 	{ MODKEY|ShiftMask,             XK_p,	    spawn,              SHCMD(APP_CLIP)},
 	{ MODKEY,						XK_f,		spawn,				SHCMD(APP_FILE) },
-	{ MODKEY,                       XK_e,       spawn,              SHCMD(APP_EDIT)  },
-	{ MODKEY,                       XK_a,      						toggleopacity,  {0} },
+	{ MODKEY,                       XK_e,       spawn,              SHCMD(APP_EDITOR)  },
+    { MODKEY,                       XK_a,      					toggleopacity,  {0} },
 };
  
 /* button definitions */
